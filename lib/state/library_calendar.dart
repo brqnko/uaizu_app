@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uaizu_app/domain/entity/library_calendar.dart';
-import 'package:uaizu_app/usecase/library_usecase.dart';
+import 'package:uaizu_app/use_case/library_usecase.dart';
 
 final libraryCalendarMonthProvider = StateProvider((ref) {
   return DateTime.now();

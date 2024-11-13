@@ -6,6 +6,33 @@ import 'package:uaizu_app/infrastructure/client/library_client.dart';
 
 const _authority = 'libopsv.u-aizu.ac.jp';
 
+extension on BookSearchOrder {
+  String get query {
+    switch (this) {
+      case BookSearchOrder.recommended:
+        return 'recommended_d';
+      case BookSearchOrder.yearFromNewest:
+        return 'year_d';
+      case BookSearchOrder.yearFromOldest:
+        return 'year_a';
+      case BookSearchOrder.titleFromA:
+        return 'title_a';
+      case BookSearchOrder.titleFromZ:
+        return 'title_d';
+      case BookSearchOrder.arrivalDateFromNewest:
+        return 'arrival_date_d';
+      case BookSearchOrder.authorFromA:
+        return 'author_a';
+      case BookSearchOrder.authorFromZ:
+        return 'author_d';
+      case BookSearchOrder.lendingCount:
+        return 'lending_count_d';
+      case BookSearchOrder.relevance:
+        return 'rank_d';
+    }
+  }
+}
+
 class BookDataSource {
   BookDataSource(
     this._client,
@@ -32,7 +59,6 @@ class BookDataSource {
   ///
   /// [query] is the search query
   Future<BookSearchResult> fetchBookSearchResult(BookSearchQuery query) async {
-    // TODO: where is the usize
     assert(query.start > 0);
     assert(query.count > 0);
 
@@ -43,7 +69,7 @@ class BookDataSource {
     // Uri.https encodes $_baseUrl, which makes this not working
     final res = await _client.get(
       Uri.parse(
-        'https://$_authority/opac/crosssearch?base_url=https://$_authority&count=${query.count}&displaylang=${_client.locale.libraryLocale}&locale=${_client.locale.libraryLocale}&order=recommended_d&q=$decodedQuery&searchmode=normal&start=${query.start}&target=local',
+        'https://$_authority/opac/crosssearch?base_url=https://$_authority&count=${query.count}&displaylang=${_client.locale.libraryLocale}&locale=${_client.locale.libraryLocale}&order=${query.order.query}&q=$decodedQuery&searchmode=normal&start=${query.start}&target=local',
       ),
     );
 
@@ -90,9 +116,7 @@ class BookDataSource {
         .replaceAll('\\/', '/')
         .replaceAll('\\\'', '\'');
 
-    final document = parse(html);
-
-    final books = document
+    final books = parse(html)
         .querySelectorAll('.panel.searchCard')
         .map(_parseBookFromElement)
         .whereType<Book>()
@@ -131,9 +155,7 @@ class BookDataSource {
   }
 
   List<Book> _parseNewBooksFromBody(String responseBody) {
-    final document = parse(responseBody);
-
-    return document
+    return parse(responseBody)
         .querySelectorAll('.panel.c_panel_slider_thumbnail')
         .map(_parseNewBookFromElement)
         .whereType<Book>()
@@ -149,26 +171,17 @@ class BookDataSource {
       Uri.parse('https://www.kinokuniya.co.jp/f/dsg-01-${book.isbn!}'),
     );
 
-    if (response.statusCode == 200) {
-      return _parseImageFromBody(response.body);
-    } else {
-      return null;
-    }
+    return _parseImageFromBody(response.body);
   }
 
   String? _parseImageFromBody(String responseBody) {
-    final document = parse(responseBody);
-    final imageElement = document.querySelector('meta[property="og:image"]');
-
-    if (imageElement != null) {
-      return imageElement.attributes['content'];
-    } else {
-      return null;
-    }
+    return parse(responseBody)
+        .querySelector('meta[property="og:image"]')
+        ?.attributes['content'];
   }
 
   Future<Book> fetchBookDetail(Book book) async {
-    assert(book.path.startsWith('/opac/')); // Path must start with /opac/
+    assert(book.path.startsWith('/opac/'));
 
     final response = await _client.get(
       Uri.parse('https://$_authority${book.path}'),

@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
-import 'package:uaizu_app/usecase/library_usecase.dart';
+import 'package:uaizu_app/use_case/library_usecase.dart';
 
 const _maxCountPerSearch = 20;
 
 final bookSearchQueryProvider = StateProvider((ref) => '');
+
+final bookSearchOrderProvider = StateProvider((ref) => BookSearchOrder.recommended);
 
 final bookSearchResultProvider =
     AsyncNotifierProvider<BookSearchResultNotifier, BookSearchResult>(
@@ -60,7 +62,7 @@ class BookSearchResultNotifier extends AsyncNotifier<BookSearchResult> {
             query: BookSearchQuery(
               query: query,
               mode: BookSearchMode.normal,
-              order: BookSearchOrder.recommended_d,
+              order: ref.watch(bookSearchOrderProvider),
               start: _currentPage,
               count: _maxCountPerSearch,
             ),

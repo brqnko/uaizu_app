@@ -133,7 +133,7 @@ String? parseExecutionKeyFromDocument(Document document) {
       ?.attributes['value'];
 }
 
-extension CampusSquareLocale on AppLocale {
+extension on AppLocale {
   String get campusSquareLocale {
     switch (this) {
       case AppLocale.ja:

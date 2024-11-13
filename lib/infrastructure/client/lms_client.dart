@@ -7,6 +7,8 @@ import 'package:uaizu_app/infrastructure/client/app_http_client.dart';
 
 final _loginUri = Uri.parse('https://elms.u-aizu.ac.jp/login/index.php');
 
+final _sessKeyRegex = RegExp(r'"sesskey":"(.*?)"');
+
 class LmsClient {
   LmsClient(
     this._client,
@@ -30,11 +32,11 @@ class LmsClient {
       return _loginToken!;
     }
 
-    await _updateLoginTOken();
+    await _updateLoginToken();
     return _loginToken!;
   }
 
-  Future<void> _updateLoginTOken() async {
+  Future<void> _updateLoginToken() async {
     if (_studentId.isEmpty || _password.isEmpty) {
       throw Exception('Student Id or password is empty');
     }
@@ -91,6 +93,27 @@ class LmsClient {
         .querySelector('input[name="logintoken"]')
         ?.attributes['value'];
   }
+  //
+  // String_ _extractSesskey(String body) {
+  //   final document = parse(body).querySelector('script');
+  //
+  //   if (scriptTag != null) {
+  //     // スクリプトの内容を取得
+  //     String scriptContent = scriptTag.innerHtml;
+  //
+  //     // JSON部分を抽出
+  //     var match = regExp.firstMatch(scriptContent);
+  //
+  //     if (match != null) {
+  //       String sesskey = match.group(1)!;
+  //       print('sesskey: $sesskey'); // sesskeyを出力
+  //     } else {
+  //       print('sesskeyが見つかりませんでした。');
+  //     }
+  //   } else {
+  //     print('<script>タグが見つかりませんでした。');
+  //   }
+  // }
 
   Future<void> _logout() async {
     await _client.get(

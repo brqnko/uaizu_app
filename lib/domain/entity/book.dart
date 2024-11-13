@@ -33,7 +33,18 @@ class BookSearchResult with _$BookSearchResult {
   }) = _BookSearchResult;
 }
 
-enum BookSearchOrder { recommended_d }
+enum BookSearchOrder {
+  recommended,
+  yearFromNewest,
+  yearFromOldest,
+  arrivalDateFromNewest,
+  titleFromA,
+  titleFromZ,
+  authorFromA,
+  authorFromZ,
+  lendingCount,
+  relevance,
+}
 
 enum BookSearchMode { normal }
 

@@ -14,7 +14,7 @@ import 'package:uaizu_app/domain/repository/calendar_repository.dart';
 import 'package:uaizu_app/domain/repository/grade_repository.dart';
 import 'package:uaizu_app/domain/repository/registration_repository.dart';
 import 'package:uaizu_app/domain/repository/syllabus_repository.dart';
-import 'package:uaizu_app/usecase/usecase.dart';
+import 'package:uaizu_app/use_case/usecase.dart';
 
 part 'campus_square_usecase.freezed.dart';
 

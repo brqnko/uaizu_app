@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uaizu_app/usecase/lms_usecase.dart';
+import 'package:uaizu_app/use_case/lms_usecase.dart';
 
 final lmsCalendarFocusedDaProvider = StateProvider((ref) => DateTime.now());
 

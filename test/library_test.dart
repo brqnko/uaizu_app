@@ -39,7 +39,7 @@ void main() {
         const BookSearchQuery(
           query: 'Rust',
           mode: BookSearchMode.normal,
-          order: BookSearchOrder.recommended_d,
+          order: BookSearchOrder.recommended,
           start: 1,
           count: 5,
         ),

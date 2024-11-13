@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uaizu_app/domain/entity/grade.dart';
-import 'package:uaizu_app/usecase/campus_square_usecase.dart';
+import 'package:uaizu_app/use_case/campus_square_usecase.dart';
 
 final gradeShowAllProvider = StateProvider((ref) => false);
 

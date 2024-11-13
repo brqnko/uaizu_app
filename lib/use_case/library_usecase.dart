@@ -6,7 +6,7 @@ import 'package:uaizu_app/domain/provider/book_repository_provider.dart';
 import 'package:uaizu_app/domain/provider/calendar_repository_provider.dart';
 import 'package:uaizu_app/domain/repository/book_repository.dart';
 import 'package:uaizu_app/domain/repository/calendar_repository.dart';
-import 'package:uaizu_app/usecase/usecase.dart';
+import 'package:uaizu_app/use_case/usecase.dart';
 
 part 'library_usecase.freezed.dart';
 

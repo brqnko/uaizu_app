@@ -200,7 +200,48 @@ class BookSearchPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: colorScheme.surface,
       appBar: appBar,
-      body: bookSearchResult,
+      body: Column(
+        children: [
+          AppBar(
+            automaticallyImplyLeading: false,
+            toolbarHeight: 55,
+            backgroundColor: colorScheme.onPrimaryContainer,
+            title: SizedBox(
+              height: 34,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: DropdownButton(
+                      value: ref.watch(bookSearchOrderProvider),
+                      onChanged: (value) {
+                        if (value == null) {
+                          return;
+                        }
+
+                        ref.read(bookSearchOrderProvider.notifier).state = value;
+                        ref.read(bookSearchResultProvider.notifier).requestFirstSearch();
+                      },
+                      items: BookSearchOrder.values.map((q) {
+                        return DropdownMenuItem(
+                          value: q,
+                          child: Text(
+                            q.name,
+                            style: Fonts.bodyS
+                                .copyWith(color: colorScheme.onSurfaceVariant),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(child: bookSearchResult),
+        ],
+      ),
     );
   }
 }
