@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:uaizu_app/domain/entity/campus_square_calendar.dart';
-import 'package:uaizu_app/state/campus_square_calendar.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
+
+import '../../../../use_case/campus_square_usecase.dart';
 
 extension on CampusSquareCalendarLectureType {
   Color color(ColorScheme colorScheme) {
@@ -18,8 +20,10 @@ extension on CampusSquareCalendarLectureType {
   }
 }
 
-class CampusSquareDetail extends ConsumerWidget {
-  const CampusSquareDetail({super.key});
+class CampusSquareDetail extends HookConsumerWidget {
+  const CampusSquareDetail(this._date, {super.key});
+
+  final DateTime _date;
 
   Widget _buildLectureTile(
     BuildContext context,
@@ -130,77 +134,77 @@ class CampusSquareDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final colorScheme = Theme.of(context).colorScheme;
 
-    return ref.watch(campusSquareCalendarDayScheduleProvider).when(
-          data: (data) {
-            final dateFormat = DateFormat(
-              'yyyy/MM/dd(E)',
-            );
-
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    const SizedBox(width: 8),
-                    Text(
-                      dateFormat.format(data.day),
-                      textAlign: TextAlign.start,
-                      style:
-                          Fonts.titleL.copyWith(color: colorScheme.onSurface),
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-                if (data.notes.isNotEmpty)
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: colorScheme.secondary,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      children: data.notes.map((note) {
-                        return Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.all(8),
-                          child: Text(
-                            note,
-                            textAlign: TextAlign.start,
-                            style: Fonts.titleM
-                                .copyWith(color: colorScheme.onSurface),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                if (data.notes.isNotEmpty) const SizedBox(height: 16),
-                if (data.lectures.isNotEmpty)
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: colorScheme.secondary,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: _buildLectureColumn(
-                        context, colorScheme, data.lectures),
-                  ),
-                const SizedBox(height: 8),
-              ],
-            );
-          },
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stackTrace) {
-            return Text(
-              error.toString(),
-              style: Fonts.bodyM.copyWith(
-                color: colorScheme.error,
-              ),
-            );
-          },
+    final scheduleFuture = useMemoized(() {
+        return ref.watch(getCampusSquareCalenderDayUseCacseProvider).call(
+          GetCampusSquareCalenderDayUseCaseParam(
+            date: _date,
+            useCache: true,
+          ),
         );
+      },
+      [_date],
+    );
+
+    final schedule = useFuture(scheduleFuture);
+
+    return schedule.connectionState == ConnectionState.done ?
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const SizedBox(width: 8),
+              Text(
+                DateFormat(
+                  'yyyy/MM/dd(E)',
+                ).format(_date),
+                textAlign: TextAlign.start,
+                style: Fonts.titleL.copyWith(color: colorScheme.onSurface),
+              ),
+              const Spacer(),
+            ],
+          ),
+          if (schedule.data!.notes.isNotEmpty)
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: colorScheme.secondary,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: schedule.data!.notes.map((note) {
+                  return Container(
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      note,
+                      textAlign: TextAlign.start,
+                      style: Fonts.titleM
+                          .copyWith(color: colorScheme.onSurface),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          if (schedule.data!.notes.isNotEmpty) const SizedBox(height: 16),
+          if (schedule.data!.lectures.isNotEmpty)
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: colorScheme.secondary,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: _buildLectureColumn(
+                  context, colorScheme, schedule.data!.lectures,),
+            ),
+          const SizedBox(height: 8),
+        ],
+      ) :
+      const Center(child: CircularProgressIndicator());
   }
 }

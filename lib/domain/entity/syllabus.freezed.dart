@@ -17,17 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SyllabusLecture {
   String get name => throw _privateConstructorUsedError;
-
   String get semester => throw _privateConstructorUsedError;
-
   String get quarter => throw _privateConstructorUsedError;
-
   String get timeSlot => throw _privateConstructorUsedError;
-
   int get code => throw _privateConstructorUsedError;
-
   String get instructor => throw _privateConstructorUsedError;
-
   AppLocale get appLocale => throw _privateConstructorUsedError;
 
   /// Create a copy of SyllabusLecture
@@ -42,7 +36,6 @@ abstract class $SyllabusLectureCopyWith<$Res> {
   factory $SyllabusLectureCopyWith(
           SyllabusLecture value, $Res Function(SyllabusLecture) then) =
       _$SyllabusLectureCopyWithImpl<$Res, SyllabusLecture>;
-
   @useResult
   $Res call(
       {String name,
@@ -61,7 +54,6 @@ class _$SyllabusLectureCopyWithImpl<$Res, $Val extends SyllabusLecture>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -117,7 +109,6 @@ abstract class _$$SyllabusLectureImplCopyWith<$Res>
   factory _$$SyllabusLectureImplCopyWith(_$SyllabusLectureImpl value,
           $Res Function(_$SyllabusLectureImpl) then) =
       __$$SyllabusLectureImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -260,22 +251,16 @@ abstract class _SyllabusLecture implements SyllabusLecture {
 
   @override
   String get name;
-
   @override
   String get semester;
-
   @override
   String get quarter;
-
   @override
   String get timeSlot;
-
   @override
   int get code;
-
   @override
   String get instructor;
-
   @override
   AppLocale get appLocale;
 
@@ -290,9 +275,7 @@ abstract class _SyllabusLecture implements SyllabusLecture {
 /// @nodoc
 mixin _$SyllabusLectureSearchQuery {
   int get year => throw _privateConstructorUsedError;
-
   int get displayCount => throw _privateConstructorUsedError;
-
   String get freeWord => throw _privateConstructorUsedError;
 
   /// Create a copy of SyllabusLectureSearchQuery
@@ -308,7 +291,6 @@ abstract class $SyllabusLectureSearchQueryCopyWith<$Res> {
           $Res Function(SyllabusLectureSearchQuery) then) =
       _$SyllabusLectureSearchQueryCopyWithImpl<$Res,
           SyllabusLectureSearchQuery>;
-
   @useResult
   $Res call({int year, int displayCount, String freeWord});
 }
@@ -321,7 +303,6 @@ class _$SyllabusLectureSearchQueryCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -358,7 +339,6 @@ abstract class _$$SyllabusLectureSearchQueryImplCopyWith<$Res>
           _$SyllabusLectureSearchQueryImpl value,
           $Res Function(_$SyllabusLectureSearchQueryImpl) then) =
       __$$SyllabusLectureSearchQueryImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({int year, int displayCount, String freeWord});
@@ -452,10 +432,8 @@ abstract class _SyllabusLectureSearchQuery
 
   @override
   int get year;
-
   @override
   int get displayCount;
-
   @override
   String get freeWord;
 

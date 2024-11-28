@@ -8,8 +8,6 @@ const _maxCountPerSearch = 20;
 
 final bookSearchQueryProvider = StateProvider((ref) => '');
 
-final bookSearchOrderProvider = StateProvider((ref) => BookSearchOrder.recommended);
-
 final bookSearchResultProvider =
     AsyncNotifierProvider<BookSearchResultNotifier, BookSearchResult>(
   () {
@@ -26,24 +24,28 @@ class BookSearchResultNotifier extends AsyncNotifier<BookSearchResult> {
     return const BookSearchResult(books: [], hasNext: false);
   }
 
-  Future<void> requestFirstSearch() async {
+  Future<void> requestFirstSearch(String query, BookSearchOrder order) async {
+
     _isLoading = false;
     _currentPage = 1;
 
-    final result = await _fetchSearchWIthCurrentState();
+    final result = await _fetchSearchWIthCurrentState(query, order);
 
     state = AsyncValue.data(result);
   }
 
-  Future<void> requestMoreResult() {
+  Future<void> requestMoreResult(String query, BookSearchOrder order) {
+
     if (_isLoading) {
       return Future(() => {});
     }
 
+    _isLoading = true;
+
     return update((prev) async {
       final prevBooks = <Book>[...prev.books];
 
-      final current = await _fetchSearchWIthCurrentState();
+      final current = await _fetchSearchWIthCurrentState(query, order);
 
       prevBooks.addAll(current.books);
 
@@ -53,21 +55,25 @@ class BookSearchResultNotifier extends AsyncNotifier<BookSearchResult> {
     });
   }
 
-  Future<BookSearchResult> _fetchSearchWIthCurrentState() async {
+  Future<BookSearchResult> _fetchSearchWIthCurrentState(
+      String query,
+      BookSearchOrder order,
+  ) async {
+
     _isLoading = true;
-    final query = ref.watch(bookSearchQueryProvider);
 
     final result = await ref.watch(getBookSearchResultUseCaseProvider).call(
           GetBookSearchResultUseCaseParam(
             query: BookSearchQuery(
               query: query,
               mode: BookSearchMode.normal,
-              order: ref.watch(bookSearchOrderProvider),
+              order: order,
               start: _currentPage,
               count: _maxCountPerSearch,
             ),
           ),
         );
+
 
     _currentPage += _maxCountPerSearch;
     _isLoading = false;

@@ -17,37 +17,21 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Book {
   String get path => throw _privateConstructorUsedError;
-
   String? get title => throw _privateConstructorUsedError;
-
   String? get imageUrl => throw _privateConstructorUsedError;
-
   String? get author => throw _privateConstructorUsedError;
-
   String? get publisher => throw _privateConstructorUsedError;
-
   String? get location => throw _privateConstructorUsedError;
-
   String? get callMark => throw _privateConstructorUsedError;
-
   String? get material => throw _privateConstructorUsedError;
-
   String? get publication => throw _privateConstructorUsedError;
-
   String? get form => throw _privateConstructorUsedError;
-
   String? get alternative => throw _privateConstructorUsedError;
-
   String? get countryOfPublication => throw _privateConstructorUsedError;
-
   String? get titleLanguage => throw _privateConstructorUsedError;
-
   String? get languageOfTexts => throw _privateConstructorUsedError;
-
   String? get languageOfOriginal => throw _privateConstructorUsedError;
-
   String? get isbn => throw _privateConstructorUsedError;
-
   String? get ncid => throw _privateConstructorUsedError;
 
   /// Create a copy of Book
@@ -60,7 +44,6 @@ mixin _$Book {
 abstract class $BookCopyWith<$Res> {
   factory $BookCopyWith(Book value, $Res Function(Book) then) =
       _$BookCopyWithImpl<$Res, Book>;
-
   @useResult
   $Res call(
       {String path,
@@ -89,7 +72,6 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -194,7 +176,6 @@ abstract class _$$BookImplCopyWith<$Res> implements $BookCopyWith<$Res> {
   factory _$$BookImplCopyWith(
           _$BookImpl value, $Res Function(_$BookImpl) then) =
       __$$BookImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -469,52 +450,36 @@ abstract class _Book implements Book {
 
   @override
   String get path;
-
   @override
   String? get title;
-
   @override
   String? get imageUrl;
-
   @override
   String? get author;
-
   @override
   String? get publisher;
-
   @override
   String? get location;
-
   @override
   String? get callMark;
-
   @override
   String? get material;
-
   @override
   String? get publication;
-
   @override
   String? get form;
-
   @override
   String? get alternative;
-
   @override
   String? get countryOfPublication;
-
   @override
   String? get titleLanguage;
-
   @override
   String? get languageOfTexts;
-
   @override
   String? get languageOfOriginal;
-
   @override
   String? get isbn;
-
   @override
   String? get ncid;
 
@@ -529,7 +494,6 @@ abstract class _Book implements Book {
 /// @nodoc
 mixin _$BookSearchResult {
   List<Book> get books => throw _privateConstructorUsedError;
-
   bool get hasNext => throw _privateConstructorUsedError;
 
   /// Create a copy of BookSearchResult
@@ -544,7 +508,6 @@ abstract class $BookSearchResultCopyWith<$Res> {
   factory $BookSearchResultCopyWith(
           BookSearchResult value, $Res Function(BookSearchResult) then) =
       _$BookSearchResultCopyWithImpl<$Res, BookSearchResult>;
-
   @useResult
   $Res call({List<Book> books, bool hasNext});
 }
@@ -556,7 +519,6 @@ class _$BookSearchResultCopyWithImpl<$Res, $Val extends BookSearchResult>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -587,7 +549,6 @@ abstract class _$$BookSearchResultImplCopyWith<$Res>
   factory _$$BookSearchResultImplCopyWith(_$BookSearchResultImpl value,
           $Res Function(_$BookSearchResultImpl) then) =
       __$$BookSearchResultImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({List<Book> books, bool hasNext});
@@ -630,7 +591,6 @@ class _$BookSearchResultImpl implements _BookSearchResult {
       : _books = books;
 
   final List<Book> _books;
-
   @override
   List<Book> get books {
     if (_books is EqualUnmodifiableListView) return _books;
@@ -676,7 +636,6 @@ abstract class _BookSearchResult implements BookSearchResult {
 
   @override
   List<Book> get books;
-
   @override
   bool get hasNext;
 
@@ -691,13 +650,9 @@ abstract class _BookSearchResult implements BookSearchResult {
 /// @nodoc
 mixin _$BookSearchQuery {
   String get query => throw _privateConstructorUsedError;
-
   BookSearchMode get mode => throw _privateConstructorUsedError;
-
   BookSearchOrder get order => throw _privateConstructorUsedError;
-
   int get start => throw _privateConstructorUsedError;
-
   int get count => throw _privateConstructorUsedError;
 
   /// Create a copy of BookSearchQuery
@@ -712,7 +667,6 @@ abstract class $BookSearchQueryCopyWith<$Res> {
   factory $BookSearchQueryCopyWith(
           BookSearchQuery value, $Res Function(BookSearchQuery) then) =
       _$BookSearchQueryCopyWithImpl<$Res, BookSearchQuery>;
-
   @useResult
   $Res call(
       {String query,
@@ -729,7 +683,6 @@ class _$BookSearchQueryCopyWithImpl<$Res, $Val extends BookSearchQuery>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -775,7 +728,6 @@ abstract class _$$BookSearchQueryImplCopyWith<$Res>
   factory _$$BookSearchQueryImplCopyWith(_$BookSearchQueryImpl value,
           $Res Function(_$BookSearchQueryImpl) then) =
       __$$BookSearchQueryImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -892,16 +844,12 @@ abstract class _BookSearchQuery implements BookSearchQuery {
 
   @override
   String get query;
-
   @override
   BookSearchMode get mode;
-
   @override
   BookSearchOrder get order;
-
   @override
   int get start;
-
   @override
   int get count;
 

@@ -17,11 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LmsTask {
   DateTime get date => throw _privateConstructorUsedError;
-
   String get title => throw _privateConstructorUsedError;
-
   String? get courseLink => throw _privateConstructorUsedError;
-
   String? get activityLink => throw _privateConstructorUsedError;
 
   /// Create a copy of LmsTask
@@ -34,7 +31,6 @@ mixin _$LmsTask {
 abstract class $LmsTaskCopyWith<$Res> {
   factory $LmsTaskCopyWith(LmsTask value, $Res Function(LmsTask) then) =
       _$LmsTaskCopyWithImpl<$Res, LmsTask>;
-
   @useResult
   $Res call(
       {DateTime date, String title, String? courseLink, String? activityLink});
@@ -47,7 +43,6 @@ class _$LmsTaskCopyWithImpl<$Res, $Val extends LmsTask>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -87,7 +82,6 @@ abstract class _$$LmsTaskImplCopyWith<$Res> implements $LmsTaskCopyWith<$Res> {
   factory _$$LmsTaskImplCopyWith(
           _$LmsTaskImpl value, $Res Function(_$LmsTaskImpl) then) =
       __$$LmsTaskImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -191,13 +185,10 @@ abstract class _LmsTask implements LmsTask {
 
   @override
   DateTime get date;
-
   @override
   String get title;
-
   @override
   String? get courseLink;
-
   @override
   String? get activityLink;
 

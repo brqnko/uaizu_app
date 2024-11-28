@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uaizu_app/state/home_index.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uaizu_app/state/settings.dart';
-import 'package:uaizu_app/ui/pages/campus_square/grade_and_exam.dart';
-import 'package:uaizu_app/ui/pages/campus_square/registration.dart';
-import 'package:uaizu_app/ui/pages/campus_square/schedule.dart';
-import 'package:uaizu_app/ui/pages/campus_square/syllabus.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 
-const _pages = [
-  RegistrationPage(),
-  GradeAndExamPage(),
-  SchedulePage(),
-  SyllabusPage(),
-];
-
-final _indexProvider = StateProvider((ref) => 2);
-
 class CampusSquarePage extends ConsumerWidget {
-  const CampusSquarePage({super.key});
+  const CampusSquarePage(this.navigationShell, {super.key});
+
+  final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,14 +34,14 @@ class CampusSquarePage extends ConsumerWidget {
             child: DrawerHeader(
               child: TextButton(
                 onPressed: () {
-                  ref.read(homeIndexProvider.notifier).state = 4;
+                  // ref.read(homeIndexProvider.notifier).state = 4;
                 },
                 child: Text(
                   ref.watch(settingsProvider
-                          .select((settings) => settings.hideStudentId))
+                          .select((settings) => settings.hideStudentId),)
                       ? 'anonymous'
                       : ref.watch(settingsProvider.select(
-                          (settings) => settings.accountInfo.studentId)),
+                          (settings) => settings.accountInfo.studentId,),),
                   style:
                       Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
                 ),
@@ -65,7 +54,10 @@ class CampusSquarePage extends ConsumerWidget {
               style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
             ),
             onTap: () {
-              ref.read(_indexProvider.notifier).state = 2;
+              navigationShell.goBranch(
+                0,
+                initialLocation: 0 == navigationShell.currentIndex,
+              );
               Navigator.pop(context);
             },
           ),
@@ -75,7 +67,10 @@ class CampusSquarePage extends ConsumerWidget {
               style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
             ),
             onTap: () {
-              ref.read(_indexProvider.notifier).state = 0;
+              navigationShell.goBranch(
+                1,
+                initialLocation: 1 == navigationShell.currentIndex,
+              );
               Navigator.pop(context);
             },
           ),
@@ -85,7 +80,10 @@ class CampusSquarePage extends ConsumerWidget {
               style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
             ),
             onTap: () {
-              ref.read(_indexProvider.notifier).state = 1;
+              navigationShell.goBranch(
+                2,
+                initialLocation: 2 == navigationShell.currentIndex,
+              );
               Navigator.pop(context);
             },
           ),
@@ -95,7 +93,10 @@ class CampusSquarePage extends ConsumerWidget {
               style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
             ),
             onTap: () {
-              ref.read(_indexProvider.notifier).state = 3;
+              navigationShell.goBranch(
+                3,
+                initialLocation: 3 == navigationShell.currentIndex,
+              );
               Navigator.pop(context);
             },
           ),
@@ -106,7 +107,7 @@ class CampusSquarePage extends ConsumerWidget {
     return Scaffold(
       appBar: appBar,
       drawer: drawer,
-      body: _pages[ref.watch(_indexProvider)],
+      body: navigationShell,
     );
   }
 }

@@ -61,10 +61,14 @@ class CampusSquareClient {
   }
 
   Future<void> _updateRwfHash() async {
+
+    debugPrint('try logging in campus square');
+
     if (_studentId.isEmpty || _password.isEmpty) {
       throw Exception('Student Id or password is empty');
     }
 
+    debugPrint('logging in campus square for real');
     final rwfHash = _extractRwfHash((await post({})).body);
 
     final body = (await get({

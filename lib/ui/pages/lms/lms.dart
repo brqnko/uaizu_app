@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:uaizu_app/ui/pages/lms/widget/lms_calendar.dart';
-import 'package:uaizu_app/ui/pages/lms/widget/lms_detail.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 
 class LMSPage extends StatelessWidget {
@@ -27,12 +26,7 @@ class LMSPage extends StatelessWidget {
       body: const SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(12),
-          child: Column(
-            children: [
-              LmsCalendar(),
-              LmsDetail(),
-            ],
-          ),
+          child: LmsCalendar(),
         ),
       ),
     );

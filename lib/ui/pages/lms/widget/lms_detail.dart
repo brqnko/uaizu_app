@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:uaizu_app/domain/entity/lms_calendar.dart';
-import 'package:uaizu_app/state/lms_calendar.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
+
+import '../../../../use_case/lms_usecase.dart';
 
 final _dateFormat = DateFormat('yyyy-MM-dd hh:mm:ss');
 
-class LmsDetail extends ConsumerWidget {
-  const LmsDetail({super.key});
+class LmsDetail extends HookConsumerWidget {
+  const LmsDetail(this._date, {super.key});
+
+  final DateTime _date;
 
   Widget _buildLectureTile(
     BuildContext context,
@@ -117,52 +121,47 @@ class LmsDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    final taskFuture = useMemoized(() {
+      return ref.watch(getLmsTaskDayUseCaseProvider).call(
+            LmsTaskDayUseCaseParam(
+              date: _date,
+            ),
+          );
+    },
+        [_date],
+    );
+    final task = useFuture(taskFuture);
+
     final colorScheme = Theme.of(context).colorScheme;
 
-    return ref.watch(lmsCalendarTaskDayProvider).when(
-          data: (data) {
-            final dateFormat = DateFormat('yyyy/MM/dd(E)');
-
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    const SizedBox(width: 8),
-                    Text(
-                      dateFormat
-                          .format(ref.watch(lmsCalendarFocusedDaProvider)),
-                      textAlign: TextAlign.start,
-                      style:
-                          Fonts.titleM.copyWith(color: colorScheme.onSurface),
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                if (data.isNotEmpty)
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: colorScheme.secondary,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: _buildLectureColumn(context, colorScheme, data),
-                  ),
-                const SizedBox(height: 8),
-              ],
-            );
-          },
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stackTrace) {
-            return Text(
-              error.toString(),
-              style: Fonts.bodyM.copyWith(
-                color: colorScheme.error,
-              ),
-            );
-          },
-        );
+    return task.connectionState == ConnectionState.done && task.hasData ? Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            const SizedBox(width: 8),
+            Text(
+              _dateFormat.format(_date),
+              textAlign: TextAlign.start,
+              style: Fonts.titleM.copyWith(color: colorScheme.onSurface),
+            ),
+            const Spacer(),
+          ],
+        ),
+        const SizedBox(height: 8),
+        if (task.data!.isNotEmpty)
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: colorScheme.secondary,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: _buildLectureColumn(context, colorScheme, task.data!),
+          ),
+        const SizedBox(height: 8),
+      ],
+    ) : const Center(child: CircularProgressIndicator());
   }
 }

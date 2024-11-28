@@ -12,7 +12,7 @@ class LmsCalendarDataSource {
 
     final res = await _client.get(
       Uri.parse(
-          'https://elms.u-aizu.ac.jp/calendar/view.php?view=day&time=${_flatToDay(date).toUtc().millisecondsSinceEpoch / 1000}'),
+          'https://elms.u-aizu.ac.jp/calendar/view.php?view=day&time=${_flatToDay(date).toUtc().millisecondsSinceEpoch / 1000}',),
     );
 
     return parseLmsTaskFromBody(res.body, date);

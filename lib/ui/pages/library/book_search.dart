@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
-import 'package:uaizu_app/state/book_detail.dart';
 import 'package:uaizu_app/state/book_image.dart';
 import 'package:uaizu_app/state/book_search.dart';
-import 'package:uaizu_app/ui/pages/library/book_detail.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 
 Widget _buildBookTile(
-  Book book,
-  ColorScheme colorScheme,
-  BuildContext context,
-  WidgetRef ref,
+    Book book,
+    ColorScheme colorScheme,
+    BuildContext context,
+    WidgetRef ref,
 ) {
+
   ref.read(bookImageProvider.notifier).updateRequest(book);
 
   return Padding(
@@ -35,23 +36,23 @@ Widget _buildBookTile(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
               child: ref.watch(bookImageProvider).when(
-                    data: (data) {
-                      if (data.containsKey(book)) {
-                        if (data[book] != null) {
-                          return Image.network(
-                            data[book]!,
-                            fit: BoxFit.cover,
-                          );
-                        } else {
-                          return const Icon(Icons.question_mark_outlined);
-                        }
-                      } else {
-                        return const CircularProgressIndicator();
-                      }
-                    },
-                    loading: () => const CircularProgressIndicator(),
-                    error: (err, stack) => Text(err.toString()),
-                  ),
+                data: (data) {
+                  if (data.containsKey(book)) {
+                    if (data[book] != null) {
+                      return Image.network(
+                        data[book]!,
+                        fit: BoxFit.cover,
+                      );
+                    } else {
+                      return const Icon(Icons.question_mark_outlined);
+                    }
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
+                loading: () => const CircularProgressIndicator(),
+                error: (err, stack) => Text(err.toString()),
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -63,7 +64,7 @@ Widget _buildBookTile(
                       book.title!,
                       overflow: TextOverflow.ellipsis,
                       style:
-                          Fonts.titleM.copyWith(color: colorScheme.onSurface),
+                      Fonts.titleM.copyWith(color: colorScheme.onSurface),
                       maxLines: 2,
                     ),
                   if (book.author != null)
@@ -105,23 +106,31 @@ Widget _buildBookTile(
         ),
       ),
       onTap: () {
-        ref.read(focusedBookProvider.notifier).state = book;
-        ref.read(bookDetailProvider.notifier).updateBook();
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const BookDetailPage()),
-        );
+        context.push('/library/book/${Uri.encodeComponent(book.path)}');
       },
     ),
   );
 }
 
-class BookSearchPage extends ConsumerWidget {
+class BookSearchPage extends HookConsumerWidget {
   const BookSearchPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final colorScheme = Theme.of(context).colorScheme;
+
+    final order = useState(BookSearchOrder.recommended);
+
+    useEffect(() {
+      
+      ref.read(bookSearchResultProvider.notifier).requestFirstSearch(
+        ref.read(bookSearchQueryProvider),
+        order.value,
+      );
+      
+      return null;
+    }, [ ref.read(bookSearchQueryProvider), order.value ],);
 
     final appBar = AppBar(
       toolbarHeight: 75,
@@ -131,7 +140,7 @@ class BookSearchPage extends ConsumerWidget {
         child: SizedBox(
           height: 35,
           child: TextFormField(
-            initialValue: ref.watch(bookSearchQueryProvider),
+            initialValue: ref.read(bookSearchQueryProvider),
             decoration: InputDecoration(
               isDense: true,
               hintText: '検索',
@@ -148,8 +157,9 @@ class BookSearchPage extends ConsumerWidget {
               ),
             ),
             onFieldSubmitted: (value) {
+
               ref.read(bookSearchQueryProvider.notifier).state = value;
-              ref.read(bookSearchResultProvider.notifier).requestFirstSearch();
+              context.push('/library/search');
             },
           ),
         ),
@@ -157,45 +167,45 @@ class BookSearchPage extends ConsumerWidget {
     );
 
     final bookSearchResult = ref.watch(bookSearchResultProvider).when(
-          data: (value) => NotificationListener(
-            onNotification: (ScrollNotification scrollInfo) {
-              if (scrollInfo.metrics.pixels ==
-                  scrollInfo.metrics.maxScrollExtent) {
-                ref.read(bookSearchResultProvider.notifier).requestMoreResult();
-              }
-              return false;
-            },
-            child: ListView.builder(
-              itemCount:
-                  value.hasNext ? value.books.length + 1 : value.books.length,
-              itemBuilder: (context, index) {
-                if (index == value.books.length) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+      data: (value) => NotificationListener(
+        onNotification: (ScrollNotification scrollInfo) {
+          if (scrollInfo.metrics.pixels ==
+              scrollInfo.metrics.maxScrollExtent && value.hasNext) {
+            ref.read(bookSearchResultProvider.notifier).requestMoreResult(ref.read(bookSearchQueryProvider), order.value);
+          }
+          return false;
+        },
+        child: ListView.builder(
+          itemCount:
+          value.hasNext ? value.books.length + 1 : value.books.length,
+          itemBuilder: (context, index) {
+            if (index == value.books.length) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
-                return _buildBookTile(
-                  value.books[index],
-                  colorScheme,
-                  context,
-                  ref,
-                );
-              },
-            ),
+            return _buildBookTile(
+              value.books[index],
+              colorScheme,
+              context,
+              ref,
+            );
+          },
+        ),
+      ),
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
+      error: (error, stackTrace) => Center(
+        child: Text(
+          'エラーが発生しました: $error',
+          style: Fonts.bodyM.copyWith(
+            color: colorScheme.onPrimary,
           ),
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          error: (error, stackTrace) => Center(
-            child: Text(
-              'エラーが発生しました: $error',
-              style: Fonts.bodyM.copyWith(
-                color: colorScheme.onPrimary,
-              ),
-            ),
-          ),
-        );
+        ),
+      ),
+    );
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -214,14 +224,15 @@ class BookSearchPage extends ConsumerWidget {
                   ElevatedButton(
                     onPressed: () {},
                     child: DropdownButton(
-                      value: ref.watch(bookSearchOrderProvider),
+                      value: order.value,
                       onChanged: (value) {
+
                         if (value == null) {
                           return;
                         }
 
-                        ref.read(bookSearchOrderProvider.notifier).state = value;
-                        ref.read(bookSearchResultProvider.notifier).requestFirstSearch();
+                        order.value = value;
+                        print('order.value: ${order.value}');
                       },
                       items: BookSearchOrder.values.map((q) {
                         return DropdownMenuItem(

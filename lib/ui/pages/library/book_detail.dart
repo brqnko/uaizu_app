@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
-import 'package:uaizu_app/state/book_detail.dart';
 import 'package:uaizu_app/state/book_image.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
+import 'package:uaizu_app/use_case/library_usecase.dart';
 
 Widget _buildBookImage(Book book, WidgetRef ref) {
+
   ref.read(bookImageProvider.notifier).updateRequest(book);
   final imageUrl = ref.watch(bookImageProvider);
   return imageUrl.when(
@@ -56,7 +58,7 @@ Widget _buildTaggedText(String tag, String text, ColorScheme colorScheme) {
 }
 
 Widget _buildBookBody(
-    Book? bookDetail, ColorScheme colorScheme, WidgetRef ref) {
+    Book? bookDetail, ColorScheme colorScheme, WidgetRef ref,) {
   if (bookDetail == null) {
     return const CircularProgressIndicator();
   }
@@ -155,22 +157,26 @@ Widget _buildBookBody(
   );
 }
 
-class BookDetailPage extends ConsumerWidget {
-  const BookDetailPage({super.key});
+class BookDetailPage extends HookConsumerWidget {
+  const BookDetailPage({super.key, required this.path});
+
+  final String path;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final colorScheme = Theme.of(context).colorScheme;
 
-    final body = ref.watch(bookDetailProvider).when(
-          data: (bookDetail) => _buildBookBody(bookDetail, colorScheme, ref),
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stackTrace) {
-            return Center(
-              child: Text('Error: $error'),
-            );
-          },
-        );
+    final bookDetailFuture = useMemoized(() {
+      return ref.watch(getBookDetailUseCaseProvider).call(
+          GetBookDetailUseCaseParam(bookPath: path),
+      );
+    });
+    final bookDetail = useFuture(bookDetailFuture);
+
+    final body = bookDetail.connectionState == ConnectionState.done
+        ? _buildBookBody(bookDetail.data, colorScheme, ref)
+        : const Center(child: CircularProgressIndicator());
 
     final appBar = AppBar(
       iconTheme: IconThemeData(color: colorScheme.onPrimaryFixed),

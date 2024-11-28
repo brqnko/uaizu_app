@@ -1,7 +1,7 @@
 import 'package:uaizu_app/domain/entity/book.dart';
 
 abstract class BookRepository {
-  Future<Book> fetchBookDetail(Book book);
+  Future<Book> fetchBookDetail(String path);
 
   Future<BookSearchResult> fetchBookSearchResult(BookSearchQuery query);
 
