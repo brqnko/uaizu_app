@@ -17,11 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LibraryOpeningState {
   DateTime get day => throw _privateConstructorUsedError;
-
   int get colorHex => throw _privateConstructorUsedError;
-
   String? get text => throw _privateConstructorUsedError;
-
   AppLocale get locale => throw _privateConstructorUsedError;
 
   /// Create a copy of LibraryOpeningState
@@ -36,7 +33,6 @@ abstract class $LibraryOpeningStateCopyWith<$Res> {
   factory $LibraryOpeningStateCopyWith(
           LibraryOpeningState value, $Res Function(LibraryOpeningState) then) =
       _$LibraryOpeningStateCopyWithImpl<$Res, LibraryOpeningState>;
-
   @useResult
   $Res call({DateTime day, int colorHex, String? text, AppLocale locale});
 }
@@ -48,7 +44,6 @@ class _$LibraryOpeningStateCopyWithImpl<$Res, $Val extends LibraryOpeningState>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -89,7 +84,6 @@ abstract class _$$LibraryOpeningStateImplCopyWith<$Res>
   factory _$$LibraryOpeningStateImplCopyWith(_$LibraryOpeningStateImpl value,
           $Res Function(_$LibraryOpeningStateImpl) then) =
       __$$LibraryOpeningStateImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({DateTime day, int colorHex, String? text, AppLocale locale});
@@ -191,13 +185,10 @@ abstract class _LibraryOpeningState implements LibraryOpeningState {
 
   @override
   DateTime get day;
-
   @override
   int get colorHex;
-
   @override
   String? get text;
-
   @override
   AppLocale get locale;
 
@@ -212,12 +203,9 @@ abstract class _LibraryOpeningState implements LibraryOpeningState {
 /// @nodoc
 mixin _$LibraryCalendarMonth {
   DateTime get month => throw _privateConstructorUsedError;
-
   Map<DateTime, LibraryOpeningState> get calender =>
       throw _privateConstructorUsedError;
-
   Map<int, String> get calenderColors => throw _privateConstructorUsedError;
-
   AppLocale get locale => throw _privateConstructorUsedError;
 
   /// Create a copy of LibraryCalendarMonth
@@ -232,7 +220,6 @@ abstract class $LibraryCalendarMonthCopyWith<$Res> {
   factory $LibraryCalendarMonthCopyWith(LibraryCalendarMonth value,
           $Res Function(LibraryCalendarMonth) then) =
       _$LibraryCalendarMonthCopyWithImpl<$Res, LibraryCalendarMonth>;
-
   @useResult
   $Res call(
       {DateTime month,
@@ -249,7 +236,6 @@ class _$LibraryCalendarMonthCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -290,7 +276,6 @@ abstract class _$$LibraryCalendarMonthImplCopyWith<$Res>
   factory _$$LibraryCalendarMonthImplCopyWith(_$LibraryCalendarMonthImpl value,
           $Res Function(_$LibraryCalendarMonthImpl) then) =
       __$$LibraryCalendarMonthImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -353,7 +338,6 @@ class _$LibraryCalendarMonthImpl implements _LibraryCalendarMonth {
   @override
   final DateTime month;
   final Map<DateTime, LibraryOpeningState> _calender;
-
   @override
   Map<DateTime, LibraryOpeningState> get calender {
     if (_calender is EqualUnmodifiableMapView) return _calender;
@@ -362,7 +346,6 @@ class _$LibraryCalendarMonthImpl implements _LibraryCalendarMonth {
   }
 
   final Map<int, String> _calenderColors;
-
   @override
   Map<int, String> get calenderColors {
     if (_calenderColors is EqualUnmodifiableMapView) return _calenderColors;
@@ -418,13 +401,10 @@ abstract class _LibraryCalendarMonth implements LibraryCalendarMonth {
 
   @override
   DateTime get month;
-
   @override
   Map<DateTime, LibraryOpeningState> get calender;
-
   @override
   Map<int, String> get calenderColors;
-
   @override
   AppLocale get locale;
 
@@ -453,7 +433,6 @@ abstract class $LibraryCalendarEntireCopyWith<$Res> {
   factory $LibraryCalendarEntireCopyWith(LibraryCalendarEntire value,
           $Res Function(LibraryCalendarEntire) then) =
       _$LibraryCalendarEntireCopyWithImpl<$Res, LibraryCalendarEntire>;
-
   @useResult
   $Res call({Map<DateTime, LibraryCalendarMonth> calender});
 }
@@ -466,7 +445,6 @@ class _$LibraryCalendarEntireCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -493,7 +471,6 @@ abstract class _$$LibraryCalendarEntireImplCopyWith<$Res>
           _$LibraryCalendarEntireImpl value,
           $Res Function(_$LibraryCalendarEntireImpl) then) =
       __$$LibraryCalendarEntireImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({Map<DateTime, LibraryCalendarMonth> calender});
@@ -532,7 +509,6 @@ class _$LibraryCalendarEntireImpl implements _LibraryCalendarEntire {
       : _calender = calender;
 
   final Map<DateTime, LibraryCalendarMonth> _calender;
-
   @override
   Map<DateTime, LibraryCalendarMonth> get calender {
     if (_calender is EqualUnmodifiableMapView) return _calender;
@@ -586,7 +562,6 @@ abstract class _LibraryCalendarEntire implements LibraryCalendarEntire {
 /// @nodoc
 mixin _$LibraryCalenderQuery {
   DateTime get time => throw _privateConstructorUsedError;
-
   bool get isFourYear => throw _privateConstructorUsedError;
 
   /// Create a copy of LibraryCalenderQuery
@@ -601,7 +576,6 @@ abstract class $LibraryCalenderQueryCopyWith<$Res> {
   factory $LibraryCalenderQueryCopyWith(LibraryCalenderQuery value,
           $Res Function(LibraryCalenderQuery) then) =
       _$LibraryCalenderQueryCopyWithImpl<$Res, LibraryCalenderQuery>;
-
   @useResult
   $Res call({DateTime time, bool isFourYear});
 }
@@ -614,7 +588,6 @@ class _$LibraryCalenderQueryCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -645,7 +618,6 @@ abstract class _$$LibraryCalenderQueryImplCopyWith<$Res>
   factory _$$LibraryCalenderQueryImplCopyWith(_$LibraryCalenderQueryImpl value,
           $Res Function(_$LibraryCalenderQueryImpl) then) =
       __$$LibraryCalenderQueryImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({DateTime time, bool isFourYear});
@@ -727,7 +699,6 @@ abstract class _LibraryCalenderQuery implements LibraryCalenderQuery {
 
   @override
   DateTime get time;
-
   @override
   bool get isFourYear;
 

@@ -8,8 +8,8 @@ class BookRepositoryImpl implements BookRepository {
   final BookDataSource _dataSource;
 
   @override
-  Future<Book> fetchBookDetail(Book book) {
-    return _dataSource.fetchBookDetail(book);
+  Future<Book> fetchBookDetail(String path) {
+    return _dataSource.fetchBookDetail(path);
   }
 
   @override

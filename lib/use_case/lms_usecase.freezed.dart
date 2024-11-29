@@ -30,7 +30,6 @@ abstract class $LmsTaskDayUseCaseParamCopyWith<$Res> {
   factory $LmsTaskDayUseCaseParamCopyWith(LmsTaskDayUseCaseParam value,
           $Res Function(LmsTaskDayUseCaseParam) then) =
       _$LmsTaskDayUseCaseParamCopyWithImpl<$Res, LmsTaskDayUseCaseParam>;
-
   @useResult
   $Res call({DateTime date});
 }
@@ -43,7 +42,6 @@ class _$LmsTaskDayUseCaseParamCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -70,7 +68,6 @@ abstract class _$$LmsTaskDayUseCaseParamImplCopyWith<$Res>
           _$LmsTaskDayUseCaseParamImpl value,
           $Res Function(_$LmsTaskDayUseCaseParamImpl) then) =
       __$$LmsTaskDayUseCaseParamImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({DateTime date});

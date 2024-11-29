@@ -180,17 +180,17 @@ class BookDataSource {
         ?.attributes['content'];
   }
 
-  Future<Book> fetchBookDetail(Book book) async {
-    assert(book.path.startsWith('/opac/'));
+  Future<Book> fetchBookDetail(String path) async {
+    assert(path.startsWith('/opac/'));
 
     final response = await _client.get(
-      Uri.parse('https://$_authority${book.path}'),
+      Uri.parse('https://$_authority$path'),
     );
 
-    return _parseBookDetailFromBody(response.body, book);
+    return _parseBookDetailFromBody(response.body, path);
   }
 
-  Book _parseBookDetailFromBody(String responseBody, Book beforeBook) {
+  Book _parseBookDetailFromBody(String responseBody, String path) {
     final document = parse(responseBody);
 
     final title = document.querySelector('#lid_intro_major_title')?.text.trim();
@@ -246,7 +246,8 @@ class BookDataSource {
       }
     }
 
-    return beforeBook.copyWith(
+    return Book(
+      path: path,
       title: title,
       author: author,
       publisher: publisher,

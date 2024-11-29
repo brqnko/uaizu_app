@@ -17,11 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Registration {
   String get title => throw _privateConstructorUsedError;
-
   String? get timeSlots => throw _privateConstructorUsedError;
-
   String? get referenceUrl => throw _privateConstructorUsedError;
-
   List<String> get info => throw _privateConstructorUsedError;
 
   /// Create a copy of Registration
@@ -36,7 +33,6 @@ abstract class $RegistrationCopyWith<$Res> {
   factory $RegistrationCopyWith(
           Registration value, $Res Function(Registration) then) =
       _$RegistrationCopyWithImpl<$Res, Registration>;
-
   @useResult
   $Res call(
       {String title,
@@ -52,7 +48,6 @@ class _$RegistrationCopyWithImpl<$Res, $Val extends Registration>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -93,7 +88,6 @@ abstract class _$$RegistrationImplCopyWith<$Res>
   factory _$$RegistrationImplCopyWith(
           _$RegistrationImpl value, $Res Function(_$RegistrationImpl) then) =
       __$$RegistrationImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -159,7 +153,6 @@ class _$RegistrationImpl implements _Registration {
   @override
   final String? referenceUrl;
   final List<String> _info;
-
   @override
   List<String> get info {
     if (_info is EqualUnmodifiableListView) return _info;
@@ -207,13 +200,10 @@ abstract class _Registration implements Registration {
 
   @override
   String get title;
-
   @override
   String? get timeSlots;
-
   @override
   String? get referenceUrl;
-
   @override
   List<String> get info;
 
@@ -228,7 +218,6 @@ abstract class _Registration implements Registration {
 /// @nodoc
 mixin _$SearchRegistrationQuery {
   int get year => throw _privateConstructorUsedError;
-
   bool get semester => throw _privateConstructorUsedError;
 
   /// Create a copy of SearchRegistrationQuery
@@ -243,7 +232,6 @@ abstract class $SearchRegistrationQueryCopyWith<$Res> {
   factory $SearchRegistrationQueryCopyWith(SearchRegistrationQuery value,
           $Res Function(SearchRegistrationQuery) then) =
       _$SearchRegistrationQueryCopyWithImpl<$Res, SearchRegistrationQuery>;
-
   @useResult
   $Res call({int year, bool semester});
 }
@@ -256,7 +244,6 @@ class _$SearchRegistrationQueryCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -288,7 +275,6 @@ abstract class _$$SearchRegistrationQueryImplCopyWith<$Res>
           _$SearchRegistrationQueryImpl value,
           $Res Function(_$SearchRegistrationQueryImpl) then) =
       __$$SearchRegistrationQueryImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({int year, bool semester});
@@ -371,7 +357,6 @@ abstract class _SearchRegistrationQuery implements SearchRegistrationQuery {
 
   @override
   int get year;
-
   @override
   bool get semester;
 

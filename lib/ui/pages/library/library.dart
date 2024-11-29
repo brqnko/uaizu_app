@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uaizu_app/state/book_search.dart';
-import 'package:uaizu_app/ui/pages/library/book_search.dart';
 import 'package:uaizu_app/ui/pages/library/widgets/library_calendar.dart';
 import 'package:uaizu_app/ui/pages/library/widgets/new_books_reel.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
@@ -11,6 +11,7 @@ class LibraryPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final colorScheme = Theme.of(context).colorScheme;
 
     final appBar = AppBar(
@@ -21,7 +22,6 @@ class LibraryPage extends ConsumerWidget {
         child: SizedBox(
           height: 35,
           child: TextFormField(
-            initialValue: ref.watch(bookSearchQueryProvider),
             decoration: InputDecoration(
               isDense: true,
               hintText: '検索',
@@ -38,12 +38,9 @@ class LibraryPage extends ConsumerWidget {
               ),
             ),
             onFieldSubmitted: (value) {
+
               ref.read(bookSearchQueryProvider.notifier).state = value;
-              ref.read(bookSearchResultProvider.notifier).requestFirstSearch();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const BookSearchPage()),
-              );
+              context.push('/library/search');
             },
           ),
         ),

@@ -17,16 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CampusSquareCalendarLecture {
   DateTime get day => throw _privateConstructorUsedError;
-
   String get courseName => throw _privateConstructorUsedError;
-
   String get timeSlot => throw _privateConstructorUsedError;
-
   String get location => throw _privateConstructorUsedError;
-
   CampusSquareCalendarLectureType get type =>
       throw _privateConstructorUsedError;
-
   AppLocale get locale => throw _privateConstructorUsedError;
 
   /// Create a copy of CampusSquareCalendarLecture
@@ -43,7 +38,6 @@ abstract class $CampusSquareCalendarLectureCopyWith<$Res> {
           $Res Function(CampusSquareCalendarLecture) then) =
       _$CampusSquareCalendarLectureCopyWithImpl<$Res,
           CampusSquareCalendarLecture>;
-
   @useResult
   $Res call(
       {DateTime day,
@@ -62,7 +56,6 @@ class _$CampusSquareCalendarLectureCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -114,7 +107,6 @@ abstract class _$$CampusSquareCalendarLectureImplCopyWith<$Res>
           _$CampusSquareCalendarLectureImpl value,
           $Res Function(_$CampusSquareCalendarLectureImpl) then) =
       __$$CampusSquareCalendarLectureImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -249,19 +241,14 @@ abstract class _CampusSquareCalendarLecture
 
   @override
   DateTime get day;
-
   @override
   String get courseName;
-
   @override
   String get timeSlot;
-
   @override
   String get location;
-
   @override
   CampusSquareCalendarLectureType get type;
-
   @override
   AppLocale get locale;
 
@@ -276,12 +263,9 @@ abstract class _CampusSquareCalendarLecture
 /// @nodoc
 mixin _$CampusSquareCalendarDay {
   DateTime get day => throw _privateConstructorUsedError;
-
   List<String> get notes => throw _privateConstructorUsedError;
-
   List<CampusSquareCalendarLecture> get lectures =>
       throw _privateConstructorUsedError;
-
   AppLocale get locale => throw _privateConstructorUsedError;
 
   /// Create a copy of CampusSquareCalendarDay
@@ -296,7 +280,6 @@ abstract class $CampusSquareCalendarDayCopyWith<$Res> {
   factory $CampusSquareCalendarDayCopyWith(CampusSquareCalendarDay value,
           $Res Function(CampusSquareCalendarDay) then) =
       _$CampusSquareCalendarDayCopyWithImpl<$Res, CampusSquareCalendarDay>;
-
   @useResult
   $Res call(
       {DateTime day,
@@ -313,7 +296,6 @@ class _$CampusSquareCalendarDayCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -355,7 +337,6 @@ abstract class _$$CampusSquareCalendarDayImplCopyWith<$Res>
           _$CampusSquareCalendarDayImpl value,
           $Res Function(_$CampusSquareCalendarDayImpl) then) =
       __$$CampusSquareCalendarDayImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -420,7 +401,6 @@ class _$CampusSquareCalendarDayImpl implements _CampusSquareCalendarDay {
   @override
   final DateTime day;
   final List<String> _notes;
-
   @override
   List<String> get notes {
     if (_notes is EqualUnmodifiableListView) return _notes;
@@ -429,7 +409,6 @@ class _$CampusSquareCalendarDayImpl implements _CampusSquareCalendarDay {
   }
 
   final List<CampusSquareCalendarLecture> _lectures;
-
   @override
   List<CampusSquareCalendarLecture> get lectures {
     if (_lectures is EqualUnmodifiableListView) return _lectures;
@@ -483,13 +462,10 @@ abstract class _CampusSquareCalendarDay implements CampusSquareCalendarDay {
 
   @override
   DateTime get day;
-
   @override
   List<String> get notes;
-
   @override
   List<CampusSquareCalendarLecture> get lectures;
-
   @override
   AppLocale get locale;
 
@@ -505,7 +481,6 @@ abstract class _CampusSquareCalendarDay implements CampusSquareCalendarDay {
 mixin _$CampusSquareCalendarEntire {
   Map<DateTime, CampusSquareCalendarDay> get calenderMonth =>
       throw _privateConstructorUsedError;
-
   AppLocale get locale => throw _privateConstructorUsedError;
 
   /// Create a copy of CampusSquareCalendarEntire
@@ -521,7 +496,6 @@ abstract class $CampusSquareCalendarEntireCopyWith<$Res> {
           $Res Function(CampusSquareCalendarEntire) then) =
       _$CampusSquareCalendarEntireCopyWithImpl<$Res,
           CampusSquareCalendarEntire>;
-
   @useResult
   $Res call(
       {Map<DateTime, CampusSquareCalendarDay> calenderMonth, AppLocale locale});
@@ -535,7 +509,6 @@ class _$CampusSquareCalendarEntireCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -567,7 +540,6 @@ abstract class _$$CampusSquareCalendarEntireImplCopyWith<$Res>
           _$CampusSquareCalendarEntireImpl value,
           $Res Function(_$CampusSquareCalendarEntireImpl) then) =
       __$$CampusSquareCalendarEntireImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -614,7 +586,6 @@ class _$CampusSquareCalendarEntireImpl implements _CampusSquareCalendarEntire {
       : _calenderMonth = calenderMonth;
 
   final Map<DateTime, CampusSquareCalendarDay> _calenderMonth;
-
   @override
   Map<DateTime, CampusSquareCalendarDay> get calenderMonth {
     if (_calenderMonth is EqualUnmodifiableMapView) return _calenderMonth;
@@ -662,7 +633,6 @@ abstract class _CampusSquareCalendarEntire
 
   @override
   Map<DateTime, CampusSquareCalendarDay> get calenderMonth;
-
   @override
   AppLocale get locale;
 

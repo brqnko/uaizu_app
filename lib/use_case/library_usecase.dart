@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
@@ -64,6 +65,8 @@ class GetBookSearchResultUseCase
 
   @override
   Future<BookSearchResult> call(GetBookSearchResultUseCaseParam param) async {
+
+    debugPrint('getting book search result, start: ${param.query.start}');
     final result = await _repository.fetchBookSearchResult(param.query);
 
     return result;
@@ -86,7 +89,7 @@ class GetNewBooksUseCase extends UseCase<void, Future<List<Book>>> {
 @freezed
 class GetBookDetailUseCaseParam with _$GetBookDetailUseCaseParam {
   const factory GetBookDetailUseCaseParam({
-    required Book book,
+    required String bookPath,
   }) = _GetBookDetailUseCaseParam;
 }
 
@@ -98,7 +101,7 @@ class GetBookDetailUseCase
 
   @override
   Future<Book> call(GetBookDetailUseCaseParam param) async {
-    final detail = await _repository.fetchBookDetail(param.book);
+    final detail = await _repository.fetchBookDetail(param.bookPath);
 
     return detail;
   }
@@ -119,7 +122,7 @@ class GetLibraryCalenderUseCase extends UseCase<GetLibraryCalenderUseCaseParam,
 
   @override
   Future<LibraryCalendarEntire> call(
-      GetLibraryCalenderUseCaseParam param) async {
+      GetLibraryCalenderUseCaseParam param,) async {
     final calender = await _repository.fetchLibraryCalendarMonth(param.query);
 
     return LibraryCalendarEntire(

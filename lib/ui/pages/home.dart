@@ -1,70 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uaizu_app/state/home_index.dart';
-import 'package:uaizu_app/ui/pages/library/library.dart';
-import 'package:uaizu_app/ui/pages/lms/lms.dart';
-import 'package:uaizu_app/ui/pages/notification/notification.dart';
-
-import 'campus_square/campus_square.dart';
-import 'settings/settings.dart';
-
-const _pages = [
-  CampusSquarePage(),
-  LMSPage(),
-  LibraryPage(),
-  NotificationPage(),
-  AccountPage(),
-];
-
-const _items = [
-  BottomNavigationBarItem(
-    icon: Icon(Icons.calendar_month),
-    label: 'Square',
-  ),
-  BottomNavigationBarItem(
-    icon: Icon(Icons.edit),
-    label: 'Moodle',
-  ),
-  BottomNavigationBarItem(
-    icon: Icon(Icons.book),
-    label: '図書館',
-  ),
-  BottomNavigationBarItem(
-    icon: Icon(Icons.notifications_sharp),
-    label: '通知',
-  ),
-  BottomNavigationBarItem(
-    icon: Icon(Icons.person),
-    label: 'アカウント',
-  ),
-];
+import 'package:go_router/go_router.dart';
 
 class HomePage extends ConsumerWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.navigationShell});
+
+  final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final index = ref.watch(homeIndexProvider);
-
     final colorScheme = Theme.of(context).colorScheme;
 
-    final bar = BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      items: _items,
+    final bottomNavigationBar = BottomNavigationBar(
+      currentIndex: navigationShell.currentIndex,
       backgroundColor: colorScheme.primary,
       selectedItemColor: colorScheme.onPrimaryFixed,
       unselectedItemColor: colorScheme.onPrimary,
-      currentIndex: index,
-      onTap: (newIndex) {
-        ref.read(homeIndexProvider.notifier).state = newIndex;
+      type: BottomNavigationBarType.fixed,
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_month),
+          label: 'Square',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.edit),
+          label: 'Moodle',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.book),
+          label: '図書館',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.notifications_sharp),
+          label: '通知',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'アカウント',
+        ),
+      ],
+      onTap: (index) {
+        navigationShell.goBranch(
+          index,
+          initialLocation: index == navigationShell.currentIndex,
+        );
       },
     );
 
     return Scaffold(
-      body: _pages[index],
+      body: navigationShell,
       bottomNavigationBar: SizedBox(
         height: 75,
-        child: bar,
+        child: bottomNavigationBar,
       ),
     );
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
-import 'package:uaizu_app/state/book_detail.dart';
-import 'package:uaizu_app/state/new_books.dart';
-import 'package:uaizu_app/ui/pages/library/book_detail.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
+import 'package:uaizu_app/use_case/library_usecase.dart';
 
-class NewBooksReel extends ConsumerWidget {
+class NewBooksReel extends HookConsumerWidget {
   const NewBooksReel({super.key});
 
   Widget _buildBookCover(
@@ -48,11 +48,7 @@ class NewBooksReel extends ConsumerWidget {
         child: bookImage,
       ),
       onTap: () {
-        ref.read(focusedBookProvider.notifier).state = book;
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const BookDetailPage()),
-        );
+        context.push('/library/book/${Uri.encodeComponent(book.path)}');
       },
     );
 
@@ -76,23 +72,25 @@ class NewBooksReel extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final colorScheme = Theme.of(context).colorScheme;
-    final books = ref.watch(newBooksProvider);
+
+    final booksFuture = useMemoized(() {
+      return ref.watch(getNewBooksUseCaseProvider).call(());
+    });
+
+    final books = useFuture(booksFuture);
 
     return SizedBox(
       height: 260,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: books.maybeWhen(
-          data: (books) => books.length,
-          orElse: () => 10,
-        ),
+        itemCount: books.hasData ? books.data!.length : 10,
         itemBuilder: (_, index) {
-          return books.when(
-            data: (books) {
-              return _buildBookCover(books[index], colorScheme, ref, context);
-            },
-            loading: () => Container(
+          if (books.hasData) {
+            return _buildBookCover(books.data![index], colorScheme, ref, context);
+          } else {
+            return Container(
               width: 150,
               height: 200,
               margin: const EdgeInsets.all(8),
@@ -106,9 +104,8 @@ class NewBooksReel extends ConsumerWidget {
                   ),
                 ],
               ),
-            ),
-            error: (error, stackTrace) => Text('Error: $stackTrace'),
-          );
+            );
+          }
         },
       ),
     );

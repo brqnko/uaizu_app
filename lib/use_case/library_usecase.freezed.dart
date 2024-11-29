@@ -30,7 +30,6 @@ abstract class $GetBookImageUseCaseParamCopyWith<$Res> {
   factory $GetBookImageUseCaseParamCopyWith(GetBookImageUseCaseParam value,
           $Res Function(GetBookImageUseCaseParam) then) =
       _$GetBookImageUseCaseParamCopyWithImpl<$Res, GetBookImageUseCaseParam>;
-
   @useResult
   $Res call({Book book});
 
@@ -45,7 +44,6 @@ class _$GetBookImageUseCaseParamCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -82,7 +80,6 @@ abstract class _$$GetBookImageUseCaseParamImplCopyWith<$Res>
           _$GetBookImageUseCaseParamImpl value,
           $Res Function(_$GetBookImageUseCaseParamImpl) then) =
       __$$GetBookImageUseCaseParamImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({Book book});
@@ -184,7 +181,6 @@ abstract class $GetBookSearchResultUseCaseParamCopyWith<$Res> {
           $Res Function(GetBookSearchResultUseCaseParam) then) =
       _$GetBookSearchResultUseCaseParamCopyWithImpl<$Res,
           GetBookSearchResultUseCaseParam>;
-
   @useResult
   $Res call({BookSearchQuery query});
 
@@ -199,7 +195,6 @@ class _$GetBookSearchResultUseCaseParamCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -236,7 +231,6 @@ abstract class _$$GetBookSearchResultUseCaseParamImplCopyWith<$Res>
           _$GetBookSearchResultUseCaseParamImpl value,
           $Res Function(_$GetBookSearchResultUseCaseParamImpl) then) =
       __$$GetBookSearchResultUseCaseParamImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({BookSearchQuery query});
@@ -327,7 +321,7 @@ abstract class _GetBookSearchResultUseCaseParam
 
 /// @nodoc
 mixin _$GetBookDetailUseCaseParam {
-  Book get book => throw _privateConstructorUsedError;
+  String get bookPath => throw _privateConstructorUsedError;
 
   /// Create a copy of GetBookDetailUseCaseParam
   /// with the given fields replaced by the non-null parameter values.
@@ -341,11 +335,8 @@ abstract class $GetBookDetailUseCaseParamCopyWith<$Res> {
   factory $GetBookDetailUseCaseParamCopyWith(GetBookDetailUseCaseParam value,
           $Res Function(GetBookDetailUseCaseParam) then) =
       _$GetBookDetailUseCaseParamCopyWithImpl<$Res, GetBookDetailUseCaseParam>;
-
   @useResult
-  $Res call({Book book});
-
-  $BookCopyWith<$Res> get book;
+  $Res call({String bookPath});
 }
 
 /// @nodoc
@@ -356,7 +347,6 @@ class _$GetBookDetailUseCaseParamCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -365,24 +355,14 @@ class _$GetBookDetailUseCaseParamCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? book = null,
+    Object? bookPath = null,
   }) {
     return _then(_value.copyWith(
-      book: null == book
-          ? _value.book
-          : book // ignore: cast_nullable_to_non_nullable
-              as Book,
+      bookPath: null == bookPath
+          ? _value.bookPath
+          : bookPath // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
-  }
-
-  /// Create a copy of GetBookDetailUseCaseParam
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $BookCopyWith<$Res> get book {
-    return $BookCopyWith<$Res>(_value.book, (value) {
-      return _then(_value.copyWith(book: value) as $Val);
-    });
   }
 }
 
@@ -393,13 +373,9 @@ abstract class _$$GetBookDetailUseCaseParamImplCopyWith<$Res>
           _$GetBookDetailUseCaseParamImpl value,
           $Res Function(_$GetBookDetailUseCaseParamImpl) then) =
       __$$GetBookDetailUseCaseParamImplCopyWithImpl<$Res>;
-
   @override
   @useResult
-  $Res call({Book book});
-
-  @override
-  $BookCopyWith<$Res> get book;
+  $Res call({String bookPath});
 }
 
 /// @nodoc
@@ -417,13 +393,13 @@ class __$$GetBookDetailUseCaseParamImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? book = null,
+    Object? bookPath = null,
   }) {
     return _then(_$GetBookDetailUseCaseParamImpl(
-      book: null == book
-          ? _value.book
-          : book // ignore: cast_nullable_to_non_nullable
-              as Book,
+      bookPath: null == bookPath
+          ? _value.bookPath
+          : bookPath // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -431,14 +407,14 @@ class __$$GetBookDetailUseCaseParamImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GetBookDetailUseCaseParamImpl implements _GetBookDetailUseCaseParam {
-  const _$GetBookDetailUseCaseParamImpl({required this.book});
+  const _$GetBookDetailUseCaseParamImpl({required this.bookPath});
 
   @override
-  final Book book;
+  final String bookPath;
 
   @override
   String toString() {
-    return 'GetBookDetailUseCaseParam(book: $book)';
+    return 'GetBookDetailUseCaseParam(bookPath: $bookPath)';
   }
 
   @override
@@ -446,11 +422,12 @@ class _$GetBookDetailUseCaseParamImpl implements _GetBookDetailUseCaseParam {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetBookDetailUseCaseParamImpl &&
-            (identical(other.book, book) || other.book == book));
+            (identical(other.bookPath, bookPath) ||
+                other.bookPath == bookPath));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, book);
+  int get hashCode => Object.hash(runtimeType, bookPath);
 
   /// Create a copy of GetBookDetailUseCaseParam
   /// with the given fields replaced by the non-null parameter values.
@@ -463,11 +440,11 @@ class _$GetBookDetailUseCaseParamImpl implements _GetBookDetailUseCaseParam {
 }
 
 abstract class _GetBookDetailUseCaseParam implements GetBookDetailUseCaseParam {
-  const factory _GetBookDetailUseCaseParam({required final Book book}) =
+  const factory _GetBookDetailUseCaseParam({required final String bookPath}) =
       _$GetBookDetailUseCaseParamImpl;
 
   @override
-  Book get book;
+  String get bookPath;
 
   /// Create a copy of GetBookDetailUseCaseParam
   /// with the given fields replaced by the non-null parameter values.
@@ -495,7 +472,6 @@ abstract class $GetLibraryCalenderUseCaseParamCopyWith<$Res> {
           $Res Function(GetLibraryCalenderUseCaseParam) then) =
       _$GetLibraryCalenderUseCaseParamCopyWithImpl<$Res,
           GetLibraryCalenderUseCaseParam>;
-
   @useResult
   $Res call({LibraryCalenderQuery query});
 
@@ -510,7 +486,6 @@ class _$GetLibraryCalenderUseCaseParamCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -547,7 +522,6 @@ abstract class _$$GetLibraryCalenderUseCaseParamImplCopyWith<$Res>
           _$GetLibraryCalenderUseCaseParamImpl value,
           $Res Function(_$GetLibraryCalenderUseCaseParamImpl) then) =
       __$$GetLibraryCalenderUseCaseParamImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({LibraryCalenderQuery query});

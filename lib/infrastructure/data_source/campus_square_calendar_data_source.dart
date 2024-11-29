@@ -26,11 +26,13 @@ class CampusSquareCalendarDataSource {
       },
     );
 
+    print(res.body);
+
     return _parseCalendarDayFromBody(res.body, date);
   }
 
   CampusSquareCalendarDay _parseCalendarDayFromBody(
-      String body, DateTime date) {
+      String body, DateTime date,) {
     final document = parse(body);
     final items = document.querySelectorAll('.mysch-portlet-list li');
     final notes = <String>[];

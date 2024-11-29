@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$GetCampusSquareCalenderDayUseCaseParam {
   DateTime get date => throw _privateConstructorUsedError;
-
   bool get useCache => throw _privateConstructorUsedError;
 
   /// Create a copy of GetCampusSquareCalenderDayUseCaseParam
@@ -35,7 +34,6 @@ abstract class $GetCampusSquareCalenderDayUseCaseParamCopyWith<$Res> {
           $Res Function(GetCampusSquareCalenderDayUseCaseParam) then) =
       _$GetCampusSquareCalenderDayUseCaseParamCopyWithImpl<$Res,
           GetCampusSquareCalenderDayUseCaseParam>;
-
   @useResult
   $Res call({DateTime date, bool useCache});
 }
@@ -48,7 +46,6 @@ class _$GetCampusSquareCalenderDayUseCaseParamCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -80,7 +77,6 @@ abstract class _$$GetCampusSquareCalenderDayUseCaseParamImplCopyWith<$Res>
           _$GetCampusSquareCalenderDayUseCaseParamImpl value,
           $Res Function(_$GetCampusSquareCalenderDayUseCaseParamImpl) then) =
       __$$GetCampusSquareCalenderDayUseCaseParamImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({DateTime date, bool useCache});
@@ -167,7 +163,6 @@ abstract class _GetCampusSquareCalenderDayUseCaseParam
 
   @override
   DateTime get date;
-
   @override
   bool get useCache;
 
@@ -183,7 +178,6 @@ abstract class _GetCampusSquareCalenderDayUseCaseParam
 /// @nodoc
 mixin _$GetGradeUseCaseParam {
   GradeQuery get query => throw _privateConstructorUsedError;
-
   bool get useCache => throw _privateConstructorUsedError;
 
   /// Create a copy of GetGradeUseCaseParam
@@ -198,7 +192,6 @@ abstract class $GetGradeUseCaseParamCopyWith<$Res> {
   factory $GetGradeUseCaseParamCopyWith(GetGradeUseCaseParam value,
           $Res Function(GetGradeUseCaseParam) then) =
       _$GetGradeUseCaseParamCopyWithImpl<$Res, GetGradeUseCaseParam>;
-
   @useResult
   $Res call({GradeQuery query, bool useCache});
 
@@ -213,7 +206,6 @@ class _$GetGradeUseCaseParamCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -254,7 +246,6 @@ abstract class _$$GetGradeUseCaseParamImplCopyWith<$Res>
   factory _$$GetGradeUseCaseParamImplCopyWith(_$GetGradeUseCaseParamImpl value,
           $Res Function(_$GetGradeUseCaseParamImpl) then) =
       __$$GetGradeUseCaseParamImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({GradeQuery query, bool useCache});
@@ -339,7 +330,6 @@ abstract class _GetGradeUseCaseParam implements GetGradeUseCaseParam {
 
   @override
   GradeQuery get query;
-
   @override
   bool get useCache;
 
@@ -354,7 +344,6 @@ abstract class _GetGradeUseCaseParam implements GetGradeUseCaseParam {
 /// @nodoc
 mixin _$GetSyllabusUseCaseParam {
   SyllabusLectureSearchQuery get query => throw _privateConstructorUsedError;
-
   bool get useCache => throw _privateConstructorUsedError;
 
   /// Create a copy of GetSyllabusUseCaseParam
@@ -369,7 +358,6 @@ abstract class $GetSyllabusUseCaseParamCopyWith<$Res> {
   factory $GetSyllabusUseCaseParamCopyWith(GetSyllabusUseCaseParam value,
           $Res Function(GetSyllabusUseCaseParam) then) =
       _$GetSyllabusUseCaseParamCopyWithImpl<$Res, GetSyllabusUseCaseParam>;
-
   @useResult
   $Res call({SyllabusLectureSearchQuery query, bool useCache});
 
@@ -384,7 +372,6 @@ class _$GetSyllabusUseCaseParamCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -426,7 +413,6 @@ abstract class _$$GetSyllabusUseCaseParamImplCopyWith<$Res>
           _$GetSyllabusUseCaseParamImpl value,
           $Res Function(_$GetSyllabusUseCaseParamImpl) then) =
       __$$GetSyllabusUseCaseParamImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({SyllabusLectureSearchQuery query, bool useCache});
@@ -512,7 +498,6 @@ abstract class _GetSyllabusUseCaseParam implements GetSyllabusUseCaseParam {
 
   @override
   SyllabusLectureSearchQuery get query;
-
   @override
   bool get useCache;
 
@@ -527,7 +512,6 @@ abstract class _GetSyllabusUseCaseParam implements GetSyllabusUseCaseParam {
 /// @nodoc
 mixin _$GetRegistrationUseCaseParam {
   SearchRegistrationQuery get query => throw _privateConstructorUsedError;
-
   bool get useCache => throw _privateConstructorUsedError;
 
   /// Create a copy of GetRegistrationUseCaseParam
@@ -544,7 +528,6 @@ abstract class $GetRegistrationUseCaseParamCopyWith<$Res> {
           $Res Function(GetRegistrationUseCaseParam) then) =
       _$GetRegistrationUseCaseParamCopyWithImpl<$Res,
           GetRegistrationUseCaseParam>;
-
   @useResult
   $Res call({SearchRegistrationQuery query, bool useCache});
 
@@ -559,7 +542,6 @@ class _$GetRegistrationUseCaseParamCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -601,7 +583,6 @@ abstract class _$$GetRegistrationUseCaseParamImplCopyWith<$Res>
           _$GetRegistrationUseCaseParamImpl value,
           $Res Function(_$GetRegistrationUseCaseParamImpl) then) =
       __$$GetRegistrationUseCaseParamImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({SearchRegistrationQuery query, bool useCache});
@@ -689,7 +670,6 @@ abstract class _GetRegistrationUseCaseParam
 
   @override
   SearchRegistrationQuery get query;
-
   @override
   bool get useCache;
 

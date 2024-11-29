@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AccountInfo {
   String get studentId => throw _privateConstructorUsedError;
-
   String get password => throw _privateConstructorUsedError;
 
   /// Create a copy of AccountInfo
@@ -32,7 +31,6 @@ abstract class $AccountInfoCopyWith<$Res> {
   factory $AccountInfoCopyWith(
           AccountInfo value, $Res Function(AccountInfo) then) =
       _$AccountInfoCopyWithImpl<$Res, AccountInfo>;
-
   @useResult
   $Res call({String studentId, String password});
 }
@@ -44,7 +42,6 @@ class _$AccountInfoCopyWithImpl<$Res, $Val extends AccountInfo>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -75,7 +72,6 @@ abstract class _$$AccountInfoImplCopyWith<$Res>
   factory _$$AccountInfoImplCopyWith(
           _$AccountInfoImpl value, $Res Function(_$AccountInfoImpl) then) =
       __$$AccountInfoImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({String studentId, String password});
@@ -155,7 +151,6 @@ abstract class _AccountInfo implements AccountInfo {
 
   @override
   String get studentId;
-
   @override
   String get password;
 
@@ -170,11 +165,8 @@ abstract class _AccountInfo implements AccountInfo {
 /// @nodoc
 mixin _$AppSettings {
   AccountInfo get accountInfo => throw _privateConstructorUsedError;
-
   bool get hideStudentId => throw _privateConstructorUsedError;
-
   AppTheme get appTheme => throw _privateConstructorUsedError;
-
   AppLocale get appLocale => throw _privateConstructorUsedError;
 
   /// Create a copy of AppSettings
@@ -189,7 +181,6 @@ abstract class $AppSettingsCopyWith<$Res> {
   factory $AppSettingsCopyWith(
           AppSettings value, $Res Function(AppSettings) then) =
       _$AppSettingsCopyWithImpl<$Res, AppSettings>;
-
   @useResult
   $Res call(
       {AccountInfo accountInfo,
@@ -207,7 +198,6 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -258,7 +248,6 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
   factory _$$AppSettingsImplCopyWith(
           _$AppSettingsImpl value, $Res Function(_$AppSettingsImpl) then) =
       __$$AppSettingsImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -370,13 +359,10 @@ abstract class _AppSettings implements AppSettings {
 
   @override
   AccountInfo get accountInfo;
-
   @override
   bool get hideStudentId;
-
   @override
   AppTheme get appTheme;
-
   @override
   AppLocale get appLocale;
 

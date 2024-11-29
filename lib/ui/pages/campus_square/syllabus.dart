@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/syllabus.dart';
-import 'package:uaizu_app/state/syllabus.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 
-class SyllabusPage extends ConsumerWidget {
+import '../../../use_case/campus_square_usecase.dart';
+
+class SyllabusPage extends HookConsumerWidget {
   const SyllabusPage({super.key});
 
   Widget _buildSyllabusListView(
-      List<SyllabusLecture> data, ColorScheme colorScheme) {
+      List<SyllabusLecture> data, ColorScheme colorScheme,) {
     return ListView.builder(
       itemCount: data.length,
       shrinkWrap: true,
@@ -140,7 +142,28 @@ class SyllabusPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final colorScheme = Theme.of(context).colorScheme;
+
+    final year = useState(DateTime.now().year);
+    final displayCount = useState(20);
+    final freeWord = useState('');
+    final syllabusFutureTrigger = useState(false);
+
+    final syllabusFuture = useMemoized(() {
+      return ref.watch(getSyllabusUseCaseProvider).call(
+        GetSyllabusUseCaseParam(
+          query: SyllabusLectureSearchQuery(
+            year: year.value,
+            displayCount: displayCount.value,
+            freeWord: freeWord.value,
+          ),
+          useCache: false,
+        ),
+      );
+    }, [syllabusFutureTrigger.value],);
+
+    final syllabus = useFuture(syllabusFuture);
 
     final appBar = AppBar(
       toolbarHeight: 55,
@@ -164,12 +187,9 @@ class SyllabusPage extends ConsumerWidget {
                         child: YearPicker(
                           firstDate: DateTime.utc(1993, 4),
                           lastDate: DateTime.utc(2030, 3, 31),
-                          selectedDate:
-                              DateTime(ref.watch(syllabusSearchYearProvider)),
+                          selectedDate: DateTime(year.value),
                           onChanged: (DateTime dateTime) {
-                            ref
-                                .read(syllabusSearchYearProvider.notifier)
-                                .state = dateTime.year;
+                            year.value = dateTime.year;
                             Navigator.pop(context);
                           },
                         ),
@@ -179,7 +199,7 @@ class SyllabusPage extends ConsumerWidget {
                 );
               },
               child: Text(
-                ref.watch(syllabusSearchYearProvider).toString(),
+                year.value.toString(),
                 style:
                     Fonts.bodyS.copyWith(color: colorScheme.onSurfaceVariant),
               ),
@@ -188,7 +208,7 @@ class SyllabusPage extends ConsumerWidget {
             SizedBox(
               width: 200,
               child: TextFormField(
-                initialValue: ref.watch(syllabusSearchFreeWordProvider),
+                initialValue: freeWord.value,
                 decoration: InputDecoration(
                   isDense: true,
                   hintText: 'フリーワード',
@@ -206,8 +226,7 @@ class SyllabusPage extends ConsumerWidget {
                   ),
                 ),
                 onChanged: (value) {
-                  ref.read(syllabusSearchFreeWordProvider.notifier).state =
-                      value;
+                  freeWord.value = value;
                 },
               ),
             ),
@@ -215,8 +234,7 @@ class SyllabusPage extends ConsumerWidget {
             SizedBox(
               width: 150,
               child: TextFormField(
-                initialValue:
-                    ref.watch(syllabusSearchDisplayCountProvider).toString(),
+                initialValue: displayCount.value.toString(),
                 decoration: InputDecoration(
                   isDense: true,
                   hintText: '表示件数',
@@ -233,7 +251,7 @@ class SyllabusPage extends ConsumerWidget {
                     borderSide: BorderSide.none,
                   ),
                 ),
-                keyboardType: const TextInputType.numberWithOptions(),
+                keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                   TextInputFormatter.withFunction(
@@ -248,15 +266,14 @@ class SyllabusPage extends ConsumerWidget {
                     return;
                   }
 
-                  ref.read(syllabusSearchDisplayCountProvider.notifier).state =
-                      formatted;
+                  displayCount.value = formatted;
                 },
               ),
             ),
             const SizedBox(width: 16),
             ElevatedButton(
               onPressed: () {
-                ref.read(syllabusSearchResultProvider.notifier).requestUpdate();
+                syllabusFutureTrigger.value = !syllabusFutureTrigger.value;
               },
               child: Text(
                 '検索',
@@ -274,21 +291,9 @@ class SyllabusPage extends ConsumerWidget {
       appBar: appBar,
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
-        child: ref.watch(syllabusSearchResultProvider).when(
-          data: (data) {
-            if (data.isEmpty) {
-              return const Text('no search result');
-            } else {
-              return _buildSyllabusListView(data, colorScheme);
-            }
-          },
-          loading: () {
-            return const CircularProgressIndicator();
-          },
-          error: (err, stack) {
-            return Text(stack.toString());
-          },
-        ),
+        child: syllabus.connectionState == ConnectionState.waiting
+            ? const Center(child: CircularProgressIndicator())
+            : _buildSyllabusListView(syllabus.data!, colorScheme),
       ),
     );
   }

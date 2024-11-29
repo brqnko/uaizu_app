@@ -17,13 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ToeicScore {
   DateTime get date => throw _privateConstructorUsedError;
-
   String get type => throw _privateConstructorUsedError;
-
   int get score => throw _privateConstructorUsedError;
-
   int get reqdingScore => throw _privateConstructorUsedError;
-
   int get listeningScore => throw _privateConstructorUsedError;
 
   /// Create a copy of ToeicScore
@@ -38,7 +34,6 @@ abstract class $ToeicScoreCopyWith<$Res> {
   factory $ToeicScoreCopyWith(
           ToeicScore value, $Res Function(ToeicScore) then) =
       _$ToeicScoreCopyWithImpl<$Res, ToeicScore>;
-
   @useResult
   $Res call(
       {DateTime date,
@@ -55,7 +50,6 @@ class _$ToeicScoreCopyWithImpl<$Res, $Val extends ToeicScore>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -101,7 +95,6 @@ abstract class _$$ToeicScoreImplCopyWith<$Res>
   factory _$$ToeicScoreImplCopyWith(
           _$ToeicScoreImpl value, $Res Function(_$ToeicScoreImpl) then) =
       __$$ToeicScoreImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -219,16 +212,12 @@ abstract class _ToeicScore implements ToeicScore {
 
   @override
   DateTime get date;
-
   @override
   String get type;
-
   @override
   int get score;
-
   @override
   int get reqdingScore;
-
   @override
   int get listeningScore;
 
@@ -243,20 +232,13 @@ abstract class _ToeicScore implements ToeicScore {
 /// @nodoc
 mixin _$SubjectGrade {
   int get year => throw _privateConstructorUsedError;
-
   String get semester => throw _privateConstructorUsedError;
-
   String get code => throw _privateConstructorUsedError;
-
   String get subjectTitle => throw _privateConstructorUsedError;
-
   String get teacher => throw _privateConstructorUsedError;
-
   String get score => throw _privateConstructorUsedError; // 履修中になるかもしれない
   String get grade => throw _privateConstructorUsedError;
-
   String get result => throw _privateConstructorUsedError;
-
   AppLocale get locale => throw _privateConstructorUsedError;
 
   /// Create a copy of SubjectGrade
@@ -271,7 +253,6 @@ abstract class $SubjectGradeCopyWith<$Res> {
   factory $SubjectGradeCopyWith(
           SubjectGrade value, $Res Function(SubjectGrade) then) =
       _$SubjectGradeCopyWithImpl<$Res, SubjectGrade>;
-
   @useResult
   $Res call(
       {int year,
@@ -292,7 +273,6 @@ class _$SubjectGradeCopyWithImpl<$Res, $Val extends SubjectGrade>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -358,7 +338,6 @@ abstract class _$$SubjectGradeImplCopyWith<$Res>
   factory _$$SubjectGradeImplCopyWith(
           _$SubjectGradeImpl value, $Res Function(_$SubjectGradeImpl) then) =
       __$$SubjectGradeImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -463,7 +442,6 @@ class _$SubjectGradeImpl implements _SubjectGrade {
   final String teacher;
   @override
   final String score;
-
 // 履修中になるかもしれない
   @override
   final String grade;
@@ -522,27 +500,20 @@ abstract class _SubjectGrade implements SubjectGrade {
 
   @override
   int get year;
-
   @override
   String get semester;
-
   @override
   String get code;
-
   @override
   String get subjectTitle;
-
   @override
   String get teacher;
-
   @override
   String get score; // 履修中になるかもしれない
   @override
   String get grade;
-
   @override
   String get result;
-
   @override
   AppLocale get locale;
 
@@ -557,21 +528,13 @@ abstract class _SubjectGrade implements SubjectGrade {
 /// @nodoc
 mixin _$Grade {
   String get studentId => throw _privateConstructorUsedError;
-
   String get studentName => throw _privateConstructorUsedError;
-
   String get department => throw _privateConstructorUsedError;
-
   String get year => throw _privateConstructorUsedError;
-
   String get semester => throw _privateConstructorUsedError;
-
   ToeicScore? get bestToeicScore => throw _privateConstructorUsedError;
-
   List<ToeicScore> get toeicScores => throw _privateConstructorUsedError;
-
   List<SubjectGrade> get subjectGrades => throw _privateConstructorUsedError;
-
   AppLocale get locale => throw _privateConstructorUsedError;
 
   /// Create a copy of Grade
@@ -584,7 +547,6 @@ mixin _$Grade {
 abstract class $GradeCopyWith<$Res> {
   factory $GradeCopyWith(Grade value, $Res Function(Grade) then) =
       _$GradeCopyWithImpl<$Res, Grade>;
-
   @useResult
   $Res call(
       {String studentId,
@@ -607,7 +569,6 @@ class _$GradeCopyWithImpl<$Res, $Val extends Grade>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -686,7 +647,6 @@ abstract class _$$GradeImplCopyWith<$Res> implements $GradeCopyWith<$Res> {
   factory _$$GradeImplCopyWith(
           _$GradeImpl value, $Res Function(_$GradeImpl) then) =
       __$$GradeImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -797,7 +757,6 @@ class _$GradeImpl implements _Grade {
   @override
   final ToeicScore? bestToeicScore;
   final List<ToeicScore> _toeicScores;
-
   @override
   List<ToeicScore> get toeicScores {
     if (_toeicScores is EqualUnmodifiableListView) return _toeicScores;
@@ -806,7 +765,6 @@ class _$GradeImpl implements _Grade {
   }
 
   final List<SubjectGrade> _subjectGrades;
-
   @override
   List<SubjectGrade> get subjectGrades {
     if (_subjectGrades is EqualUnmodifiableListView) return _subjectGrades;
@@ -881,28 +839,20 @@ abstract class _Grade implements Grade {
 
   @override
   String get studentId;
-
   @override
   String get studentName;
-
   @override
   String get department;
-
   @override
   String get year;
-
   @override
   String get semester;
-
   @override
   ToeicScore? get bestToeicScore;
-
   @override
   List<ToeicScore> get toeicScores;
-
   @override
   List<SubjectGrade> get subjectGrades;
-
   @override
   AppLocale get locale;
 
@@ -917,9 +867,7 @@ abstract class _Grade implements Grade {
 /// @nodoc
 mixin _$GradeQuery {
   bool get showAll => throw _privateConstructorUsedError;
-
   int? get year => throw _privateConstructorUsedError;
-
   int? get quarter => throw _privateConstructorUsedError;
 
   /// Create a copy of GradeQuery
@@ -934,7 +882,6 @@ abstract class $GradeQueryCopyWith<$Res> {
   factory $GradeQueryCopyWith(
           GradeQuery value, $Res Function(GradeQuery) then) =
       _$GradeQueryCopyWithImpl<$Res, GradeQuery>;
-
   @useResult
   $Res call({bool showAll, int? year, int? quarter});
 }
@@ -946,7 +893,6 @@ class _$GradeQueryCopyWithImpl<$Res, $Val extends GradeQuery>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -982,7 +928,6 @@ abstract class _$$GradeQueryImplCopyWith<$Res>
   factory _$$GradeQueryImplCopyWith(
           _$GradeQueryImpl value, $Res Function(_$GradeQueryImpl) then) =
       __$$GradeQueryImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({bool showAll, int? year, int? quarter});
@@ -1070,10 +1015,8 @@ abstract class _GradeQuery implements GradeQuery {
 
   @override
   bool get showAll;
-
   @override
   int? get year;
-
   @override
   int? get quarter;
 

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/grade.dart';
-import 'package:uaizu_app/state/grade.dart';
 import 'package:uaizu_app/state/settings.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 
-class GradeAndExamPage extends ConsumerWidget {
+import '../../../use_case/campus_square_usecase.dart';
+
+class GradeAndExamPage extends HookConsumerWidget {
   const GradeAndExamPage({super.key});
 
   Widget _buildStudentInformation(
@@ -31,7 +33,7 @@ class GradeAndExamPage extends ConsumerWidget {
               '名前',
               Icons.school_outlined,
               ref.watch(settingsProvider
-                      .select((settings) => settings.hideStudentId))
+                      .select((settings) => settings.hideStudentId),)
                   ? 'anonymous'
                   : grade.studentName,
               colorScheme,
@@ -40,7 +42,7 @@ class GradeAndExamPage extends ConsumerWidget {
               '学籍番号',
               Icons.numbers_outlined,
               ref.watch(settingsProvider
-                      .select((settings) => settings.hideStudentId))
+                      .select((settings) => settings.hideStudentId),)
                   ? 'anonymous'
                   : grade.studentId,
               colorScheme,
@@ -311,7 +313,7 @@ class GradeAndExamPage extends ConsumerWidget {
   }
 
   Widget _buildGradeListView(
-      Grade grade, ColorScheme colorScheme, WidgetRef ref) {
+      Grade grade, ColorScheme colorScheme, WidgetRef ref,) {
     return ListView.builder(
       itemCount: 3 + grade.subjectGrades.length,
       itemBuilder: (_, index) {
@@ -345,12 +347,35 @@ class GradeAndExamPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final quarters = [
       '1学期',
       '2学期',
       '3学期',
       '4学期',
     ];
+
+    final showAll = useState(false);
+    final year = useState(DateTime.now().year);
+    final quarter = useState(0);
+    final gradeFutureTrigger = useState(false);
+
+    final gradeFuture = useMemoized(() {
+        return ref.read(getGradeUseCaseProvider).call(
+          GetGradeUseCaseParam(
+            query: GradeQuery(
+              showAll: showAll.value,
+              year: year.value,
+              quarter: quarter.value + 1,
+            ),
+            useCache: false,
+          ),
+        );
+      },
+      [gradeFutureTrigger.value],
+    );
+
+    final grade = useFuture(gradeFuture);
 
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -376,10 +401,9 @@ class GradeAndExamPage extends ConsumerWidget {
                         child: YearPicker(
                           firstDate: DateTime.utc(1993, 4),
                           lastDate: DateTime.utc(2030, 3, 31),
-                          selectedDate: DateTime(ref.watch(gradeYearProvider)),
+                          selectedDate: DateTime(year.value),
                           onChanged: (DateTime date) {
-                            ref.read(gradeYearProvider.notifier).state =
-                                date.year;
+                            year.value = date.year;
                             Navigator.pop(context);
                           },
                         ),
@@ -389,7 +413,7 @@ class GradeAndExamPage extends ConsumerWidget {
                 );
               },
               child: Text(
-                ref.watch(gradeYearProvider).toString(),
+                year.value.toString(),
                 style:
                     Fonts.bodyS.copyWith(color: colorScheme.onSurfaceVariant),
               ),
@@ -398,14 +422,13 @@ class GradeAndExamPage extends ConsumerWidget {
             ElevatedButton(
               onPressed: () {},
               child: DropdownButton(
-                value: quarters[ref.watch(gradeQuarterProvider)],
+                value: quarters[quarter.value],
                 onChanged: (String? value) {
                   if (value == null) {
                     return;
                   }
 
-                  ref.read(gradeQuarterProvider.notifier).state =
-                      quarters.indexOf(value);
+                  quarter.value = quarters.indexOf(value);
                 },
                 items: quarters.map((q) {
                   return DropdownMenuItem(
@@ -422,11 +445,10 @@ class GradeAndExamPage extends ConsumerWidget {
             const SizedBox(width: 16),
             ElevatedButton(
               onPressed: () {
-                ref.read(gradeShowAllProvider.notifier).state =
-                    !ref.read(gradeShowAllProvider);
+                showAll.value = !showAll.value;
               },
               child: Text(
-                ref.watch(gradeShowAllProvider) ? 'すべて表示' : '一部表示',
+                showAll.value ? 'すべて表示' : '一部表示',
                 style:
                     Fonts.bodyS.copyWith(color: colorScheme.onSurfaceVariant),
               ),
@@ -434,7 +456,7 @@ class GradeAndExamPage extends ConsumerWidget {
             const SizedBox(width: 16),
             ElevatedButton(
               onPressed: () {
-                ref.read(gradeProvider.notifier).requestUpdate();
+                gradeFutureTrigger.value = !gradeFutureTrigger.value;
               },
               child: RichText(
                 text: TextSpan(
@@ -465,17 +487,11 @@ class GradeAndExamPage extends ConsumerWidget {
       backgroundColor: colorScheme.surface,
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
-        child: ref.watch(gradeProvider).when(
-              data: (data) {
-                if (data == null) {
-                  return const Text('no search result');
-                } else {
-                  return _buildGradeListView(data, colorScheme, ref);
-                }
-              },
-              error: (err, stack) => Text(stack.toString()),
-              loading: () => const CircularProgressIndicator(),
-            ),
+        child: grade.connectionState == ConnectionState.done
+            ? grade.hasData
+                ? _buildGradeListView(grade.data!, colorScheme, ref)
+                : const Text('no search result')
+            : const CircularProgressIndicator(),
       ),
     );
   }

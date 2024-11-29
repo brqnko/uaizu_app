@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:uaizu_app/domain/entity/library_calendar.dart';
-import 'package:uaizu_app/state/library_calendar.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
+import 'package:uaizu_app/use_case/library_usecase.dart';
 
 DateTime _flatToMonth(DateTime date) {
   return DateTime.utc(date.year, date.month);
@@ -67,106 +68,108 @@ Widget _buildContainerFromColor(
   );
 }
 
-class LibraryCalendar extends ConsumerWidget {
+class LibraryCalendar extends HookConsumerWidget {
   const LibraryCalendar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final colorScheme = Theme.of(context).colorScheme;
-    final openingCalendar = ref.watch(libraryCalendarProvider);
 
-    final colors = openingCalendar.when(
-      data: (data) {
-        final flat = _flatToMonth(ref.watch(libraryCalendarMonthProvider));
-        if (data.calender.containsKey(flat)) {
-          return Column(
-            children: data.calender[flat]!.calenderColors.entries
-                .map((e) =>
-                    _buildContainerFromColor(e.key, e.value, colorScheme))
-                .toList(),
-          );
-        } else {
-          return null;
-        }
-      },
-      loading: () => null,
-      error: (error, stackTrace) {
-        return Text('Error: $error');
-      },
-    );
+    final month = useState(_flatToMonth(DateTime.now()));
+    final isFourYear = useState(true);
 
-    final tableCalendar = openingCalendar.when(
-      data: (data) {
-        return TableCalendar(
-          availableGestures: AvailableGestures.none,
-          firstDay: DateTime.utc(1993, 4),
-          lastDay: DateTime.utc(2030, 3, 31),
-          focusedDay: ref.watch(libraryCalendarMonthProvider),
-          calendarFormat: ref.watch(_calendarFormatProvider),
-          onFormatChanged: (format) {
-            ref.read(_calendarFormatProvider.notifier).state = format;
-          },
-          onPageChanged: (newFocusedDay) {
-            ref.watch(libraryCalendarMonthProvider.notifier).state =
-                newFocusedDay;
-            ref.read(libraryCalendarProvider.notifier).requestUpdate();
-          },
-          calendarBuilders: CalendarBuilders(
-            selectedBuilder: (context, date, events) {
-              return Container(
-                margin: const EdgeInsets.all(4),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  // color: _colorFromDate(date, data),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(
-                  date.day.toString(),
-                ),
-              );
-            },
-            todayBuilder: (context, date, events) {
-              return Container(
-                margin: const EdgeInsets.all(4),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: _colorFromDate(date, data),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(
-                  date.day.toString(),
-                  // not use color scheme because
-                  // the background color depends on something
-                  style: Fonts.bodyS.copyWith(color: Colors.black54),
-                ),
-              );
-            },
-            defaultBuilder: (context, date, events) {
-              return Container(
-                margin: const EdgeInsets.all(4),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: _colorFromDate(date, data),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(
-                  date.day.toString(),
-                  // not use color scheme because
-                  // the background color depends on something
-                  style: Fonts.bodyS.copyWith(color: Colors.black54),
-                ),
-              );
-            },
+    final calendarFuture = useMemoized(() {
+      return ref.watch(getLibraryCalendarUseCaseProvider).call(
+        GetLibraryCalenderUseCaseParam(
+          query: LibraryCalenderQuery(
+            time: month.value,
+            isFourYear: isFourYear.value,
           ),
-        );
-      },
-      loading: () => const CircularProgressIndicator(),
-      error: (error, stackTrace) {
-        return Text('Error: $error');
-      },
-    );
+        ),
+      );
+    }, [month.value],);
 
-    final calendar = Container(
+    final calendar = useFuture(calendarFuture);
+
+    final colors = calendar.connectionState == ConnectionState.done ?
+      Column(
+        children: calendar.data!.calender[month.value]!.calenderColors.entries
+          .map((e) => _buildContainerFromColor(e.key, e.value, colorScheme))
+          .toList(),
+      ) : null;
+
+    final tableCalendar = calendar.connectionState == ConnectionState.done ?
+      TableCalendar(
+        availableGestures: AvailableGestures.none,
+        firstDay: DateTime.utc(1993, 4),
+        lastDay: DateTime.utc(2030, 3, 31),
+        focusedDay: month.value,
+        calendarFormat: ref.watch(_calendarFormatProvider),
+        onFormatChanged: (format) {
+          ref.read(_calendarFormatProvider.notifier).state = format;
+        },
+        onPageChanged: (newFocusedDay) {
+          month.value = newFocusedDay;
+          ref.read(getLibraryCalendarUseCaseProvider).call(
+            GetLibraryCalenderUseCaseParam(
+              query: LibraryCalenderQuery(
+                time: month.value,
+                isFourYear: isFourYear.value,
+              ),
+            ),
+          );
+        },
+        calendarBuilders: CalendarBuilders(
+          selectedBuilder: (context, date, events) {
+            return Container(
+              margin: const EdgeInsets.all(4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                // color: _colorFromDate(date, data),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                date.day.toString(),
+              ),
+            );
+          },
+          todayBuilder: (context, date, events) {
+            return Container(
+              margin: const EdgeInsets.all(4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: _colorFromDate(date, calendar.data!),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                date.day.toString(),
+                // not use color scheme because
+                // the background color depends on something
+                style: Fonts.bodyS.copyWith(color: Colors.black54),
+              ),
+            );
+          },
+          defaultBuilder: (context, date, events) {
+            return Container(
+              margin: const EdgeInsets.all(4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: _colorFromDate(date, calendar.data!),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                date.day.toString(),
+                // not use color scheme because
+                // the background color depends on something
+                style: Fonts.bodyS.copyWith(color: Colors.black54),
+              ),
+            );
+          },
+        ),
+      ) : const CircularProgressIndicator();
+
+    return Container(
       decoration: BoxDecoration(
         color: colorScheme.secondary,
         borderRadius: BorderRadius.circular(15),
@@ -185,15 +188,21 @@ class LibraryCalendar extends ConsumerWidget {
               ),
               OutlinedButton(
                 onPressed: () {
-                  ref.read(libraryCalendarIsFourYearProvider.notifier).state =
-                      !ref.read(libraryCalendarIsFourYearProvider);
-                  ref.read(libraryCalendarProvider.notifier).requestUpdate();
+                  isFourYear.value = !isFourYear.value;
+                  ref.read(getLibraryCalendarUseCaseProvider).call(
+                    GetLibraryCalenderUseCaseParam(
+                      query: LibraryCalenderQuery(
+                        time: month.value,
+                        isFourYear: isFourYear.value,
+                      ),
+                    ),
+                  );
                 },
                 style: OutlinedButton.styleFrom(
                   foregroundColor: colorScheme.secondary,
                 ),
                 child: Text(
-                  ref.watch(libraryCalendarIsFourYearProvider)
+                  isFourYear.value
                       ? '2年制大学'
                       : '4年制大学',
                   style: Fonts.titleS.copyWith(
@@ -209,7 +218,5 @@ class LibraryCalendar extends ConsumerWidget {
         ],
       ),
     );
-
-    return calendar;
   }
 }
