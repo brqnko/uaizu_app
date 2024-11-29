@@ -161,7 +161,8 @@ class SyllabusPage extends HookConsumerWidget {
                             TextSpan(
                               text: registration.instructor,
                               style: Fonts.bodyM.copyWith(
-                                  color: colorScheme.onSurfaceVariant,),
+                                color: colorScheme.onSurfaceVariant,
+                              ),
                             ),
                           ],
                         ),
@@ -180,7 +181,8 @@ class SyllabusPage extends HookConsumerWidget {
                             TextSpan(
                               text: registration.timeSlot,
                               style: Fonts.bodyM.copyWith(
-                                  color: colorScheme.onSurfaceVariant,),
+                                color: colorScheme.onSurfaceVariant,
+                              ),
                             ),
                           ],
                         ),
@@ -198,7 +200,8 @@ class SyllabusPage extends HookConsumerWidget {
                             TextSpan(
                               text: registration.quarter,
                               style: Fonts.bodyM.copyWith(
-                                  color: colorScheme.onSurfaceVariant,),
+                                color: colorScheme.onSurfaceVariant,
+                              ),
                             ),
                           ],
                         ),
@@ -216,7 +219,8 @@ class SyllabusPage extends HookConsumerWidget {
                             TextSpan(
                               text: registration.semester,
                               style: Fonts.bodyM.copyWith(
-                                  color: colorScheme.onSurfaceVariant,),
+                                color: colorScheme.onSurfaceVariant,
+                              ),
                             ),
                           ],
                         ),
@@ -234,7 +238,8 @@ class SyllabusPage extends HookConsumerWidget {
                             TextSpan(
                               text: registration.code.toString(),
                               style: Fonts.bodyM.copyWith(
-                                  color: colorScheme.onSurfaceVariant,),
+                                color: colorScheme.onSurfaceVariant,
+                              ),
                             ),
                           ],
                         ),

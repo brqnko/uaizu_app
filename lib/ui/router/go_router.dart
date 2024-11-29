@@ -10,7 +10,7 @@ import 'package:uaizu_app/ui/pages/home.dart';
 import 'package:uaizu_app/ui/pages/library/book_detail.dart';
 import 'package:uaizu_app/ui/pages/library/book_search.dart';
 import 'package:uaizu_app/ui/pages/library/library.dart';
-import 'package:uaizu_app/ui/pages/lms/lms.dart';
+import 'package:uaizu_app/ui/pages/moodle/moodle.dart';
 import 'package:uaizu_app/ui/pages/notification/notification.dart';
 import 'package:uaizu_app/ui/pages/settings/account.dart';
 import 'package:uaizu_app/ui/pages/settings/settings.dart';
@@ -124,7 +124,7 @@ final goRouterProvider = Provider((ref) {
                 pageBuilder: (context, state) {
                   return NoTransitionPage(
                     key: state.pageKey,
-                    child: const LMSPage(),
+                    child: const MoodlePage(),
                   );
                 },
               ),
