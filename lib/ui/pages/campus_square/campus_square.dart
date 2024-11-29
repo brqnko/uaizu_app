@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uaizu_app/state/settings.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
+import 'package:uaizu_app/ui/widgets/app_bar.dart';
 
 class CampusSquarePage extends ConsumerWidget {
   const CampusSquarePage(this.navigationShell, {super.key});
@@ -13,17 +14,7 @@ class CampusSquarePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    final appBar = AppBar(
-      toolbarHeight: 75,
-      backgroundColor: colorScheme.primary,
-      iconTheme: IconThemeData(color: colorScheme.onPrimaryFixed),
-      title: Center(
-        child: Text(
-          'Campus Square',
-          style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
-        ),
-      ),
-    );
+    final appBar = brandAppBar(context, title: 'Campus Square');
 
     final drawer = Drawer(
       backgroundColor: colorScheme.primary,

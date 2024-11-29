@@ -31,7 +31,7 @@ class AccountPage extends HookConsumerWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              ref.watch(accountNameProvider),
+              ref.read(accountNameProvider),
               style: Fonts.titleM.copyWith(color: colorScheme.onSecondary),
             ),
             const SizedBox(height: 20),
@@ -50,7 +50,10 @@ class AccountPage extends HookConsumerWidget {
           child: Column(
             children: [
               TextFormField(
-                initialValue: ref.watch(accountNameProvider),
+                initialValue: ref.read(
+                  settingsProvider.select((s) => s.accountInfo.studentId),
+                ),
+                obscureText: ref.watch(settingsProvider).hideStudentId,
                 decoration: const InputDecoration(
                   labelText: 'Student ID',
                 ),
@@ -62,7 +65,8 @@ class AccountPage extends HookConsumerWidget {
               TextFormField(
                 obscureText: true,
                 initialValue: ref.read(
-                    settingsProvider.select((s) => s.accountInfo.password)),
+                  settingsProvider.select((s) => s.accountInfo.password),
+                ),
                 decoration: const InputDecoration(
                   labelText: 'Password',
                 ),
@@ -100,7 +104,7 @@ class AccountPage extends HookConsumerWidget {
     );
 
     return Scaffold(
-      appBar: appBar(context, 'Account'),
+      appBar: brandAppBar(context, title: 'Account'),
       backgroundColor: colorScheme.surface,
       body: body,
     );

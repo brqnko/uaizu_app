@@ -2,22 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:uaizu_app/ui/pages/campus_square/widgets/campus_square_detail.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 
-DateTime _flatToDay(DateTime flat) {
-  return DateTime.utc(flat.year, flat.month, flat.day);
-}
-
 class CampusSquareCalendar extends HookConsumerWidget {
-  const CampusSquareCalendar({super.key});
+  const CampusSquareCalendar({super.key, required this.focusedDay});
+
+  final ValueNotifier<DateTime> focusedDay;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
 
     final calendarFormat = useState(CalendarFormat.month);
-    final focusedDay = useState(_flatToDay(DateTime.now()));
 
     final tableCalender = TableCalendar(
       availableGestures: AvailableGestures.none,
@@ -52,17 +48,12 @@ class CampusSquareCalendar extends HookConsumerWidget {
       ),
     );
 
-    return Column(
-      children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: colorScheme.secondary,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: tableCalender,
-        ),
-        CampusSquareDetail(focusedDay.value),
-      ],
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: colorScheme.secondary,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: tableCalender,
     );
   }
 }

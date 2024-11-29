@@ -88,7 +88,11 @@ class NewBooksReel extends HookConsumerWidget {
         itemBuilder: (_, index) {
           if (books.hasData) {
             return _buildBookCover(
-                books.data![index], colorScheme, ref, context);
+              books.data![index],
+              colorScheme,
+              ref,
+              context,
+            );
           } else {
             return Container(
               width: 150,

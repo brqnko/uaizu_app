@@ -222,9 +222,9 @@ class SettingsPage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
-      appBar: appBar(
+      appBar: brandAppBar(
         context,
-        'Settings',
+        title: 'Settings',
       ),
       body: body,
     );

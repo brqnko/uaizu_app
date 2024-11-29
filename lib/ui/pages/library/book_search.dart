@@ -172,7 +172,9 @@ class BookSearchPage extends HookConsumerWidget {
                       scrollInfo.metrics.maxScrollExtent &&
                   value.hasNext) {
                 ref.read(bookSearchResultProvider.notifier).requestMoreResult(
-                    ref.read(bookSearchQueryProvider), order.value);
+                      ref.read(bookSearchQueryProvider),
+                      order.value,
+                    );
               }
               return false;
             },

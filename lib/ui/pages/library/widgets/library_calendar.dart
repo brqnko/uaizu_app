@@ -89,7 +89,7 @@ class LibraryCalendar extends HookConsumerWidget {
               ),
             );
       },
-      [ month.value, isFourYear.value ],
+      [month.value, isFourYear.value],
     );
 
     final calendar = useFuture(calendarFuture);
@@ -98,8 +98,9 @@ class LibraryCalendar extends HookConsumerWidget {
         ? Column(
             children: calendar
                 .data!.calender[month.value]!.calenderColors.entries
-                .map((e) =>
-                    _buildContainerFromColor(e.key, e.value, colorScheme))
+                .map(
+                  (e) => _buildContainerFromColor(e.key, e.value, colorScheme),
+                )
                 .toList(),
           )
         : null;

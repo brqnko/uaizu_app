@@ -49,3 +49,9 @@ final accountNameProvider = Provider((ref) {
     return 'anonyomous';
   }
 });
+
+String getAnonymousableValue(String value, WidgetRef ref) {
+  final hideStudentId =
+      ref.watch(settingsProvider.select((settings) => settings.hideStudentId));
+  return hideStudentId ? 'anonymous' : value;
+}

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uaizu_app/ui/pages/campus_square/campus_square.dart';
 import 'package:uaizu_app/ui/pages/campus_square/grade_and_exam.dart';
+import 'package:uaizu_app/ui/pages/campus_square/registration.dart';
 import 'package:uaizu_app/ui/pages/campus_square/schedule.dart';
 import 'package:uaizu_app/ui/pages/campus_square/syllabus.dart';
 import 'package:uaizu_app/ui/pages/home.dart';
@@ -69,24 +70,24 @@ final goRouterProvider = Provider((ref) {
                     ],
                   ),
                   StatefulShellBranch(
-                    navigatorKey: squareGradeAndExamNavigatorKey,
+                    navigatorKey: squareRegistrationNavigatorKey,
                     routes: [
                       GoRoute(
-                        path: '/square/grade_and_exam',
+                        path: '/square/registration',
                         pageBuilder: (context, state) {
                           return NoTransitionPage(
                             key: state.pageKey,
-                            child: const GradeAndExamPage(),
+                            child: const RegistrationPage(),
                           );
                         },
                       ),
                     ],
                   ),
                   StatefulShellBranch(
-                    navigatorKey: squareRegistrationNavigatorKey,
+                    navigatorKey: squareGradeAndExamNavigatorKey,
                     routes: [
                       GoRoute(
-                        path: '/square/registration',
+                        path: '/square/grade_and_exam',
                         pageBuilder: (context, state) {
                           return NoTransitionPage(
                             key: state.pageKey,

@@ -15,7 +15,7 @@ void main() {
 
   group('lms ja', () {
     final lmsClient = LmsClient(AppHttpClient(
-        Client()),
+        Client(),),
         AppLocale.ja,
         studentId!,
         password!,
