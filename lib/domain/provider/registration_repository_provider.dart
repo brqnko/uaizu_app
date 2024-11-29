@@ -1,8 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uaizu_app/domain/provider/client_provider.dart';
 import 'package:uaizu_app/domain/repository/registration_repository_impl.dart';
 import 'package:uaizu_app/infrastructure/data_source/registration_data_source.dart';
-
-import 'client_provider.dart';
 
 final _registrationDataSourceProvider = Provider((ref) {
   return RegistrationDataSource(ref.watch(campusSquareClientProvider));

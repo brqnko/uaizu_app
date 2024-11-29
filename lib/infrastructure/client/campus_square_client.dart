@@ -61,7 +61,6 @@ class CampusSquareClient {
   }
 
   Future<void> _updateRwfHash() async {
-
     debugPrint('try logging in campus square');
 
     if (_studentId.isEmpty || _password.isEmpty) {

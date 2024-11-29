@@ -65,7 +65,6 @@ class GetBookSearchResultUseCase
 
   @override
   Future<BookSearchResult> call(GetBookSearchResultUseCaseParam param) async {
-
     debugPrint('getting book search result, start: ${param.query.start}');
     final result = await _repository.fetchBookSearchResult(param.query);
 
@@ -122,7 +121,8 @@ class GetLibraryCalenderUseCase extends UseCase<GetLibraryCalenderUseCaseParam,
 
   @override
   Future<LibraryCalendarEntire> call(
-      GetLibraryCalenderUseCaseParam param,) async {
+    GetLibraryCalenderUseCaseParam param,
+  ) async {
     final calender = await _repository.fetchLibraryCalendarMonth(param.query);
 
     return LibraryCalendarEntire(

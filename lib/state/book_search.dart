@@ -25,7 +25,6 @@ class BookSearchResultNotifier extends AsyncNotifier<BookSearchResult> {
   }
 
   Future<void> requestFirstSearch(String query, BookSearchOrder order) async {
-
     _isLoading = false;
     _currentPage = 1;
 
@@ -35,7 +34,6 @@ class BookSearchResultNotifier extends AsyncNotifier<BookSearchResult> {
   }
 
   Future<void> requestMoreResult(String query, BookSearchOrder order) {
-
     if (_isLoading) {
       return Future(() => {});
     }
@@ -56,10 +54,9 @@ class BookSearchResultNotifier extends AsyncNotifier<BookSearchResult> {
   }
 
   Future<BookSearchResult> _fetchSearchWIthCurrentState(
-      String query,
-      BookSearchOrder order,
+    String query,
+    BookSearchOrder order,
   ) async {
-
     _isLoading = true;
 
     final result = await ref.watch(getBookSearchResultUseCaseProvider).call(
@@ -73,7 +70,6 @@ class BookSearchResultNotifier extends AsyncNotifier<BookSearchResult> {
             ),
           ),
         );
-
 
     _currentPage += _maxCountPerSearch;
     _isLoading = false;

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uaizu_app/state/settings.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
-
-import '../../../state/settings.dart';
-import '../../widgets/app_bar.dart';
+import 'package:uaizu_app/ui/widgets/app_bar.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});

@@ -3,14 +3,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/registration.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
-
-import '../../../use_case/campus_square_usecase.dart';
+import 'package:uaizu_app/use_case/campus_square_usecase.dart';
 
 class RegistrationPage extends HookConsumerWidget {
   const RegistrationPage({super.key});
 
   Widget _buildRegistrationsListView(
-      List<Registration> data, ColorScheme colorScheme,) {
+    List<Registration> data,
+    ColorScheme colorScheme,
+  ) {
     return ListView.builder(
       itemCount: data.length,
       shrinkWrap: true,
@@ -60,24 +61,26 @@ class RegistrationPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final colorScheme = Theme.of(context).colorScheme;
 
     final year = useState(DateTime.now().year);
     final semester = useState(false);
     final registrationsTrigger = useState(false);
 
-    final registrationsFuture = useMemoized(() {
-      return ref.read(getRegistrationUseCaseProvider).call(
-        GetRegistrationUseCaseParam(
-          query: SearchRegistrationQuery(
-            year: year.value,
-            semester: semester.value,
-          ),
-          useCache: false,
-        ),
-      );
-    }, [registrationsTrigger.value],);
+    final registrationsFuture = useMemoized(
+      () {
+        return ref.read(getRegistrationUseCaseProvider).call(
+              GetRegistrationUseCaseParam(
+                query: SearchRegistrationQuery(
+                  year: year.value,
+                  semester: semester.value,
+                ),
+                useCache: false,
+              ),
+            );
+      },
+      [registrationsTrigger.value],
+    );
 
     final registrations = useFuture(registrationsFuture);
 
@@ -103,8 +106,7 @@ class RegistrationPage extends HookConsumerWidget {
                         child: YearPicker(
                           firstDate: DateTime.utc(1993, 4),
                           lastDate: DateTime.utc(2030, 3, 31),
-                          selectedDate:
-                              DateTime(year.value),
+                          selectedDate: DateTime(year.value),
                           onChanged: (DateTime dateTime) {
                             year.value = dateTime.year;
                             Navigator.pop(context);

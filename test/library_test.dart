@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
@@ -62,9 +64,7 @@ void main() {
     test('fetch book detail', () async {
 
       final detail = await BookDataSource(libraryClient).fetchBookDetail(
-        const Book(
-          path: '/opac/volume/403829?current=1&q=Rust&total=124&trans_url=%2Fopac%2Fsearch%3Fbase_url%3Dhttps%253A%252F%252Flibopsv.u-aizu.ac.jp%26count%3D20%26defaultpage%3D1%26defaulttarget%3Dlocal%26order%3Drecommended_d%26q%3DRust%26searchmode%3Dnormal',
-        ),
+        '/opac/volume/403829?current=1&q=Rust&total=124&trans_url=%2Fopac%2Fsearch%3Fbase_url%3Dhttps%253A%252F%252Flibopsv.u-aizu.ac.jp%26count%3D20%26defaultpage%3D1%26defaulttarget%3Dlocal%26order%3Drecommended_d%26q%3DRust%26searchmode%3Dnormal',
       );
 
       print(detail);

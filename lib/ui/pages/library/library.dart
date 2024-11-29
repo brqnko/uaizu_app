@@ -11,7 +11,6 @@ class LibraryPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final colorScheme = Theme.of(context).colorScheme;
 
     final appBar = AppBar(
@@ -38,7 +37,6 @@ class LibraryPage extends ConsumerWidget {
               ),
             ),
             onFieldSubmitted: (value) {
-
               ref.read(bookSearchQueryProvider.notifier).state = value;
               context.push('/library/search');
             },

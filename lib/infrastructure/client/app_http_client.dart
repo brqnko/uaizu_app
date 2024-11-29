@@ -60,8 +60,11 @@ class AppHttpClient extends BaseClient {
     final timeSinceLastRequest = now.difference(_lastRequestTime);
 
     if (timeSinceLastRequest.inMilliseconds < rateLimitMillis) {
-      await Future.delayed(Duration(
-          milliseconds: rateLimitMillis - timeSinceLastRequest.inMilliseconds,),);
+      await Future.delayed(
+        Duration(
+          milliseconds: rateLimitMillis - timeSinceLastRequest.inMilliseconds,
+        ),
+      );
     }
 
     _lastRequestTime = DateTime.now();

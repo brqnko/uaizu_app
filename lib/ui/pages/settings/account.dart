@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/state/settings.dart';
+import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/app_bar.dart';
-
-import '../../res/fonts.dart';
 
 class AccountPage extends HookConsumerWidget {
   const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final username = useState('');
     final password = useState('');
 
@@ -52,7 +50,8 @@ class AccountPage extends HookConsumerWidget {
           child: Column(
             children: [
               TextFormField(
-                initialValue: ref.read(settingsProvider.select((s) => s.accountInfo.studentId)),
+                initialValue: ref.read(
+                    settingsProvider.select((s) => s.accountInfo.studentId)),
                 obscureText: ref.watch(settingsProvider).hideStudentId,
                 decoration: const InputDecoration(
                   labelText: 'Student ID',
@@ -64,7 +63,8 @@ class AccountPage extends HookConsumerWidget {
               const SizedBox(height: 12),
               TextFormField(
                 obscureText: true,
-                initialValue: ref.read(settingsProvider.select((s) => s.accountInfo.password)),
+                initialValue: ref.read(
+                    settingsProvider.select((s) => s.accountInfo.password)),
                 decoration: const InputDecoration(
                   labelText: 'Password',
                 ),
@@ -79,9 +79,9 @@ class AccountPage extends HookConsumerWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     ref.read(settingsProvider.notifier).update(
-                      studentId: username.value,
-                      password: password.value,
-                    );
+                          studentId: username.value,
+                          password: password.value,
+                        );
                   },
                   child: const Text('Save'),
                 ),

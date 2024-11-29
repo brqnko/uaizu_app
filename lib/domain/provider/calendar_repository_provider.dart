@@ -1,10 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uaizu_app/domain/provider/client_provider.dart';
 import 'package:uaizu_app/domain/repository/calendar_repository_impl.dart';
 import 'package:uaizu_app/infrastructure/data_source/campus_square_calendar_data_source.dart';
 import 'package:uaizu_app/infrastructure/data_source/library_calendar_data_source.dart';
 import 'package:uaizu_app/infrastructure/data_source/lms_calendar_data_source.dart';
-
-import 'client_provider.dart';
 
 final _campusSquareCalendarDataSourceProvider = Provider((ref) {
   return CampusSquareCalendarDataSource(ref.watch(campusSquareClientProvider));

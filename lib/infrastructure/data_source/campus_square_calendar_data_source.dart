@@ -32,7 +32,9 @@ class CampusSquareCalendarDataSource {
   }
 
   CampusSquareCalendarDay _parseCalendarDayFromBody(
-      String body, DateTime date,) {
+    String body,
+    DateTime date,
+  ) {
     final document = parse(body);
     final items = document.querySelectorAll('.mysch-portlet-list li');
     final notes = <String>[];

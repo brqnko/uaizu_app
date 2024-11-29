@@ -14,7 +14,6 @@ class CampusSquareCalendar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final colorScheme = Theme.of(context).colorScheme;
 
     final calendarFormat = useState(CalendarFormat.month);

@@ -9,7 +9,6 @@ class LmsCalendar extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final calendarFormat = useState(CalendarFormat.month);
     final focusedDay = useState(DateTime.now());
 

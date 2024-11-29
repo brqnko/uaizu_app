@@ -93,6 +93,7 @@ class LmsClient {
         .querySelector('input[name="logintoken"]')
         ?.attributes['value'];
   }
+
   //
   // String_ _extractSesskey(String body) {
   //   final document = parse(body).querySelector('script');

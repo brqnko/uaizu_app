@@ -4,8 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:uaizu_app/domain/entity/campus_square_calendar.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
-
-import '../../../../use_case/campus_square_usecase.dart';
+import 'package:uaizu_app/use_case/campus_square_usecase.dart';
 
 extension on CampusSquareCalendarLectureType {
   Color color(ColorScheme colorScheme) {
@@ -134,77 +133,80 @@ class CampusSquareDetail extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final colorScheme = Theme.of(context).colorScheme;
 
-    final scheduleFuture = useMemoized(() {
+    final scheduleFuture = useMemoized(
+      () {
         return ref.watch(getCampusSquareCalenderDayUseCacseProvider).call(
-          GetCampusSquareCalenderDayUseCaseParam(
-            date: _date,
-            useCache: true,
-          ),
-        );
+              GetCampusSquareCalenderDayUseCaseParam(
+                date: _date,
+                useCache: true,
+              ),
+            );
       },
       [_date],
     );
 
     final schedule = useFuture(scheduleFuture);
 
-    return schedule.connectionState == ConnectionState.done ?
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 8),
-          Row(
+    return schedule.connectionState == ConnectionState.done
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(width: 8),
-              Text(
-                DateFormat(
-                  'yyyy/MM/dd(E)',
-                ).format(_date),
-                textAlign: TextAlign.start,
-                style: Fonts.titleL.copyWith(color: colorScheme.onSurface),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const SizedBox(width: 8),
+                  Text(
+                    DateFormat(
+                      'yyyy/MM/dd(E)',
+                    ).format(_date),
+                    textAlign: TextAlign.start,
+                    style: Fonts.titleL.copyWith(color: colorScheme.onSurface),
+                  ),
+                  const Spacer(),
+                ],
               ),
-              const Spacer(),
+              if (schedule.data!.notes.isNotEmpty)
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    children: schedule.data!.notes.map((note) {
+                      return Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.all(8),
+                        child: Text(
+                          note,
+                          textAlign: TextAlign.start,
+                          style: Fonts.titleM
+                              .copyWith(color: colorScheme.onSurface),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              if (schedule.data!.notes.isNotEmpty) const SizedBox(height: 16),
+              if (schedule.data!.lectures.isNotEmpty)
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: _buildLectureColumn(
+                    context,
+                    colorScheme,
+                    schedule.data!.lectures,
+                  ),
+                ),
+              const SizedBox(height: 8),
             ],
-          ),
-          if (schedule.data!.notes.isNotEmpty)
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: colorScheme.secondary,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                children: schedule.data!.notes.map((note) {
-                  return Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.all(8),
-                    child: Text(
-                      note,
-                      textAlign: TextAlign.start,
-                      style: Fonts.titleM
-                          .copyWith(color: colorScheme.onSurface),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-          if (schedule.data!.notes.isNotEmpty) const SizedBox(height: 16),
-          if (schedule.data!.lectures.isNotEmpty)
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: colorScheme.secondary,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: _buildLectureColumn(
-                  context, colorScheme, schedule.data!.lectures,),
-            ),
-          const SizedBox(height: 8),
-        ],
-      ) :
-      const Center(child: CircularProgressIndicator());
+          )
+        : const Center(child: CircularProgressIndicator());
   }
 }

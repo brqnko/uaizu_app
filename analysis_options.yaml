@@ -100,3 +100,4 @@ linter:
     - use_super_parameters
     - use_test_throws_matchers
     - use_to_and_as_if_applicable
+    - always_use_package_imports

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uaizu_app/ui/pages/campus_square/campus_square.dart';
 import 'package:uaizu_app/ui/pages/campus_square/grade_and_exam.dart';
 import 'package:uaizu_app/ui/pages/campus_square/schedule.dart';
 import 'package:uaizu_app/ui/pages/campus_square/syllabus.dart';
@@ -13,20 +14,23 @@ import 'package:uaizu_app/ui/pages/notification/notification.dart';
 import 'package:uaizu_app/ui/pages/settings/account.dart';
 import 'package:uaizu_app/ui/pages/settings/settings.dart';
 
-import '../pages/campus_square/campus_square.dart';
-
 final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
 final squareNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'square');
 final moodleNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'moodle');
 final libraryNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'library');
-final notificationNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'notification');
+final notificationNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'notification');
 final accountNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'account');
 
-final squareCalendarNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'squareCalendar');
-final squareGradeAndExamNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'squareGradeAndExam');
-final squareRegistrationNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'squareRegistration');
-final squareSyllabusNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'squareSyllabus');
+final squareCalendarNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'squareCalendar');
+final squareGradeAndExamNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'squareGradeAndExam');
+final squareRegistrationNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'squareRegistration');
+final squareSyllabusNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'squareSyllabus');
 
 final goRouterProvider = Provider((ref) {
   final appRouter = GoRouter(
@@ -37,7 +41,7 @@ final goRouterProvider = Provider((ref) {
     },
     routes: [
       StatefulShellRoute.indexedStack(
-        builder:(context, state, navigationShell){
+        builder: (context, state, navigationShell) {
           return HomePage(navigationShell: navigationShell);
         },
         branches: [

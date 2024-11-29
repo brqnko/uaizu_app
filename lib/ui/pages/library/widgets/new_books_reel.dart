@@ -72,7 +72,6 @@ class NewBooksReel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final colorScheme = Theme.of(context).colorScheme;
 
     final booksFuture = useMemoized(() {
@@ -88,7 +87,8 @@ class NewBooksReel extends HookConsumerWidget {
         itemCount: books.hasData ? books.data!.length : 10,
         itemBuilder: (_, index) {
           if (books.hasData) {
-            return _buildBookCover(books.data![index], colorScheme, ref, context);
+            return _buildBookCover(
+                books.data![index], colorScheme, ref, context);
           } else {
             return Container(
               width: 150,

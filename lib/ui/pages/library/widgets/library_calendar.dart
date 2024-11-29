@@ -73,101 +73,107 @@ class LibraryCalendar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final colorScheme = Theme.of(context).colorScheme;
 
     final month = useState(_flatToMonth(DateTime.now()));
     final isFourYear = useState(true);
 
-    final calendarFuture = useMemoized(() {
-      return ref.watch(getLibraryCalendarUseCaseProvider).call(
-        GetLibraryCalenderUseCaseParam(
-          query: LibraryCalenderQuery(
-            time: month.value,
-            isFourYear: isFourYear.value,
-          ),
-        ),
-      );
-    }, [month.value],);
+    final calendarFuture = useMemoized(
+      () {
+        return ref.watch(getLibraryCalendarUseCaseProvider).call(
+              GetLibraryCalenderUseCaseParam(
+                query: LibraryCalenderQuery(
+                  time: month.value,
+                  isFourYear: isFourYear.value,
+                ),
+              ),
+            );
+      },
+      [month.value],
+    );
 
     final calendar = useFuture(calendarFuture);
 
-    final colors = calendar.connectionState == ConnectionState.done ?
-      Column(
-        children: calendar.data!.calender[month.value]!.calenderColors.entries
-          .map((e) => _buildContainerFromColor(e.key, e.value, colorScheme))
-          .toList(),
-      ) : null;
+    final colors = calendar.connectionState == ConnectionState.done
+        ? Column(
+            children: calendar
+                .data!.calender[month.value]!.calenderColors.entries
+                .map((e) =>
+                    _buildContainerFromColor(e.key, e.value, colorScheme))
+                .toList(),
+          )
+        : null;
 
-    final tableCalendar = calendar.connectionState == ConnectionState.done ?
-      TableCalendar(
-        availableGestures: AvailableGestures.none,
-        firstDay: DateTime.utc(1993, 4),
-        lastDay: DateTime.utc(2030, 3, 31),
-        focusedDay: month.value,
-        calendarFormat: ref.watch(_calendarFormatProvider),
-        onFormatChanged: (format) {
-          ref.read(_calendarFormatProvider.notifier).state = format;
-        },
-        onPageChanged: (newFocusedDay) {
-          month.value = newFocusedDay;
-          ref.read(getLibraryCalendarUseCaseProvider).call(
-            GetLibraryCalenderUseCaseParam(
-              query: LibraryCalenderQuery(
-                time: month.value,
-                isFourYear: isFourYear.value,
-              ),
+    final tableCalendar = calendar.connectionState == ConnectionState.done
+        ? TableCalendar(
+            availableGestures: AvailableGestures.none,
+            firstDay: DateTime.utc(1993, 4),
+            lastDay: DateTime.utc(2030, 3, 31),
+            focusedDay: month.value,
+            calendarFormat: ref.watch(_calendarFormatProvider),
+            onFormatChanged: (format) {
+              ref.read(_calendarFormatProvider.notifier).state = format;
+            },
+            onPageChanged: (newFocusedDay) {
+              month.value = newFocusedDay;
+              ref.read(getLibraryCalendarUseCaseProvider).call(
+                    GetLibraryCalenderUseCaseParam(
+                      query: LibraryCalenderQuery(
+                        time: month.value,
+                        isFourYear: isFourYear.value,
+                      ),
+                    ),
+                  );
+            },
+            calendarBuilders: CalendarBuilders(
+              selectedBuilder: (context, date, events) {
+                return Container(
+                  margin: const EdgeInsets.all(4),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    // color: _colorFromDate(date, data),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    date.day.toString(),
+                  ),
+                );
+              },
+              todayBuilder: (context, date, events) {
+                return Container(
+                  margin: const EdgeInsets.all(4),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: _colorFromDate(date, calendar.data!),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    date.day.toString(),
+                    // not use color scheme because
+                    // the background color depends on something
+                    style: Fonts.bodyS.copyWith(color: Colors.black54),
+                  ),
+                );
+              },
+              defaultBuilder: (context, date, events) {
+                return Container(
+                  margin: const EdgeInsets.all(4),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: _colorFromDate(date, calendar.data!),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    date.day.toString(),
+                    // not use color scheme because
+                    // the background color depends on something
+                    style: Fonts.bodyS.copyWith(color: Colors.black54),
+                  ),
+                );
+              },
             ),
-          );
-        },
-        calendarBuilders: CalendarBuilders(
-          selectedBuilder: (context, date, events) {
-            return Container(
-              margin: const EdgeInsets.all(4),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                // color: _colorFromDate(date, data),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Text(
-                date.day.toString(),
-              ),
-            );
-          },
-          todayBuilder: (context, date, events) {
-            return Container(
-              margin: const EdgeInsets.all(4),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: _colorFromDate(date, calendar.data!),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Text(
-                date.day.toString(),
-                // not use color scheme because
-                // the background color depends on something
-                style: Fonts.bodyS.copyWith(color: Colors.black54),
-              ),
-            );
-          },
-          defaultBuilder: (context, date, events) {
-            return Container(
-              margin: const EdgeInsets.all(4),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: _colorFromDate(date, calendar.data!),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Text(
-                date.day.toString(),
-                // not use color scheme because
-                // the background color depends on something
-                style: Fonts.bodyS.copyWith(color: Colors.black54),
-              ),
-            );
-          },
-        ),
-      ) : const CircularProgressIndicator();
+          )
+        : const CircularProgressIndicator();
 
     return Container(
       decoration: BoxDecoration(
@@ -190,21 +196,19 @@ class LibraryCalendar extends HookConsumerWidget {
                 onPressed: () {
                   isFourYear.value = !isFourYear.value;
                   ref.read(getLibraryCalendarUseCaseProvider).call(
-                    GetLibraryCalenderUseCaseParam(
-                      query: LibraryCalenderQuery(
-                        time: month.value,
-                        isFourYear: isFourYear.value,
-                      ),
-                    ),
-                  );
+                        GetLibraryCalenderUseCaseParam(
+                          query: LibraryCalenderQuery(
+                            time: month.value,
+                            isFourYear: isFourYear.value,
+                          ),
+                        ),
+                      );
                 },
                 style: OutlinedButton.styleFrom(
                   foregroundColor: colorScheme.secondary,
                 ),
                 child: Text(
-                  isFourYear.value
-                      ? '2年制大学'
-                      : '4年制大学',
+                  isFourYear.value ? '2年制大学' : '4年制大学',
                   style: Fonts.titleS.copyWith(
                     color: colorScheme.onSurface,
                   ),

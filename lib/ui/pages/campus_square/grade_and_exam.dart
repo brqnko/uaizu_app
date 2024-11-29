@@ -4,8 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/grade.dart';
 import 'package:uaizu_app/state/settings.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
-
-import '../../../use_case/campus_square_usecase.dart';
+import 'package:uaizu_app/use_case/campus_square_usecase.dart';
 
 class GradeAndExamPage extends HookConsumerWidget {
   const GradeAndExamPage({super.key});
@@ -32,8 +31,9 @@ class GradeAndExamPage extends HookConsumerWidget {
             _buildRichTextKeyValue(
               '名前',
               Icons.school_outlined,
-              ref.watch(settingsProvider
-                      .select((settings) => settings.hideStudentId),)
+              ref.watch(
+                settingsProvider.select((settings) => settings.hideStudentId),
+              )
                   ? 'anonymous'
                   : grade.studentName,
               colorScheme,
@@ -41,8 +41,9 @@ class GradeAndExamPage extends HookConsumerWidget {
             _buildRichTextKeyValue(
               '学籍番号',
               Icons.numbers_outlined,
-              ref.watch(settingsProvider
-                      .select((settings) => settings.hideStudentId),)
+              ref.watch(
+                settingsProvider.select((settings) => settings.hideStudentId),
+              )
                   ? 'anonymous'
                   : grade.studentId,
               colorScheme,
@@ -313,7 +314,10 @@ class GradeAndExamPage extends HookConsumerWidget {
   }
 
   Widget _buildGradeListView(
-      Grade grade, ColorScheme colorScheme, WidgetRef ref,) {
+    Grade grade,
+    ColorScheme colorScheme,
+    WidgetRef ref,
+  ) {
     return ListView.builder(
       itemCount: 3 + grade.subjectGrades.length,
       itemBuilder: (_, index) {
@@ -347,7 +351,6 @@ class GradeAndExamPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final quarters = [
       '1学期',
       '2学期',
@@ -360,17 +363,18 @@ class GradeAndExamPage extends HookConsumerWidget {
     final quarter = useState(0);
     final gradeFutureTrigger = useState(false);
 
-    final gradeFuture = useMemoized(() {
+    final gradeFuture = useMemoized(
+      () {
         return ref.read(getGradeUseCaseProvider).call(
-          GetGradeUseCaseParam(
-            query: GradeQuery(
-              showAll: showAll.value,
-              year: year.value,
-              quarter: quarter.value + 1,
-            ),
-            useCache: false,
-          ),
-        );
+              GetGradeUseCaseParam(
+                query: GradeQuery(
+                  showAll: showAll.value,
+                  year: year.value,
+                  quarter: quarter.value + 1,
+                ),
+                useCache: false,
+              ),
+            );
       },
       [gradeFutureTrigger.value],
     );

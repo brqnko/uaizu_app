@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../res/fonts.dart';
+import 'package:uaizu_app/ui/res/fonts.dart';
 
 AppBar appBar(BuildContext context, String title) {
-
   final colorScheme = Theme.of(context).colorScheme;
 
   return AppBar(

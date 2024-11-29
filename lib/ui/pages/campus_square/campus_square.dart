@@ -37,11 +37,16 @@ class CampusSquarePage extends ConsumerWidget {
                   // ref.read(homeIndexProvider.notifier).state = 4;
                 },
                 child: Text(
-                  ref.watch(settingsProvider
-                          .select((settings) => settings.hideStudentId),)
+                  ref.watch(
+                    settingsProvider
+                        .select((settings) => settings.hideStudentId),
+                  )
                       ? 'anonymous'
-                      : ref.watch(settingsProvider.select(
-                          (settings) => settings.accountInfo.studentId,),),
+                      : ref.watch(
+                          settingsProvider.select(
+                            (settings) => settings.accountInfo.studentId,
+                          ),
+                        ),
                   style:
                       Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
                 ),

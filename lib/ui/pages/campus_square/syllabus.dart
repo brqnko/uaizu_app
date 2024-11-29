@@ -4,14 +4,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/syllabus.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
-
-import '../../../use_case/campus_square_usecase.dart';
+import 'package:uaizu_app/use_case/campus_square_usecase.dart';
 
 class SyllabusPage extends HookConsumerWidget {
   const SyllabusPage({super.key});
 
   Widget _buildSyllabusListView(
-      List<SyllabusLecture> data, ColorScheme colorScheme,) {
+    List<SyllabusLecture> data,
+    ColorScheme colorScheme,
+  ) {
     return ListView.builder(
       itemCount: data.length,
       shrinkWrap: true,
@@ -142,7 +143,6 @@ class SyllabusPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final colorScheme = Theme.of(context).colorScheme;
 
     final year = useState(DateTime.now().year);
@@ -150,18 +150,21 @@ class SyllabusPage extends HookConsumerWidget {
     final freeWord = useState('');
     final syllabusFutureTrigger = useState(false);
 
-    final syllabusFuture = useMemoized(() {
-      return ref.watch(getSyllabusUseCaseProvider).call(
-        GetSyllabusUseCaseParam(
-          query: SyllabusLectureSearchQuery(
-            year: year.value,
-            displayCount: displayCount.value,
-            freeWord: freeWord.value,
-          ),
-          useCache: false,
-        ),
-      );
-    }, [syllabusFutureTrigger.value],);
+    final syllabusFuture = useMemoized(
+      () {
+        return ref.watch(getSyllabusUseCaseProvider).call(
+              GetSyllabusUseCaseParam(
+                query: SyllabusLectureSearchQuery(
+                  year: year.value,
+                  displayCount: displayCount.value,
+                  freeWord: freeWord.value,
+                ),
+                useCache: false,
+              ),
+            );
+      },
+      [syllabusFutureTrigger.value],
+    );
 
     final syllabus = useFuture(syllabusFuture);
 

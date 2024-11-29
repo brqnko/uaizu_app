@@ -8,12 +8,11 @@ import 'package:uaizu_app/state/book_search.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 
 Widget _buildBookTile(
-    Book book,
-    ColorScheme colorScheme,
-    BuildContext context,
-    WidgetRef ref,
+  Book book,
+  ColorScheme colorScheme,
+  BuildContext context,
+  WidgetRef ref,
 ) {
-
   ref.read(bookImageProvider.notifier).updateRequest(book);
 
   return Padding(
@@ -36,23 +35,23 @@ Widget _buildBookTile(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
               child: ref.watch(bookImageProvider).when(
-                data: (data) {
-                  if (data.containsKey(book)) {
-                    if (data[book] != null) {
-                      return Image.network(
-                        data[book]!,
-                        fit: BoxFit.cover,
-                      );
-                    } else {
-                      return const Icon(Icons.question_mark_outlined);
-                    }
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-                loading: () => const CircularProgressIndicator(),
-                error: (err, stack) => Text(err.toString()),
-              ),
+                    data: (data) {
+                      if (data.containsKey(book)) {
+                        if (data[book] != null) {
+                          return Image.network(
+                            data[book]!,
+                            fit: BoxFit.cover,
+                          );
+                        } else {
+                          return const Icon(Icons.question_mark_outlined);
+                        }
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    },
+                    loading: () => const CircularProgressIndicator(),
+                    error: (err, stack) => Text(err.toString()),
+                  ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -64,7 +63,7 @@ Widget _buildBookTile(
                       book.title!,
                       overflow: TextOverflow.ellipsis,
                       style:
-                      Fonts.titleM.copyWith(color: colorScheme.onSurface),
+                          Fonts.titleM.copyWith(color: colorScheme.onSurface),
                       maxLines: 2,
                     ),
                   if (book.author != null)
@@ -117,20 +116,21 @@ class BookSearchPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final colorScheme = Theme.of(context).colorScheme;
 
     final order = useState(BookSearchOrder.recommended);
 
-    useEffect(() {
-      
-      ref.read(bookSearchResultProvider.notifier).requestFirstSearch(
-        ref.read(bookSearchQueryProvider),
-        order.value,
-      );
-      
-      return null;
-    }, [ ref.read(bookSearchQueryProvider), order.value ],);
+    useEffect(
+      () {
+        ref.read(bookSearchResultProvider.notifier).requestFirstSearch(
+              ref.read(bookSearchQueryProvider),
+              order.value,
+            );
+
+        return null;
+      },
+      [ref.read(bookSearchQueryProvider), order.value],
+    );
 
     final appBar = AppBar(
       toolbarHeight: 75,
@@ -157,7 +157,6 @@ class BookSearchPage extends HookConsumerWidget {
               ),
             ),
             onFieldSubmitted: (value) {
-
               ref.read(bookSearchQueryProvider.notifier).state = value;
               context.push('/library/search');
             },
@@ -167,45 +166,47 @@ class BookSearchPage extends HookConsumerWidget {
     );
 
     final bookSearchResult = ref.watch(bookSearchResultProvider).when(
-      data: (value) => NotificationListener(
-        onNotification: (ScrollNotification scrollInfo) {
-          if (scrollInfo.metrics.pixels ==
-              scrollInfo.metrics.maxScrollExtent && value.hasNext) {
-            ref.read(bookSearchResultProvider.notifier).requestMoreResult(ref.read(bookSearchQueryProvider), order.value);
-          }
-          return false;
-        },
-        child: ListView.builder(
-          itemCount:
-          value.hasNext ? value.books.length + 1 : value.books.length,
-          itemBuilder: (context, index) {
-            if (index == value.books.length) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
+          data: (value) => NotificationListener(
+            onNotification: (ScrollNotification scrollInfo) {
+              if (scrollInfo.metrics.pixels ==
+                      scrollInfo.metrics.maxScrollExtent &&
+                  value.hasNext) {
+                ref.read(bookSearchResultProvider.notifier).requestMoreResult(
+                    ref.read(bookSearchQueryProvider), order.value);
+              }
+              return false;
+            },
+            child: ListView.builder(
+              itemCount:
+                  value.hasNext ? value.books.length + 1 : value.books.length,
+              itemBuilder: (context, index) {
+                if (index == value.books.length) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
 
-            return _buildBookTile(
-              value.books[index],
-              colorScheme,
-              context,
-              ref,
-            );
-          },
-        ),
-      ),
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
-      ),
-      error: (error, stackTrace) => Center(
-        child: Text(
-          'エラーが発生しました: $error',
-          style: Fonts.bodyM.copyWith(
-            color: colorScheme.onPrimary,
+                return _buildBookTile(
+                  value.books[index],
+                  colorScheme,
+                  context,
+                  ref,
+                );
+              },
+            ),
           ),
-        ),
-      ),
-    );
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+          error: (error, stackTrace) => Center(
+            child: Text(
+              'エラーが発生しました: $error',
+              style: Fonts.bodyM.copyWith(
+                color: colorScheme.onPrimary,
+              ),
+            ),
+          ),
+        );
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -226,7 +227,6 @@ class BookSearchPage extends HookConsumerWidget {
                     child: DropdownButton(
                       value: order.value,
                       onChanged: (value) {
-
                         if (value == null) {
                           return;
                         }

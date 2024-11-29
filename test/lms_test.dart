@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -12,7 +14,12 @@ void main() {
   final password = stdin.readLineSync();
 
   group('lms ja', () {
-    final lmsClient = LmsClient(AppHttpClient(Client()), AppLocale.ja, studentId!, password!);
+    final lmsClient = LmsClient(AppHttpClient(
+        Client()),
+        AppLocale.ja,
+        studentId!,
+        password!,
+    );
 
     test('fetch calender day', () async {
       final tasks = await LmsCalendarDataSource(lmsClient).fetchLmsTaskDay(
