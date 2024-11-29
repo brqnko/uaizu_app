@@ -36,3 +36,16 @@ class SettingsNotifier extends Notifier<AppSettings> {
 
 final settingsProvider =
     NotifierProvider<SettingsNotifier, AppSettings>(SettingsNotifier.new);
+
+final accountNameProvider = Provider((ref) {
+  var name = ref.watch(settingsProvider.select((s) => s.accountInfo.studentId));
+  if (name.isEmpty) {
+    name = 'not logged in';
+  }
+
+  if (ref.watch(settingsProvider.select((s) => s.hideStudentId))) {
+    return name;
+  } else {
+    return 'anonyomous';
+  }
+});

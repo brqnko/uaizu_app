@@ -34,19 +34,10 @@ class CampusSquarePage extends ConsumerWidget {
             child: DrawerHeader(
               child: TextButton(
                 onPressed: () {
-                  // ref.read(homeIndexProvider.notifier).state = 4;
+                  context.push('/account/account');
                 },
                 child: Text(
-                  ref.watch(
-                    settingsProvider
-                        .select((settings) => settings.hideStudentId),
-                  )
-                      ? 'anonymous'
-                      : ref.watch(
-                          settingsProvider.select(
-                            (settings) => settings.accountInfo.studentId,
-                          ),
-                        ),
+                  ref.watch(accountNameProvider),
                   style:
                       Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
                 ),

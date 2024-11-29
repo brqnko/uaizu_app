@@ -145,7 +145,7 @@ class SettingsPage extends ConsumerWidget {
             ),
           ),
           title: Text(
-            ref.watch(settingsProvider.select((s) => s.accountInfo.studentId)),
+            ref.watch(accountNameProvider),
             style: Fonts.titleM.copyWith(color: colorScheme.onSurface),
           ),
           subtitle: Text(

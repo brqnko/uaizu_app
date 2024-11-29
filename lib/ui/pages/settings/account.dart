@@ -31,7 +31,7 @@ class AccountPage extends HookConsumerWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              ref.read(settingsProvider.select((s) => s.accountInfo.studentId)),
+              ref.watch(accountNameProvider),
               style: Fonts.titleM.copyWith(color: colorScheme.onSecondary),
             ),
             const SizedBox(height: 20),
@@ -50,9 +50,7 @@ class AccountPage extends HookConsumerWidget {
           child: Column(
             children: [
               TextFormField(
-                initialValue: ref.read(
-                    settingsProvider.select((s) => s.accountInfo.studentId)),
-                obscureText: ref.watch(settingsProvider).hideStudentId,
+                initialValue: ref.watch(accountNameProvider),
                 decoration: const InputDecoration(
                   labelText: 'Student ID',
                 ),

@@ -89,7 +89,7 @@ class LibraryCalendar extends HookConsumerWidget {
               ),
             );
       },
-      [month.value],
+      [ month.value, isFourYear.value ],
     );
 
     final calendar = useFuture(calendarFuture);
