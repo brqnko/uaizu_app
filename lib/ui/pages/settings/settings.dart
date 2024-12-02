@@ -12,92 +12,6 @@ class SettingsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    // final body = Padding(
-    //   padding: const EdgeInsets.all(12),
-    //   child: Wrap(
-    //     runSpacing: 20,
-    //     children: [
-    //       ListTile(
-    //         title: Text(
-    //           'Language',
-    //           style: Fonts.bodyM.copyWith(color: colorScheme.onSurfaceVariant),
-    //         ),
-    //         trailing: DropdownButton(
-    //           value: ref.watch(settingsProvider).appLocale.languageCode,
-    //           onChanged: (String? value) {
-    //             if (value == null) {
-    //               return;
-    //             }
-    //
-    //             ref.read(settingsProvider.notifier).update(
-    //                   appLocale: AppLocale.values
-    //                       .firstWhere((locale) => locale.languageCode == value),
-    //                 );
-    //           },
-    //           items: AppLocale.values
-    //               .map(
-    //                 (locale) => DropdownMenuItem(
-    //                   value: locale.languageCode,
-    //                   child: Text(
-    //                     locale.title,
-    //                     style: Fonts.bodyM
-    //                         .copyWith(color: colorScheme.onSurfaceVariant),
-    //                   ),
-    //                 ),
-    //               )
-    //               .toList(),
-    //         ),
-    //       ),
-    //       ListTile(
-    //         title: Text(
-    //           'Theme',
-    //           style: Fonts.titleM.copyWith(color: colorScheme.onSurfaceVariant),
-    //         ),
-    //         trailing: DropdownButton(
-    //           value: ref.watch(settingsProvider).appTheme.name,
-    //           onChanged: (String? value) {
-    //             if (value == null) {
-    //               return;
-    //             }
-    //
-    //             ref.read(settingsProvider.notifier).update(
-    //                   appTheme: AppTheme.values
-    //                       .firstWhere((locale) => locale.name == value),
-    //                 );
-    //           },
-    //           items: AppTheme.values
-    //               .map(
-    //                 (locale) => DropdownMenuItem(
-    //                   value: locale.name,
-    //                   child: Text(
-    //                     locale.name,
-    //                     style: Fonts.bodyM
-    //                         .copyWith(color: colorScheme.onSurfaceVariant),
-    //                   ),
-    //                 ),
-    //               )
-    //               .toList(),
-    //         ),
-    //       ),
-    //       ListTile(
-    //         title: Text(
-    //           'Hide Student ID',
-    //           style: Fonts.titleM.copyWith(color: colorScheme.onSurfaceVariant),
-    //         ),
-    //         trailing: Switch(
-    //           value: ref.watch(settingsProvider
-    //               .select((settings) => settings.hideStudentId)),
-    //           onChanged: (value) {
-    //             ref
-    //                 .read(settingsProvider.notifier)
-    //                 .update(hideStudentId: value);
-    //           },
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
-
     final settingWidgets = [
       Container(
         decoration: BoxDecoration(
@@ -105,7 +19,6 @@ class SettingsPage extends ConsumerWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         width: double.infinity,
-        // search field
         child: SizedBox(
           height: 50,
           child: TextField(
@@ -169,7 +82,9 @@ class SettingsPage extends ConsumerWidget {
         ),
         width: double.infinity,
         child: ListTile(
-          onTap: () {},
+          onTap: () {
+            context.push('/account/appearance');
+          },
           title: Text(
             'Appearance',
             style: Fonts.titleM.copyWith(color: colorScheme.onSurface),
@@ -192,7 +107,9 @@ class SettingsPage extends ConsumerWidget {
         ),
         width: double.infinity,
         child: ListTile(
-          onTap: () {},
+          onTap: () {
+            context.push('/account/about');
+          },
           title: Text(
             'About',
             style: Fonts.titleM.copyWith(color: colorScheme.onSurface),

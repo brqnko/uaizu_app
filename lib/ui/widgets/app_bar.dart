@@ -13,7 +13,7 @@ AppBar brandAppBar(
   return AppBar(
     toolbarHeight: height ?? 75,
     backgroundColor: color ?? colorScheme.primary,
-    iconTheme: IconThemeData(color: colorScheme.secondary),
+    iconTheme: IconThemeData(color: colorScheme.onPrimary),
     title: title == null
         ? child
         : Center(
@@ -31,7 +31,7 @@ AppBar brandAppBarWithOptions(BuildContext context, List<Widget> widgets) {
   return AppBar(
     toolbarHeight: 55,
     backgroundColor: colorScheme.onPrimaryContainer,
-    iconTheme: IconThemeData(color: colorScheme.secondary),
+    iconTheme: IconThemeData(color: colorScheme.onPrimary),
     automaticallyImplyLeading: false,
     title: SizedBox(
       height: 34,

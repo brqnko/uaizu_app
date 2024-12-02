@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:uaizu_app/domain/provider/client_provider.dart';
 import 'package:uaizu_app/state/settings.dart';
+import 'package:uaizu_app/ui/dialogs/close_dialog.dart';
+import 'package:uaizu_app/ui/dialogs/loading_dialog.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/app_bar.dart';
 
@@ -10,8 +13,10 @@ class AccountPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final username = useState('');
-    final password = useState('');
+    final username = useState(
+        ref.read(settingsProvider.select((s) => s.accountInfo.studentId)),);
+    final password = useState(
+        ref.read(settingsProvider.select((s) => s.accountInfo.password)),);
 
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -24,17 +29,17 @@ class AccountPage extends HookConsumerWidget {
         width: double.infinity,
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
             const CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage('assets/images/avatar.png'),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
             Text(
               ref.read(accountNameProvider),
-              style: Fonts.titleM.copyWith(color: colorScheme.onSecondary),
+              style: Fonts.titleM.copyWith(color: colorScheme.onSurface),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
           ],
         ),
       ),
@@ -50,9 +55,7 @@ class AccountPage extends HookConsumerWidget {
           child: Column(
             children: [
               TextFormField(
-                initialValue: ref.read(
-                  settingsProvider.select((s) => s.accountInfo.studentId),
-                ),
+                initialValue: username.value,
                 obscureText: ref.watch(settingsProvider).hideStudentId,
                 decoration: const InputDecoration(
                   labelText: 'Student ID',
@@ -64,9 +67,7 @@ class AccountPage extends HookConsumerWidget {
               const SizedBox(height: 12),
               TextFormField(
                 obscureText: true,
-                initialValue: ref.read(
-                  settingsProvider.select((s) => s.accountInfo.password),
-                ),
+                initialValue: password.value,
                 decoration: const InputDecoration(
                   labelText: 'Password',
                 ),
@@ -84,8 +85,22 @@ class AccountPage extends HookConsumerWidget {
                           studentId: username.value,
                           password: password.value,
                         );
+
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) => LoadingDialog(
+                        title: 'Logging in...',
+                        future: ref
+                            .read(campusSquareClientProvider)
+                            .requireRwfHash(),
+                        onSuccessful: (context) => const CloseDialog(
+                          title: 'Login successful',
+                        ),
+                      ),
+                    );
                   },
-                  child: const Text('Save'),
+                  child: const Text('Login'),
                 ),
               ),
             ],
@@ -95,7 +110,7 @@ class AccountPage extends HookConsumerWidget {
     ];
 
     final body = Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       child: ListView.separated(
         itemBuilder: (context, index) => settingsWidgets[index],
         separatorBuilder: (context, index) => const SizedBox(height: 20),

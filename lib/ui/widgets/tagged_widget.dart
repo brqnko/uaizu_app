@@ -17,7 +17,7 @@ class TaggedWidget extends StatelessWidget {
         Text(
           tag,
           textAlign: TextAlign.start,
-          style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryContainer),
+          style: Fonts.titleM,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

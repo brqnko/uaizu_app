@@ -12,7 +12,9 @@ import 'package:uaizu_app/ui/pages/library/book_search.dart';
 import 'package:uaizu_app/ui/pages/library/library.dart';
 import 'package:uaizu_app/ui/pages/moodle/moodle.dart';
 import 'package:uaizu_app/ui/pages/notification/notification.dart';
+import 'package:uaizu_app/ui/pages/settings/about.dart';
 import 'package:uaizu_app/ui/pages/settings/account.dart';
+import 'package:uaizu_app/ui/pages/settings/appearance.dart';
 import 'package:uaizu_app/ui/pages/settings/settings.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -199,6 +201,24 @@ final goRouterProvider = Provider((ref) {
                   return NoTransitionPage(
                     key: state.pageKey,
                     child: const AccountPage(),
+                  );
+                },
+              ),
+              GoRoute(
+                path: '/account/appearance',
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                    key: state.pageKey,
+                    child: const AppearancePage(),
+                  );
+                },
+              ),
+              GoRoute(
+                path: '/account/about',
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                    key: state.pageKey,
+                    child: const AboutPage(),
                   );
                 },
               ),

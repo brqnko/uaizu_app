@@ -28,25 +28,25 @@ class SearchResultBook extends ConsumerWidget {
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
               child: ref.watch(bookImageProvider).when(
-                data: (data) {
-                  if (data.containsKey(book)) {
-                    if (data[book] != null) {
-                      return Image.network(
-                        data[book]!,
-                        fit: BoxFit.cover,
-                      );
-                    } else {
-                      return const Icon(
-                        Icons.question_mark_outlined,);
-                    }
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-                loading: () =>
-                const CircularProgressIndicator(),
-                error: (err, stack) => Text(err.toString()),
-              ),
+                    data: (data) {
+                      if (data.containsKey(book)) {
+                        if (data[book] != null) {
+                          return Image.network(
+                            data[book]!,
+                            fit: BoxFit.cover,
+                          );
+                        } else {
+                          return const Icon(
+                            Icons.question_mark_outlined,
+                          );
+                        }
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    },
+                    loading: () => const CircularProgressIndicator(),
+                    error: (err, stack) => Text(err.toString()),
+                  ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -57,8 +57,8 @@ class SearchResultBook extends ConsumerWidget {
                     Text(
                       book.title!,
                       overflow: TextOverflow.ellipsis,
-                      style: Fonts.titleM
-                          .copyWith(color: colorScheme.onSurface),
+                      style:
+                          Fonts.titleM.copyWith(color: colorScheme.onSurface),
                       maxLines: 2,
                     ),
                   if (book.author != null)
@@ -66,7 +66,8 @@ class SearchResultBook extends ConsumerWidget {
                       book.author!,
                       overflow: TextOverflow.ellipsis,
                       style: Fonts.bodyT.copyWith(
-                        color: colorScheme.onSurfaceVariant,),
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       maxLines: 1,
                     ),
                   if (book.publisher != null)
@@ -74,7 +75,8 @@ class SearchResultBook extends ConsumerWidget {
                       book.publisher!,
                       overflow: TextOverflow.ellipsis,
                       style: Fonts.bodyT.copyWith(
-                        color: colorScheme.onSurfaceVariant,),
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       maxLines: 1,
                     ),
                   if (book.location != null)
@@ -82,7 +84,8 @@ class SearchResultBook extends ConsumerWidget {
                       book.location!,
                       overflow: TextOverflow.ellipsis,
                       style: Fonts.bodyT.copyWith(
-                        color: colorScheme.onSurfaceVariant,),
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       maxLines: 1,
                     ),
                   if (book.isbn != null)
@@ -90,7 +93,8 @@ class SearchResultBook extends ConsumerWidget {
                       book.isbn!,
                       overflow: TextOverflow.ellipsis,
                       style: Fonts.bodyT.copyWith(
-                        color: colorScheme.onSurfaceVariant,),
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       maxLines: 1,
                     ),
                 ],
@@ -101,7 +105,8 @@ class SearchResultBook extends ConsumerWidget {
       ),
       onTap: () {
         context.push(
-          '/library/book/${Uri.encodeComponent(book.path)}',);
+          '/library/book/${Uri.encodeComponent(book.path)}',
+        );
       },
     );
   }
