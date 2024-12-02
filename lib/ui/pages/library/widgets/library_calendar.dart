@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:uaizu_app/domain/entity/library_calendar.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
+import 'package:uaizu_app/ui/widgets/future_body.dart';
+import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
 import 'package:uaizu_app/use_case/library_usecase.dart';
 
 DateTime _flatToMonth(DateTime date) {
@@ -40,8 +42,6 @@ Color _colorFromDate(
   }
 }
 
-final _calendarFormatProvider = StateProvider((ref) => CalendarFormat.month);
-
 Widget _buildContainerFromColor(
   int colorHex,
   String text,
@@ -58,8 +58,6 @@ Widget _buildContainerFromColor(
         ),
         child: Text(
           text,
-          // not use color scheme because
-          // the background color depends on something
           style: Fonts.bodyS.copyWith(color: Colors.black54),
         ),
       ),
@@ -76,6 +74,7 @@ class LibraryCalendar extends HookConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final month = useState(_flatToMonth(DateTime.now()));
+    final calendarFormat = useState(CalendarFormat.month);
     final isFourYear = useState(true);
 
     final calendarFuture = useMemoized(
@@ -94,94 +93,71 @@ class LibraryCalendar extends HookConsumerWidget {
 
     final calendar = useFuture(calendarFuture);
 
-    final colors = calendar.connectionState == ConnectionState.done
-        ? Column(
-            children: calendar
-                .data!.calender[month.value]!.calenderColors.entries
-                .map(
-                  (e) => _buildContainerFromColor(e.key, e.value, colorScheme),
-                )
-                .toList(),
-          )
-        : null;
-
-    final tableCalendar = calendar.connectionState == ConnectionState.done
-        ? TableCalendar(
-            availableGestures: AvailableGestures.none,
-            firstDay: DateTime.utc(1993, 4),
-            lastDay: DateTime.utc(2030, 3, 31),
-            focusedDay: month.value,
-            calendarFormat: ref.watch(_calendarFormatProvider),
-            onFormatChanged: (format) {
-              ref.read(_calendarFormatProvider.notifier).state = format;
-            },
-            onPageChanged: (newFocusedDay) {
-              month.value = newFocusedDay;
-              ref.read(getLibraryCalendarUseCaseProvider).call(
-                    GetLibraryCalenderUseCaseParam(
-                      query: LibraryCalenderQuery(
-                        time: month.value,
-                        isFourYear: isFourYear.value,
-                      ),
-                    ),
-                  );
-            },
-            calendarBuilders: CalendarBuilders(
-              selectedBuilder: (context, date, events) {
-                return Container(
-                  margin: const EdgeInsets.all(4),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    // color: _colorFromDate(date, data),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Text(
-                    date.day.toString(),
-                  ),
-                );
-              },
-              todayBuilder: (context, date, events) {
-                return Container(
-                  margin: const EdgeInsets.all(4),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: _colorFromDate(date, calendar.data!),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Text(
-                    date.day.toString(),
-                    // not use color scheme because
-                    // the background color depends on something
-                    style: Fonts.bodyS.copyWith(color: Colors.black54),
-                  ),
-                );
-              },
-              defaultBuilder: (context, date, events) {
-                return Container(
-                  margin: const EdgeInsets.all(4),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: _colorFromDate(date, calendar.data!),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Text(
-                    date.day.toString(),
-                    // not use color scheme because
-                    // the background color depends on something
-                    style: Fonts.bodyS.copyWith(color: Colors.black54),
-                  ),
-                );
-              },
-            ),
-          )
-        : const CircularProgressIndicator();
-
-    return Container(
-      decoration: BoxDecoration(
-        color: colorScheme.secondary,
-        borderRadius: BorderRadius.circular(15),
+    final colors = futureBody(
+      calendar,
+      (data) => Column(
+        children: calendar.data!.calender[month.value]!.calenderColors.entries
+            .map((e) => _buildContainerFromColor(e.key, e.value, colorScheme))
+            .toList(),
       ),
-      padding: const EdgeInsets.all(16),
+    );
+
+    final tableCalendar = futureBody(
+      calendar,
+      (data) => TableCalendar(
+        availableGestures: AvailableGestures.none,
+        firstDay: DateTime.utc(1993, 4),
+        lastDay: DateTime.utc(2030, 3, 31),
+        focusedDay: month.value,
+        calendarFormat: calendarFormat.value,
+        onFormatChanged: (format) => calendarFormat.value = format,
+        onPageChanged: (newFocusedDay) => month.value = newFocusedDay,
+        calendarBuilders: CalendarBuilders(
+          selectedBuilder: (context, date, events) {
+            return Container(
+              margin: const EdgeInsets.all(4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                date.day.toString(),
+              ),
+            );
+          },
+          todayBuilder: (context, date, events) {
+            return Container(
+              margin: const EdgeInsets.all(4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: _colorFromDate(date, calendar.data!),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                date.day.toString(),
+                style: Fonts.bodyS.copyWith(color: Colors.black54),
+              ),
+            );
+          },
+          defaultBuilder: (context, date, events) {
+            return Container(
+              margin: const EdgeInsets.all(4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: _colorFromDate(date, calendar.data!),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                date.day.toString(),
+                style: Fonts.bodyS.copyWith(color: Colors.black54),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+
+    return HorizontalExpandedContainer(
       child: Column(
         children: [
           Row(
@@ -194,17 +170,7 @@ class LibraryCalendar extends HookConsumerWidget {
                 ),
               ),
               OutlinedButton(
-                onPressed: () {
-                  isFourYear.value = !isFourYear.value;
-                  ref.read(getLibraryCalendarUseCaseProvider).call(
-                        GetLibraryCalenderUseCaseParam(
-                          query: LibraryCalenderQuery(
-                            time: month.value,
-                            isFourYear: isFourYear.value,
-                          ),
-                        ),
-                      );
-                },
+                onPressed: () => isFourYear.value = !isFourYear.value,
                 style: OutlinedButton.styleFrom(
                   foregroundColor: colorScheme.secondary,
                 ),
@@ -219,7 +185,7 @@ class LibraryCalendar extends HookConsumerWidget {
           ),
           tableCalendar,
           const SizedBox(height: 16),
-          if (colors != null) colors,
+          colors,
         ],
       ),
     );

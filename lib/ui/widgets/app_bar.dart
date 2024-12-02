@@ -28,9 +28,12 @@ AppBar brandAppBar(
 AppBar brandAppBarWithOptions(BuildContext context, List<Widget> widgets) {
   final colorScheme = Theme.of(context).colorScheme;
 
-  return brandAppBar(
-    context,
-    child: SizedBox(
+  return AppBar(
+    toolbarHeight: 55,
+    backgroundColor: colorScheme.onPrimaryContainer,
+    iconTheme: IconThemeData(color: colorScheme.secondary),
+    automaticallyImplyLeading: false,
+    title: SizedBox(
       height: 34,
       child: ListView.separated(
         separatorBuilder: (_, __) => const SizedBox(width: 16),
@@ -39,7 +42,5 @@ AppBar brandAppBarWithOptions(BuildContext context, List<Widget> widgets) {
         itemBuilder: (_, index) => widgets[index],
       ),
     ),
-    color: colorScheme.onPrimaryContainer,
-    height: 55,
   );
 }
