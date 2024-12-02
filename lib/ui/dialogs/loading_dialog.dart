@@ -3,11 +3,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:uaizu_app/ui/dialogs/error_dialog.dart';
 
 class LoadingDialog<T> extends HookWidget {
-  const LoadingDialog(
-      {super.key,
-      required this.title,
-      required this.future,
-      required this.onSuccessful,});
+  const LoadingDialog({
+    super.key,
+    required this.title,
+    required this.future,
+    required this.onSuccessful,
+  });
 
   final String title;
 

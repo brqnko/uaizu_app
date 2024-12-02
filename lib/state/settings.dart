@@ -1,18 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uaizu_app/domain/entity/settings.dart';
+import 'package:uaizu_app/domain/provider/settings_provider.dart';
 
 class SettingsNotifier extends Notifier<AppSettings> {
+  SettingsNotifier(this.initialSettings);
+
+  final AppSettings initialSettings;
+
   @override
   AppSettings build() {
-    return const AppSettings(
-      accountInfo: AccountInfo(
-        studentId: '',
-        password: '',
-      ),
-      hideStudentId: true,
-      appTheme: AppTheme.light,
-      appLocale: AppLocale.en,
-    );
+    return initialSettings;
   }
 
   void update({
@@ -31,11 +28,13 @@ class SettingsNotifier extends Notifier<AppSettings> {
       appTheme: appTheme ?? state.appTheme,
       appLocale: appLocale ?? state.appLocale,
     );
+
+    ref.watch(settingsRepositoryProvider).saveSettings(state);
   }
 }
 
-final settingsProvider =
-    NotifierProvider<SettingsNotifier, AppSettings>(SettingsNotifier.new);
+final settingsProvider = NotifierProvider<SettingsNotifier, AppSettings>(
+    () => throw UnimplementedError(),);
 
 final accountNameProvider = Provider((ref) {
   var name = ref.watch(settingsProvider.select((s) => s.accountInfo.studentId));

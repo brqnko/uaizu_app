@@ -14,9 +14,11 @@ class AccountPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final username = useState(
-        ref.read(settingsProvider.select((s) => s.accountInfo.studentId)),);
+      ref.read(settingsProvider.select((s) => s.accountInfo.studentId)),
+    );
     final password = useState(
-        ref.read(settingsProvider.select((s) => s.accountInfo.password)),);
+      ref.read(settingsProvider.select((s) => s.accountInfo.password)),
+    );
 
     final colorScheme = Theme.of(context).colorScheme;
 
