@@ -12,7 +12,8 @@ enum CampusSquareCalendarLectureType {
 @freezed
 class CampusSquareCalendarLecture with _$CampusSquareCalendarLecture {
   const factory CampusSquareCalendarLecture({
-    required DateTime day,
+    required DateTime startTime,
+    required DateTime endTime,
     required String courseName,
     required String timeSlot,
     required String location,

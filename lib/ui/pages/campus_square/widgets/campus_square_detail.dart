@@ -93,12 +93,9 @@ class CampusSquareDetail extends HookConsumerWidget {
                           ),
                         ],
                       ),
-                      onTap: () => showDialog(
+                      onTap: () => showModalBottomSheet(
                         context: context,
-                        builder: (BuildContext context) =>
-                            ScheduleLectureDialog(
-                          note: note,
-                        ),
+                        builder: (context) => ScheduleLectureBottomSheet(note),
                       ),
                     );
                   }).toList(),

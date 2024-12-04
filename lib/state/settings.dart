@@ -34,7 +34,8 @@ class SettingsNotifier extends Notifier<AppSettings> {
 }
 
 final settingsProvider = NotifierProvider<SettingsNotifier, AppSettings>(
-    () => throw UnimplementedError(),);
+  () => throw UnimplementedError(),
+);
 
 final accountNameProvider = Provider((ref) {
   var name = ref.watch(settingsProvider.select((s) => s.accountInfo.studentId));

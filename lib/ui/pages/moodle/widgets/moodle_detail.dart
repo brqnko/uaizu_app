@@ -9,7 +9,7 @@ import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
 import 'package:uaizu_app/ui/widgets/tagged_widget.dart';
 import 'package:uaizu_app/use_case/lms_usecase.dart';
 
-final _dateFormat = DateFormat('yyyy-MM-dd hh:mm:ss');
+final _dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
 class LmsDetail extends HookConsumerWidget {
   const LmsDetail({super.key, required this.focusedDay});

@@ -32,12 +32,18 @@ class SettingsDataSource {
 
   Future<void> saveSettings(AppSettings settings) async {
     await _storage.write(
-        key: 'studentId', value: settings.accountInfo.studentId,);
+      key: 'studentId',
+      value: settings.accountInfo.studentId,
+    );
     await _storage.write(key: 'password', value: settings.accountInfo.password);
     await _storage.write(
-        key: 'hideStudentId', value: settings.hideStudentId.toString(),);
+      key: 'hideStudentId',
+      value: settings.hideStudentId.toString(),
+    );
     await _storage.write(key: 'appTheme', value: settings.appTheme.toString());
     await _storage.write(
-        key: 'appLocale', value: settings.appLocale.toString(),);
+      key: 'appLocale',
+      value: settings.appLocale.toString(),
+    );
   }
 }
