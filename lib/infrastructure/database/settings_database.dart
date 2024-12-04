@@ -1,8 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uaizu_app/domain/entity/settings.dart';
 
-class SettingsDataSource {
-  SettingsDataSource(this._storage);
+class SettingsDatabase {
+  SettingsDatabase(this._storage);
 
   final FlutterSecureStorage _storage;
 

@@ -1,19 +1,19 @@
 import 'package:uaizu_app/domain/entity/settings.dart';
 import 'package:uaizu_app/domain/repository/settings_repository.dart';
-import 'package:uaizu_app/infrastructure/data_source/settings_data_source.dart';
+import 'package:uaizu_app/infrastructure/database/settings_database.dart';
 
 class SettingsRepositoryImpl implements SettingsRepository {
-  SettingsRepositoryImpl(this._dataSource);
+  SettingsRepositoryImpl(this._database);
 
-  final SettingsDataSource _dataSource;
+  final SettingsDatabase _database;
 
   @override
   Future<AppSettings> loadSettings() {
-    return _dataSource.loadSettings();
+    return _database.loadSettings();
   }
 
   @override
   Future<void> saveSettings(AppSettings settings) {
-    return _dataSource.saveSettings(settings);
+    return _database.saveSettings(settings);
   }
 }

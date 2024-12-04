@@ -47,6 +47,7 @@ dependencies:
   flutter_local_notifications: ^18.0.1
   timezone: ^0.10.0
   flutter_datetime_picker_plus: ^2.2.0
+  shared_preferences: ^2.3.3
   
 
 dev_dependencies:
