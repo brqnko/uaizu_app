@@ -44,6 +44,9 @@ dependencies:
   hooks_riverpod: ^2.6.1
   flutter_hooks: ^0.20.5
   flutter_secure_storage: ^4.2.1
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.10.0
+  flutter_datetime_picker_plus: ^2.2.0
   
 
 dev_dependencies:
