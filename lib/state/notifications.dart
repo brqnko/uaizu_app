@@ -1,14 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uaizu_app/domain/entity/notification.dart';
-import 'package:uaizu_app/domain/provider/notification_repository_provider.dart';
+import 'package:uaizu_app/domain/provider/notification_sender_repository_provider.dart';
 
 final notificationManagerProvider =
     NotifierProvider<NotificationManagerNotifier, NotificationManager>(
-        NotificationManagerNotifier.new,);
+  NotificationManagerNotifier.new,
+);
 
 class NotificationManagerNotifier extends Notifier<NotificationManager> {
   Future<void> add(Notification notification) async {
-    await ref.read(notificationProvider).sendNotification(
+    await ref.read(notificationSenderProvider).sendNotification(
           notification.copyWith(
             scheduledDate: DateTime.now().copyWith(
               year: notification.scheduledDate.year,
@@ -32,7 +33,25 @@ class NotificationManagerNotifier extends Notifier<NotificationManager> {
       upcomingNotifications: {...state.upcomingNotifications}
         ..remove(notification),
       confirmedNotifications: {...state.confirmedNotifications}
+        ..remove(notification),
+    );
+  }
+
+  void confirm(Notification notification) {
+    state = state.copyWith(
+      upcomingNotifications: {...state.upcomingNotifications}
+        ..remove(notification),
+      confirmedNotifications: {...state.confirmedNotifications}
         ..add(notification),
+    );
+  }
+
+  void unconfirm(Notification notification) {
+    state = state.copyWith(
+      upcomingNotifications: {...state.upcomingNotifications}
+        ..add(notification),
+      confirmedNotifications: {...state.confirmedNotifications}
+        ..remove(notification),
     );
   }
 
