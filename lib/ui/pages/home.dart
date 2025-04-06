@@ -50,7 +50,6 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: SizedBox(
-        height: 75,
         child: bottomNavigationBar,
       ),
     );

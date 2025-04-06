@@ -43,8 +43,8 @@ dependencies:
   go_router: ^14.6.0
   hooks_riverpod: ^2.6.1
   flutter_hooks: ^0.20.5
-  flutter_secure_storage: ^4.2.1
-  flutter_local_notifications: ^18.0.1
+  flutter_secure_storage: ^9.2.4
+  flutter_local_notifications: ^19.0.0
   timezone: ^0.10.0
   flutter_datetime_picker_plus: ^2.2.0
   shared_preferences: ^2.3.3

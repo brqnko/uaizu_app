@@ -34,7 +34,6 @@ class AccountPage extends HookConsumerWidget {
             const SizedBox(height: 16),
             const CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/images/avatar.png'),
             ),
             const SizedBox(height: 12),
             Text(

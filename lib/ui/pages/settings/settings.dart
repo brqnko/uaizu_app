@@ -54,7 +54,6 @@ class SettingsPage extends ConsumerWidget {
             backgroundColor: colorScheme.onSurface,
             child: const CircleAvatar(
               radius: 28,
-              backgroundImage: AssetImage('assets/images/avatar.png'),
             ),
           ),
           title: Text(
