@@ -38,14 +38,14 @@ class LmsClient {
 
   Future<void> _updateLoginToken() async {
     if (_studentId.isEmpty || _password.isEmpty) {
-      throw Exception('Student Id or password is empty');
+      return Future.error('Student Id or password is empty');
     }
 
     final loginToken = _extractLoginToken(
       await _client.get(_loginUri),
     );
     if (loginToken == null) {
-      throw Exception('Failed to extract login token');
+      return Future.error('Failed to extract login token');
     }
 
     // HACK
@@ -75,7 +75,7 @@ class LmsClient {
     while (response.statusCode == 303) {
       final redirectUrl = _extractRedirectUrlFromBody(response.body);
       if (redirectUrl == null) {
-        throw Exception('failed to extract redirect url');
+        return Future.error('failed to extract redirect url');
       }
 
       response = await _client.get(Uri.parse(redirectUrl));

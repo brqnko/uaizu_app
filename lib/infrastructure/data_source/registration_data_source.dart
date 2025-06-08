@@ -22,7 +22,7 @@ class RegistrationDataSource {
       parse(flowExecutionKeyRes.body),
     );
     if (flowExecutionKey == null) {
-      throw Exception('failed to fetch flowExecutionKey');
+      return Future.error('failed to fetch flowExecutionKey');
     }
 
     final res = await _client.get(

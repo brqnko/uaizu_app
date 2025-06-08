@@ -64,11 +64,14 @@ class CampusSquareClient {
     debugPrint('try logging in campus square');
 
     if (_studentId.isEmpty || _password.isEmpty) {
-      throw Exception('Student Id or password is empty');
+      return Future.error('Student Id or password is empty');
     }
 
     debugPrint('logging in campus square for real');
     final rwfHash = _extractRwfHash((await post({})).body);
+    if (rwfHash == null) {
+      return Future.error('Failed to extract RWF hash');
+    }
 
     final body = (await get({
       'wfId': 'nwf_PTW0000002_login',
@@ -84,7 +87,7 @@ class CampusSquareClient {
         .body;
 
     if (!body.contains('now loading...')) {
-      throw Exception('Invalid username or password');
+      return Future.error('Invalid username or password');
     }
 
     _rwfHash = _extractRwfHash((await get({'page': 'main'})).body);
@@ -92,13 +95,13 @@ class CampusSquareClient {
   }
 
   /// Extract the RWF hash from the raw HTML
-  String _extractRwfHash(String html) {
+  String? _extractRwfHash(String html) {
     final clipped = clip(html, 'var portalConf = ', ';').replaceAll("'", '"');
     final json = jsonDecode(clipped) as Map<String, dynamic>;
 
     final rwfHash = json['rwfHash'];
     if (rwfHash == null || rwfHash is! String) {
-      throw Exception('Failed to extract RWF hash');
+      return null;
     }
 
     return rwfHash;

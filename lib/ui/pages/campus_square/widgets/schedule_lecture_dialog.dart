@@ -1,10 +1,10 @@
+import 'package:board_datetime_picker/board_datetime_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:uaizu_app/domain/entity/campus_square_calendar.dart';
 import 'package:uaizu_app/domain/entity/notification.dart' as notification;
 import 'package:uaizu_app/state/notifications.dart';
-import 'package:uaizu_app/ui/dialogs/set_reminder_dialog.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
 
@@ -76,27 +76,20 @@ class ScheduleLectureBottomSheet extends ConsumerWidget {
               style: Fonts.bodyM.copyWith(color: colorScheme.onSurface),
             ),
           ),
-          ListTile(
-            leading: Icon(
-              Icons.notifications_none_outlined,
-              color: colorScheme.onSurface,
-            ),
-            title: Text(
-              'リマインダー ${ref.watch(notificationManagerProvider).upcomingNotifications.where((e) => e.sourceHash == note.hashCode).length}件',
-              style: Fonts.bodyM.copyWith(color: colorScheme.onSurface),
-            ),
-            onTap: () => showSetReminderDialog(
-              context,
-              ref,
-              note.endTime,
-              note.startTime,
-              (date) => notification.Notification(
-                title: note.courseName,
-                body: '${note.timeSlot} ${note.location}',
-                scheduledDate: date,
-                payload: '',
-                sourceHash: note.hashCode,
-              ),
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(onPressed: () async {
+                  final result = await showBoardDateTimePicker(
+                    context: context,
+                    pickerType: DateTimePickerType.time,
+                    maximumDate: note.startTime,
+                    initialDate: note.startTime.subtract(const Duration(minutes: 5)),
+                  );
+                },
+                child: Text('リマインダー'))
+              ],
             ),
           ),
         ],
