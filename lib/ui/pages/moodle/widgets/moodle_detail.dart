@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/pages/moodle/widgets/moodle_task_dialog.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/future_body.dart';
@@ -18,6 +19,8 @@ class LmsDetail extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+    
     final taskFuture = useMemoized(
       () {
         return ref.watch(getLmsTaskDayUseCaseProvider).call(
@@ -60,7 +63,7 @@ class LmsDetail extends HookConsumerWidget {
                       ),
                     ],
                   ),
-                  onTap: () => showDialog(
+                  onTap: () => showDialog<void>(
                     context: context,
                     builder: (BuildContext context) =>
                         MoodleTaskDialog(note: note),
@@ -71,6 +74,7 @@ class LmsDetail extends HookConsumerWidget {
           ),
         );
       },
+      l10n,
     );
   }
 }

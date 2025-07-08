@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/state/settings.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/app_bar.dart';
@@ -11,6 +12,7 @@ class SettingsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final settingWidgets = [
       Container(
@@ -23,7 +25,7 @@ class SettingsPage extends ConsumerWidget {
           height: 50,
           child: TextField(
             decoration: InputDecoration(
-              hintText: 'Search',
+              hintText: l10n.search,
               hintStyle: Fonts.bodyM.copyWith(color: colorScheme.onSurface),
               prefixIcon: Icon(
                 Icons.search,
@@ -61,7 +63,7 @@ class SettingsPage extends ConsumerWidget {
             style: Fonts.titleM.copyWith(color: colorScheme.onSurface),
           ),
           subtitle: Text(
-            'Campus Square and Moodle Account',
+            l10n.accountTitle,
             style: Fonts.bodyS.copyWith(color: colorScheme.onSurface),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -85,11 +87,11 @@ class SettingsPage extends ConsumerWidget {
             context.push('/account/appearance');
           },
           title: Text(
-            'Appearance',
+            l10n.appearance,
             style: Fonts.titleM.copyWith(color: colorScheme.onSurface),
           ),
           subtitle: Text(
-            'Language, Theme, Hide Student ID',
+            l10n.languageThemeStudentId,
             style: Fonts.bodyS.copyWith(color: colorScheme.onSurface),
           ),
           trailing: Icon(
@@ -110,11 +112,11 @@ class SettingsPage extends ConsumerWidget {
             context.push('/account/about');
           },
           title: Text(
-            'About',
+            l10n.about,
             style: Fonts.titleM.copyWith(color: colorScheme.onSurface),
           ),
           subtitle: Text(
-            'Version, License, Privacy Policy',
+            l10n.versionLicensePrivacy,
             style: Fonts.bodyS.copyWith(color: colorScheme.onSurface),
           ),
           trailing: Icon(
@@ -140,7 +142,7 @@ class SettingsPage extends ConsumerWidget {
       backgroundColor: colorScheme.surface,
       appBar: brandAppBar(
         context,
-        title: 'Settings',
+        title: l10n.settings,
       ),
       body: body,
     );

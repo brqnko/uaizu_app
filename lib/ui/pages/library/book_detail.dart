@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/state/book_image.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/use_case/library_usecase.dart';
@@ -60,6 +61,7 @@ Widget _buildBookBody(
   Book? bookDetail,
   ColorScheme colorScheme,
   WidgetRef ref,
+  AppLocalizations l10n,
 ) {
   if (bookDetail == null) {
     return const CircularProgressIndicator();
@@ -93,63 +95,63 @@ Widget _buildBookBody(
           const SizedBox(height: 16),
           if (bookDetail.author != null)
             _buildTaggedText(
-              'Author',
+              l10n.author,
               bookDetail.author!,
               colorScheme,
             ),
           const SizedBox(height: 8),
           if (bookDetail.publisher != null)
             _buildTaggedText(
-              'Publisher',
+              l10n.publisher,
               bookDetail.publisher!,
               colorScheme,
             ),
           const SizedBox(height: 8),
           if (bookDetail.publication != null)
             _buildTaggedText(
-              'Published Date',
+              l10n.publishedDate,
               bookDetail.publication!,
               colorScheme,
             ),
           const SizedBox(height: 8),
           if (bookDetail.location != null)
             _buildTaggedText(
-              'Location',
+              l10n.location,
               bookDetail.location!,
               colorScheme,
             ),
           const SizedBox(height: 8),
           if (bookDetail.isbn != null)
             _buildTaggedText(
-              'ISBN',
+              l10n.isbn,
               bookDetail.isbn!,
               colorScheme,
             ),
           const SizedBox(height: 8),
           if (bookDetail.alternative != null)
             _buildTaggedText(
-              'Alternative',
+              l10n.alternative,
               bookDetail.alternative!,
               colorScheme,
             ),
           const SizedBox(height: 8),
           if (bookDetail.callMark != null)
             _buildTaggedText(
-              'Call Mark',
+              l10n.callMark,
               bookDetail.callMark!,
               colorScheme,
             ),
           const SizedBox(height: 8),
           if (bookDetail.countryOfPublication != null)
             _buildTaggedText(
-              'Country of Publication',
+              l10n.countryOfPublication,
               bookDetail.countryOfPublication!,
               colorScheme,
             ),
           const SizedBox(height: 8),
           if (bookDetail.form != null)
             _buildTaggedText(
-              'Format',
+              l10n.format,
               bookDetail.form!,
               colorScheme,
             ),
@@ -167,6 +169,7 @@ class BookDetailPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final bookDetailFuture = useMemoized(() {
       return ref.watch(getBookDetailUseCaseProvider).call(
@@ -176,14 +179,14 @@ class BookDetailPage extends HookConsumerWidget {
     final bookDetail = useFuture(bookDetailFuture);
 
     final body = bookDetail.connectionState == ConnectionState.done
-        ? _buildBookBody(bookDetail.data, colorScheme, ref)
+        ? _buildBookBody(bookDetail.data, colorScheme, ref, l10n)
         : const Center(child: CircularProgressIndicator());
 
     final appBar = AppBar(
       iconTheme: IconThemeData(color: colorScheme.onPrimaryFixed),
       backgroundColor: colorScheme.primary,
       title: Text(
-        'Book Detail',
+        l10n.bookDetail,
         style: Fonts.titleM.copyWith(
           color: colorScheme.onPrimaryFixed,
         ),

@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:uaizu_app/domain/entity/campus_square_calendar.dart';
-import 'package:uaizu_app/domain/entity/notification.dart' as notification;
-import 'package:uaizu_app/state/notifications.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
 
 extension on CampusSquareCalendarLectureType {
-  String get title {
+  String title(AppLocalizations l10n) {
     switch (this) {
       case CampusSquareCalendarLectureType.kyuko:
-        return '休講';
+        return l10n.classCancel;
       case CampusSquareCalendarLectureType.kaiko:
-        return '開講';
+        return l10n.classOpen;
       case CampusSquareCalendarLectureType.hoko:
-        return '補講';
+        return l10n.makeupClass;
     }
   }
 }
@@ -31,6 +30,7 @@ class ScheduleLectureBottomSheet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return HorizontalExpandedContainer(
       child: Column(
@@ -72,7 +72,7 @@ class ScheduleLectureBottomSheet extends ConsumerWidget {
               color: colorScheme.onSurface,
             ),
             title: Text(
-              note.type.title,
+              note.type.title(l10n),
               style: Fonts.bodyM.copyWith(color: colorScheme.onSurface),
             ),
           ),
@@ -80,15 +80,17 @@ class ScheduleLectureBottomSheet extends ConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(onPressed: () async {
-                  final result = await showBoardDateTimePicker(
-                    context: context,
-                    pickerType: DateTimePickerType.time,
-                    maximumDate: note.startTime,
-                    initialDate: note.startTime.subtract(const Duration(minutes: 5)),
-                  );
-                },
-                child: Text('リマインダー'))
+                ElevatedButton(
+                    onPressed: () async {
+                      await showBoardDateTimePicker(
+                        context: context,
+                        pickerType: DateTimePickerType.time,
+                        maximumDate: note.startTime,
+                        initialDate:
+                            note.startTime.subtract(const Duration(minutes: 5)),
+                      );
+                    },
+                    child: Text(l10n.reminder))
               ],
             ),
           ),

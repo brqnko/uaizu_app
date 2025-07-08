@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uaizu_app/domain/entity/settings.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/state/settings.dart';
 import 'package:uaizu_app/ui/widgets/app_bar.dart';
 import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
@@ -11,6 +12,7 @@ class AppearancePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final settingsWidgets = [
       // language
@@ -21,13 +23,13 @@ class AppearancePage extends ConsumerWidget {
         ),
         width: double.infinity,
         child: ListTile(
-          title: const Text('Language'),
+          title: Text(l10n.language),
           subtitle: Text(
             ref.watch(settingsProvider.select((s) => s.appLocale)).title,
           ),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () {
-            showModalBottomSheet(
+            showModalBottomSheet<void>(
               context: context,
               builder: (context) {
                 return HorizontalExpandedContainer(
@@ -60,13 +62,14 @@ class AppearancePage extends ConsumerWidget {
         ),
         width: double.infinity,
         child: ListTile(
-          title: const Text('Theme'),
+          title: Text(l10n.theme),
           subtitle: Text(
-            ref.watch(settingsProvider.select((s) => s.appTheme)).name,
+            _getThemeDisplayName(
+                ref.watch(settingsProvider.select((s) => s.appTheme)), l10n),
           ),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () {
-            showModalBottomSheet(
+            showModalBottomSheet<void>(
               context: context,
               builder: (context) {
                 return HorizontalExpandedContainer(
@@ -74,7 +77,7 @@ class AppearancePage extends ConsumerWidget {
                     children: AppTheme.values
                         .map(
                           (theme) => ListTile(
-                            title: Text(theme.name),
+                            title: Text(_getThemeDisplayName(theme, l10n)),
                             onTap: () {
                               ref.read(settingsProvider.notifier).update(
                                     appTheme: theme,
@@ -99,11 +102,11 @@ class AppearancePage extends ConsumerWidget {
         ),
         width: double.infinity,
         child: ListTile(
-          title: const Text('Hide Student ID'),
+          title: Text(l10n.hideStudentId),
           subtitle: Text(
             ref.watch(settingsProvider.select((s) => s.hideStudentId))
-                ? 'Enabled'
-                : 'Disabled',
+                ? l10n.enabled
+                : l10n.disabled,
           ),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () {
@@ -125,9 +128,18 @@ class AppearancePage extends ConsumerWidget {
     );
 
     return Scaffold(
-      appBar: brandAppBar(context, title: 'Account'),
+      appBar: brandAppBar(context, title: l10n.appearance),
       backgroundColor: colorScheme.surface,
       body: body,
     );
+  }
+
+  String _getThemeDisplayName(AppTheme theme, AppLocalizations l10n) {
+    switch (theme) {
+      case AppTheme.light:
+        return l10n.light;
+      case AppTheme.dark:
+        return l10n.dark;
+    }
   }
 }

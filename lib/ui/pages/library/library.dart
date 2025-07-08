@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/state/book_search.dart';
 import 'package:uaizu_app/ui/pages/library/widgets/library_calendar.dart';
 import 'package:uaizu_app/ui/pages/library/widgets/new_books_reel.dart';
@@ -14,6 +15,7 @@ class LibraryPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final appBar = brandAppBar(
       context,
@@ -22,7 +24,7 @@ class LibraryPage extends ConsumerWidget {
         child: TextFormField(
           decoration: InputDecoration(
             isDense: true,
-            hintText: '検索',
+            hintText: l10n.search,
             hintStyle: Fonts.bodyS.copyWith(color: colorScheme.primary),
             prefixIcon: Icon(
               Icons.search,
@@ -46,17 +48,17 @@ class LibraryPage extends ConsumerWidget {
     return Scaffold(
       appBar: appBar,
       backgroundColor: colorScheme.surface,
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               TaggedWidget(
-                tag: '新着図書',
-                child: NewBooksReel(),
+                tag: l10n.newBooks,
+                child: const NewBooksReel(),
               ),
-              SizedBox(height: 16),
-              LibraryCalendar(),
+              const SizedBox(height: 16),
+              const LibraryCalendar(),
             ],
           ),
         ),

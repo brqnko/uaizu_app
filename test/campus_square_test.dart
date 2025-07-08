@@ -21,25 +21,25 @@ void main() {
 
   group('campus square client ja', () {
     final campusSquareClient = CampusSquareClient(
-        AppHttpClient(Client()),
-        studentId!,
-        password!,
-        AppLocale.ja,
+      AppHttpClient(Client()),
+      studentId!,
+      password!,
+      AppLocale.ja,
     );
 
     test('fetch syllabus', () async {
-      final lectures = await SyllabusDataSource(campusSquareClient)
-          .fetchSyllabus(
-            const SyllabusLectureSearchQuery(
-                year: 2024,
-                displayCount: 10,
-                freeWord: '',
-            ),
-          );
+      final lectures =
+          await SyllabusDataSource(campusSquareClient).fetchSyllabus(
+        const SyllabusLectureSearchQuery(
+          year: 2024,
+          displayCount: 10,
+          freeWord: '',
+        ),
+      );
 
       lectures.forEach(print);
     });
-    
+
     test('fetch calender', () async {
       final calender = await CampusSquareCalendarDataSource(campusSquareClient)
           .fetchCalendarDay(DateTime.now());
@@ -48,26 +48,25 @@ void main() {
     });
 
     test('fetch grade', () async {
-      final grade = await GradeDataSource(campusSquareClient)
-        .fetchGrade(
-          const GradeQuery(
-            showAll: false,
-            year: 2024,
-            quarter: 3,
-          ),
-        );
+      final grade = await GradeDataSource(campusSquareClient).fetchGrade(
+        const GradeQuery(
+          showAll: false,
+          year: 2024,
+          quarter: 3,
+        ),
+      );
 
       print(grade);
     });
 
     test('fetch registration', () async {
-      final registrations = await RegistrationDataSource(campusSquareClient)
-          .fetchRegistrations(
-            const SearchRegistrationQuery(
-              year: 2024,
-              semester: true,
-            ),
-          );
+      final registrations =
+          await RegistrationDataSource(campusSquareClient).fetchRegistrations(
+        const SearchRegistrationQuery(
+          year: 2024,
+          semester: true,
+        ),
+      );
 
       registrations.forEach(print);
     });

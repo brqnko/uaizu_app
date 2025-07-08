@@ -1,0 +1,375 @@
+{
+  "@@locale": "en",
+  "appTitle": "UAIZU App",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings menu label"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme setting label"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light theme option"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme option"
+  },
+  "system": "System",
+  "@system": {
+    "description": "System theme option"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications setting label"
+  },
+  "enabled": "Enabled",
+  "@enabled": {
+    "description": "Enabled option"
+  },
+  "disabled": "Disabled",
+  "@disabled": {
+    "description": "Disabled option"
+  },
+  "library": "Library",
+  "@library": {
+    "description": "Library section label"
+  },
+  "campusSquare": "Campus Square",
+  "@campusSquare": {
+    "description": "Campus Square section label"
+  },
+  "lms": "LMS",
+  "@lms": {
+    "description": "LMS section label"
+  },
+  "moodle": "Moodle",
+  "@moodle": {
+    "description": "Moodle section label"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Search action label"
+  },
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error message label"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry action label"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel action label"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK action label"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save action label"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete action label"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit action label"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Add action label"
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Back navigation label"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home page label"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile page label"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About page label"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version information label"
+  },
+  "account": "Account",
+  "@account": {
+    "description": "Account page label"
+  },
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Appearance setting label"
+  },
+  "hideStudentId": "Hide Student ID",
+  "@hideStudentId": {
+    "description": "Hide student ID setting"
+  },
+  "studentId": "Student ID",
+  "@studentId": {
+    "description": "Student ID label"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password label"
+  },
+  "bookDetail": "Book Detail",
+  "@bookDetail": {
+    "description": "Book detail page title"
+  },
+  "newBooks": "New Books",
+  "@newBooks": {
+    "description": "New books section label"
+  },
+  "openingCalendar": "Opening Calendar",
+  "@openingCalendar": {
+    "description": "Library opening calendar"
+  },
+  "twoYearCollege": "2-year College",
+  "@twoYearCollege": {
+    "description": "2-year college option"
+  },
+  "fourYearUniversity": "4-year University",
+  "@fourYearUniversity": {
+    "description": "4-year university option"
+  },
+  "schedule": "Schedule",
+  "@schedule": {
+    "description": "Schedule page label"
+  },
+  "registration": "Registration",
+  "@registration": {
+    "description": "Registration page label"
+  },
+  "gradeAndExam": "Grade and Exam",
+  "@gradeAndExam": {
+    "description": "Grade and exam page label"
+  },
+  "syllabus": "Syllabus",
+  "@syllabus": {
+    "description": "Syllabus page label"
+  },
+  "notification": "Notification",
+  "@notification": {
+    "description": "Notification page label"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close action label"
+  },
+  "square": "Square",
+  "@square": {
+    "description": "Campus Square navigation label"
+  },
+  "accountTitle": "Campus Square and Moodle Account",
+  "@accountTitle": {
+    "description": "Account settings subtitle"
+  },
+  "languageThemeStudentId": "Language, Theme, Hide Student ID",
+  "@languageThemeStudentId": {
+    "description": "Appearance settings subtitle"
+  },
+  "versionLicensePrivacy": "Version, License, Privacy Policy",
+  "@versionLicensePrivacy": {
+    "description": "About settings subtitle"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Description label"
+  },
+  "sourceCode": "Source Code",
+  "@sourceCode": {
+    "description": "Source code label"
+  },
+  "license": "License",
+  "@license": {
+    "description": "License label"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy label"
+  },
+  "appDescription": "uaizu_app allows you to access Campus Square, Moodle and Library without browser.",
+  "@appDescription": {
+    "description": "Application description text"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button label"
+  },
+  "loggingIn": "Logging in...",
+  "@loggingIn": {
+    "description": "Login progress message"
+  },
+  "loginSuccessful": "Login successful",
+  "@loginSuccessful": {
+    "description": "Login success message"
+  },
+  "author": "Author",
+  "@author": {
+    "description": "Book author field label"
+  },
+  "publisher": "Publisher",
+  "@publisher": {
+    "description": "Book publisher field label"
+  },
+  "publishedDate": "Published Date",
+  "@publishedDate": {
+    "description": "Book published date field label"
+  },
+  "location": "Location",
+  "@location": {
+    "description": "Book location field label"
+  },
+  "isbn": "ISBN",
+  "@isbn": {
+    "description": "Book ISBN field label"
+  },
+  "alternative": "Alternative",
+  "@alternative": {
+    "description": "Book alternative field label"
+  },
+  "callMark": "Call Mark",
+  "@callMark": {
+    "description": "Book call mark field label"
+  },
+  "countryOfPublication": "Country of Publication",
+  "@countryOfPublication": {
+    "description": "Book country of publication field label"
+  },
+  "format": "Format",
+  "@format": {
+    "description": "Book format field label"
+  },
+  "errorOccurred": "An error occurred",
+  "@errorOccurred": {
+    "description": "Generic error message"
+  },
+  "firstSemester": "First Semester",
+  "@firstSemester": {
+    "description": "First semester label"
+  },
+  "secondSemester": "Second Semester",
+  "@secondSemester": {
+    "description": "Second semester label"
+  },
+  "studentInformation": "Student Information",
+  "@studentInformation": {
+    "description": "Student information section label"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "Name field label"
+  },
+  "department": "Department",
+  "@department": {
+    "description": "Department field label"
+  },
+  "year": "Year",
+  "@year": {
+    "description": "Year field label"
+  },
+  "semester": "Semester",
+  "@semester": {
+    "description": "Semester field label"
+  },
+  "showAll": "Show All",
+  "@showAll": {
+    "description": "Show all items button label"
+  },
+  "showPartial": "Show Partial",
+  "@showPartial": {
+    "description": "Show partial items button label"
+  },
+  "grades": "Grades",
+  "@grades": {
+    "description": "Grades section label"
+  },
+  "quarter1": "1st Quarter",
+  "@quarter1": {
+    "description": "First quarter label"
+  },
+  "quarter2": "2nd Quarter",
+  "@quarter2": {
+    "description": "Second quarter label"
+  },
+  "quarter3": "3rd Quarter",
+  "@quarter3": {
+    "description": "Third quarter label"
+  },
+  "quarter4": "4th Quarter",
+  "@quarter4": {
+    "description": "Fourth quarter label"
+  },
+  "toeicBestScore": "TOEIC Best Score",
+  "@toeicBestScore": {
+    "description": "TOEIC best score section label"
+  },
+  "toeicHistory": "TOEIC History",
+  "@toeicHistory": {
+    "description": "TOEIC history section label"
+  },
+  "freeWord": "Free Word",
+  "@freeWord": {
+    "description": "Free word search field placeholder"
+  },
+  "displayCount": "Display Count",
+  "@displayCount": {
+    "description": "Display count field placeholder"
+  },
+  "searchButton": "Search",
+  "@searchButton": {
+    "description": "Search button label"
+  },
+  "openingCalendar": "Opening Calendar",
+  "@openingCalendar": {
+    "description": "Opening calendar label"
+  },
+  "classCancel": "Class Cancelled",
+  "@classCancel": {
+    "description": "Class cancelled status"
+  },
+  "classOpen": "Class Open",
+  "@classOpen": {
+    "description": "Class open status"
+  },
+  "makeupClass": "Makeup Class",
+  "@makeupClass": {
+    "description": "Makeup class status"
+  },
+  "reminder": "Reminder",
+  "@reminder": {
+    "description": "Reminder button label"
+  },
+  "somethingWentWrong": "Something went wrong",
+  "@somethingWentWrong": {
+    "description": "Error message when something unexpected happens"
+  },
+  "noDataAvailable": "No data available",
+  "@noDataAvailable": {
+    "description": "Message when no data is found"
+  }
+}

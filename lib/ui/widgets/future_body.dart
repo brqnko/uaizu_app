@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 
 Widget futureBody<T>(
-    AsyncSnapshot<T> snapshot,
-    Widget Function(T data) builder,
+  AsyncSnapshot<T> snapshot,
+  Widget Function(T data) builder,
+  AppLocalizations l10n,
 ) {
   if (snapshot.connectionState == ConnectionState.waiting) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -14,7 +16,7 @@ Widget futureBody<T>(
           ),
           SizedBox(height: 16),
           Text(
-            'Loading...',
+            l10n.loading,
             style: TextStyle(fontSize: 16),
           ),
         ],
@@ -29,20 +31,20 @@ Widget futureBody<T>(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               Icons.error_outline,
               size: 48,
               color: Colors.red,
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'Something went wrong',
+            SizedBox(height: 16),
+            Text(
+              l10n.somethingWentWrong,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '${snapshot.error}',
-              style: const TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
           ],
@@ -55,7 +57,7 @@ Widget futureBody<T>(
     return builder(snapshot.data as T);
   }
 
-  return const Center(
+  return Center(
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -66,7 +68,7 @@ Widget futureBody<T>(
         ),
         SizedBox(height: 16),
         Text(
-          'No data available',
+          l10n.noDataAvailable,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
       ],

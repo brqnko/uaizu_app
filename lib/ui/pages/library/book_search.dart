@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/state/book_image.dart';
 import 'package:uaizu_app/state/book_search.dart';
 import 'package:uaizu_app/ui/pages/library/widgets/search_result_book.dart';
@@ -15,6 +16,7 @@ class BookSearchPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final orderIndex = useState(0);
 
@@ -38,7 +40,7 @@ class BookSearchPage extends HookConsumerWidget {
           initialValue: ref.read(bookSearchQueryProvider),
           decoration: InputDecoration(
             isDense: true,
-            hintText: '検索',
+            hintText: l10n.search,
             hintStyle: Fonts.bodyS.copyWith(color: colorScheme.primary),
             prefixIcon: Icon(
               Icons.search,
@@ -93,7 +95,7 @@ class BookSearchPage extends HookConsumerWidget {
           ),
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stackTrace) =>
-              Center(child: Text('エラーが発生しました: $error')),
+              Center(child: Text('${l10n.errorOccurred}: $error')),
         );
 
     return Scaffold(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key, required this.navigationShell});
@@ -10,6 +11,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final bottomNavigationBar = BottomNavigationBar(
       currentIndex: navigationShell.currentIndex,
@@ -17,26 +19,26 @@ class HomePage extends ConsumerWidget {
       selectedItemColor: colorScheme.onPrimaryFixed,
       unselectedItemColor: colorScheme.onPrimary,
       type: BottomNavigationBarType.fixed,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_month),
-          label: 'Square',
+          icon: const Icon(Icons.calendar_month),
+          label: l10n.square,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.edit),
-          label: 'Moodle',
+          icon: const Icon(Icons.edit),
+          label: l10n.moodle,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.book),
-          label: '図書館',
+          icon: const Icon(Icons.book),
+          label: l10n.library,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.notifications_sharp),
-          label: '通知',
+          icon: const Icon(Icons.notifications_sharp),
+          label: l10n.notifications,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'アカウント',
+          icon: const Icon(Icons.person),
+          label: l10n.account,
         ),
       ],
       onTap: (index) {

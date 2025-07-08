@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:uaizu_app/domain/entity/library_calendar.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/future_body.dart';
 import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
@@ -72,6 +73,7 @@ class LibraryCalendar extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final month = useState(_flatToMonth(DateTime.now()));
     final calendarFormat = useState(CalendarFormat.month);
@@ -100,6 +102,7 @@ class LibraryCalendar extends HookConsumerWidget {
             .map((e) => _buildContainerFromColor(e.key, e.value, colorScheme))
             .toList(),
       ),
+      l10n,
     );
 
     final tableCalendar = futureBody(
@@ -112,7 +115,7 @@ class LibraryCalendar extends HookConsumerWidget {
         calendarFormat: calendarFormat.value,
         onFormatChanged: (format) => calendarFormat.value = format,
         onPageChanged: (newFocusedDay) => month.value = newFocusedDay,
-        calendarBuilders: CalendarBuilders(
+        calendarBuilders: CalendarBuilders<dynamic>(
           selectedBuilder: (context, date, events) {
             return Container(
               margin: const EdgeInsets.all(4),
@@ -155,6 +158,7 @@ class LibraryCalendar extends HookConsumerWidget {
           },
         ),
       ),
+      l10n,
     );
 
     return HorizontalExpandedContainer(
@@ -164,7 +168,7 @@ class LibraryCalendar extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '開館カレンダー',
+                l10n.openingCalendar,
                 style: Fonts.titleM.copyWith(
                   color: colorScheme.onSurface,
                 ),
