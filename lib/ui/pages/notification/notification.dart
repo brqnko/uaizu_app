@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -7,13 +8,14 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final appBar = AppBar(
       toolbarHeight: 75,
       backgroundColor: colorScheme.primary,
       title: Center(
         child: Text(
-          'Notification',
+          l10n.notification,
           style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
         ),
       ),
@@ -22,8 +24,8 @@ class NotificationPage extends StatelessWidget {
     return Scaffold(
       appBar: appBar,
       backgroundColor: colorScheme.surface,
-      body: const Center(
-        child: Text('Notification'),
+      body: Center(
+        child: Text(l10n.notification),
       ),
     );
   }

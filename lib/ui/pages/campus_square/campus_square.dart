@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/state/settings.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/app_bar.dart';
@@ -13,8 +14,9 @@ class CampusSquarePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
-    final appBar = brandAppBar(context, title: 'Campus Square');
+    final appBar = brandAppBar(context, title: l10n.campusSquare);
 
     final drawer = Drawer(
       backgroundColor: colorScheme.primary,
@@ -37,7 +39,7 @@ class CampusSquarePage extends ConsumerWidget {
           ),
           ListTile(
             title: Text(
-              'スケジュール',
+              l10n.schedule,
               style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
             ),
             onTap: () {
@@ -50,7 +52,7 @@ class CampusSquarePage extends ConsumerWidget {
           ),
           ListTile(
             title: Text(
-              '履修',
+              l10n.registration,
               style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
             ),
             onTap: () {
@@ -63,7 +65,7 @@ class CampusSquarePage extends ConsumerWidget {
           ),
           ListTile(
             title: Text(
-              '成績',
+              l10n.gradeAndExam,
               style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
             ),
             onTap: () {
@@ -76,7 +78,7 @@ class CampusSquarePage extends ConsumerWidget {
           ),
           ListTile(
             title: Text(
-              'シラバス',
+              l10n.syllabus,
               style: Fonts.titleM.copyWith(color: colorScheme.onPrimaryFixed),
             ),
             onTap: () {

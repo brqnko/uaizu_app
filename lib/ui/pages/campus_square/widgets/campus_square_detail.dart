@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:uaizu_app/domain/entity/campus_square_calendar.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/pages/campus_square/widgets/schedule_lecture_dialog.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/future_body.dart';
@@ -33,6 +34,7 @@ class CampusSquareDetail extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final scheduleFuture = useMemoized(
       () {
@@ -93,7 +95,7 @@ class CampusSquareDetail extends HookConsumerWidget {
                           ),
                         ],
                       ),
-                      onTap: () => showModalBottomSheet(
+                      onTap: () => showModalBottomSheet<void>(
                         context: context,
                         builder: (context) => ScheduleLectureBottomSheet(note),
                       ),
@@ -104,6 +106,7 @@ class CampusSquareDetail extends HookConsumerWidget {
           ],
         ),
       ),
+      l10n,
     );
   }
 }

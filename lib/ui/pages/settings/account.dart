@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/provider/client_provider.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/state/settings.dart';
 import 'package:uaizu_app/ui/dialogs/close_dialog.dart';
 import 'package:uaizu_app/ui/dialogs/loading_dialog.dart';
@@ -21,6 +22,7 @@ class AccountPage extends HookConsumerWidget {
     );
 
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final settingsWidgets = [
       Container(
@@ -58,8 +60,8 @@ class AccountPage extends HookConsumerWidget {
               TextFormField(
                 initialValue: username.value,
                 obscureText: ref.watch(settingsProvider).hideStudentId,
-                decoration: const InputDecoration(
-                  labelText: 'Student ID',
+                decoration: InputDecoration(
+                  labelText: l10n.studentId,
                 ),
                 onChanged: (value) {
                   username.value = value;
@@ -69,8 +71,8 @@ class AccountPage extends HookConsumerWidget {
               TextFormField(
                 obscureText: true,
                 initialValue: password.value,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
+                decoration: InputDecoration(
+                  labelText: l10n.password,
                 ),
                 onChanged: (value) {
                   password.value = value;
@@ -87,21 +89,21 @@ class AccountPage extends HookConsumerWidget {
                           password: password.value,
                         );
 
-                    showDialog(
+                    showDialog<void>(
                       barrierDismissible: false,
                       context: context,
                       builder: (context) => LoadingDialog(
-                        title: 'Logging in...',
+                        title: l10n.loggingIn,
                         future: ref
                             .read(campusSquareClientProvider)
                             .requireRwfHash(),
-                        onSuccessful: (context) => const CloseDialog(
-                          title: 'Login successful',
+                        onSuccessful: (context) => CloseDialog(
+                          title: l10n.loginSuccessful,
                         ),
                       ),
                     );
                   },
-                  child: const Text('Login'),
+                  child: Text(l10n.login),
                 ),
               ),
             ],
@@ -120,7 +122,8 @@ class AccountPage extends HookConsumerWidget {
     );
 
     return Scaffold(
-      appBar: brandAppBar(context, title: 'Account'),
+      appBar:
+          brandAppBar(context, title: AppLocalizations.of(context)!.account),
       backgroundColor: colorScheme.surface,
       body: body,
     );

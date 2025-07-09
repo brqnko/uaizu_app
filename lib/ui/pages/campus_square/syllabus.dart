@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/syllabus.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/dialogs/select_year_dialog.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/app_bar.dart';
@@ -17,6 +18,7 @@ class SyllabusPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final year = useState(DateTime.now().year);
     final displayCount = useState(20);
@@ -45,7 +47,7 @@ class SyllabusPage extends HookConsumerWidget {
       context,
       [
         ElevatedButton(
-          onPressed: () => showDialog(
+          onPressed: () => showDialog<void>(
             context: context,
             builder: (context) => SelectYearDialog(year: year),
           ),
@@ -60,7 +62,7 @@ class SyllabusPage extends HookConsumerWidget {
             initialValue: freeWord.value,
             decoration: InputDecoration(
               isDense: true,
-              hintText: 'フリーワード',
+              hintText: l10n.freeWord,
               hintStyle:
                   Fonts.bodyS.copyWith(color: colorScheme.onSurfaceVariant),
               prefixIcon: Icon(
@@ -83,7 +85,7 @@ class SyllabusPage extends HookConsumerWidget {
             initialValue: displayCount.value.toString(),
             decoration: InputDecoration(
               isDense: true,
-              hintText: '表示件数',
+              hintText: l10n.displayCount,
               hintStyle:
                   Fonts.bodyM.copyWith(color: colorScheme.onSurfaceVariant),
               prefixIcon: Icon(
@@ -251,7 +253,7 @@ class SyllabusPage extends HookConsumerWidget {
             );
           },
         );
-      }),
+      }, l10n),
     );
   }
 }

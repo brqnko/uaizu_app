@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/grade.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/state/settings.dart';
 import 'package:uaizu_app/ui/dialogs/select_year_dialog.dart';
 import 'package:uaizu_app/ui/pages/campus_square/widgets/lecture_grade_card.dart';
@@ -23,35 +24,36 @@ class GradeAndExamPage extends HookConsumerWidget {
     Grade grade,
     WidgetRef ref,
     ColorScheme colorScheme,
+    AppLocalizations l10n,
   ) {
     return TaggedWidget(
-      tag: '学生情報',
+      tag: l10n.studentInformation,
       child: Wrap(
         runSpacing: 16,
         spacing: 16,
         children: [
           KeyValueContainer(
-            keyString: '名前',
+            keyString: l10n.name,
             valueString: getAnonymousableValue(grade.studentName, ref),
             keyIcon: Icons.school_outlined,
           ),
           KeyValueContainer(
-            keyString: '学籍番号',
+            keyString: l10n.studentId,
             valueString: getAnonymousableValue(grade.studentId, ref),
             keyIcon: Icons.numbers_outlined,
           ),
           KeyValueContainer(
-            keyString: '学科',
+            keyString: l10n.department,
             valueString: grade.department,
             keyIcon: Icons.science_outlined,
           ),
           KeyValueContainer(
-            keyString: '学年',
+            keyString: l10n.year,
             valueString: grade.year,
             keyIcon: Icons.calendar_month_outlined,
           ),
           KeyValueContainer(
-            keyString: '学期',
+            keyString: l10n.semester,
             valueString: grade.semester,
             keyIcon: Icons.history_edu_outlined,
           ),
@@ -60,19 +62,20 @@ class GradeAndExamPage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildToeicScore(Grade grade, ColorScheme colorScheme) {
+  Widget _buildToeicScore(
+      Grade grade, ColorScheme colorScheme, AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TaggedWidget(
-          tag: 'TOEIC最高点',
+          tag: l10n.toeicBestScore,
           child: HorizontalExpandedContainer(
             child: ToeicScoreText(score: grade.bestToeicScore),
           ),
         ),
         const SizedBox(height: 8),
         TaggedWidget(
-          tag: 'TOEIC履歴',
+          tag: l10n.toeicHistory,
           child: HorizontalExpandedContainer(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,6 +91,9 @@ class GradeAndExamPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
+
     final showAll = useState(false);
     final year = useState(DateTime.now().year);
     final quarter = useState(0);
@@ -111,13 +117,11 @@ class GradeAndExamPage extends HookConsumerWidget {
 
     final grade = useFuture(gradeFuture);
 
-    final colorScheme = Theme.of(context).colorScheme;
-
     final appBar = brandAppBarWithOptions(
       context,
       [
         ElevatedButton(
-          onPressed: () => showDialog(
+          onPressed: () => showDialog<void>(
             context: context,
             builder: (BuildContext context) => SelectYearDialog(year: year),
           ),
@@ -130,13 +134,18 @@ class GradeAndExamPage extends HookConsumerWidget {
           onPressed: () {},
           child: BrandDropdownButton(
             index: quarter,
-            values: const ['1学期', '2学期', '3学期', '4学期'],
+            values: [
+              l10n.quarter1,
+              l10n.quarter2,
+              l10n.quarter3,
+              l10n.quarter4
+            ],
           ),
         ),
         ElevatedButton(
           onPressed: () => showAll.value = !showAll.value,
           child: Text(
-            showAll.value ? 'すべて表示' : '一部表示',
+            showAll.value ? l10n.showAll : l10n.showPartial,
             style: Fonts.bodyS.copyWith(color: colorScheme.onSurfaceVariant),
           ),
         ),
@@ -164,14 +173,15 @@ class GradeAndExamPage extends HookConsumerWidget {
             itemCount: 3 + data.subjectGrades.length,
             itemBuilder: (_, index) {
               return switch (index) {
-                0 => _buildStudentInformation(data, ref, colorScheme),
-                1 => _buildToeicScore(data, colorScheme),
-                2 => const TaggedWidget(tag: '成績'),
+                0 => _buildStudentInformation(data, ref, colorScheme, l10n),
+                1 => _buildToeicScore(data, colorScheme, l10n),
+                2 => TaggedWidget(tag: l10n.grades),
                 _ => LectureGradeCard(grade: data.subjectGrades[index - 3]),
               };
             },
           );
         },
+        l10n,
       ),
     );
   }

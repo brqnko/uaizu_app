@@ -18,8 +18,8 @@ void main() {
     );
 
     test('fetch library calender', () async {
-      final calender = await LibraryCalendarDataSource(libraryClient)
-          .fetchCalendar(
+      final calender =
+          await LibraryCalendarDataSource(libraryClient).fetchCalendar(
         LibraryCalenderQuery(
           time: DateTime.now(),
           isFourYear: true,
@@ -36,8 +36,7 @@ void main() {
     });
 
     test('fetch book search result', () async {
-      final result = await BookDataSource(libraryClient)
-          .fetchBookSearchResult(
+      final result = await BookDataSource(libraryClient).fetchBookSearchResult(
         const BookSearchQuery(
           query: 'Rust',
           mode: BookSearchMode.normal,
@@ -62,7 +61,6 @@ void main() {
     });
 
     test('fetch book detail', () async {
-
       final detail = await BookDataSource(libraryClient).fetchBookDetail(
         '/opac/volume/403829?current=1&q=Rust&total=124&trans_url=%2Fopac%2Fsearch%3Fbase_url%3Dhttps%253A%252F%252Flibopsv.u-aizu.ac.jp%26count%3D20%26defaultpage%3D1%26defaulttarget%3Dlocal%26order%3Drecommended_d%26q%3DRust%26searchmode%3Dnormal',
       );

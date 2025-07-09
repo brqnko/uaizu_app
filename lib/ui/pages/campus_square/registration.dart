@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/registration.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/dialogs/select_year_dialog.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/app_bar.dart';
@@ -16,6 +17,7 @@ class RegistrationPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final year = useState(DateTime.now().year);
     final semester = useState(false);
@@ -42,7 +44,7 @@ class RegistrationPage extends HookConsumerWidget {
       context,
       [
         ElevatedButton(
-          onPressed: () => showDialog(
+          onPressed: () => showDialog<void>(
             context: context,
             builder: (BuildContext context) => SelectYearDialog(year: year),
           ),
@@ -54,7 +56,7 @@ class RegistrationPage extends HookConsumerWidget {
         ElevatedButton(
           onPressed: () => semester.value = !semester.value,
           child: Text(
-            semester.value ? '前期' : '後期',
+            semester.value ? l10n.firstSemester : l10n.secondSemester,
             style: Fonts.bodyS.copyWith(color: colorScheme.onSurfaceVariant),
           ),
         ),
@@ -104,7 +106,7 @@ class RegistrationPage extends HookConsumerWidget {
             );
           },
         );
-      }),
+      }, l10n),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 
 class SearchButton extends StatelessWidget {
@@ -9,6 +10,7 @@ class SearchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return ElevatedButton(
       onPressed: onPressed,
@@ -23,7 +25,7 @@ class SearchButton extends StatelessWidget {
               ),
             ),
             TextSpan(
-              text: '検索',
+              text: l10n.searchButton,
               style: Fonts.bodyS.copyWith(color: colorScheme.onSurfaceVariant),
             ),
           ],

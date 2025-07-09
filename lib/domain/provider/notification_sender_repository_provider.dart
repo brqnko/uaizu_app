@@ -9,5 +9,6 @@ final _notificationSenderProvider = Provider((ref) {
 
 final notificationSenderProvider = Provider((ref) {
   return NotificationSenderRepositoryImpl(
-      ref.watch(_notificationSenderProvider),);
+    ref.watch(_notificationSenderProvider),
+  );
 });

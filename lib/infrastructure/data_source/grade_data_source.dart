@@ -23,7 +23,7 @@ class GradeDataSource {
       parse(flowExecutionKeyRes.body),
     );
     if (flowExecutionKey == null) {
-      throw Exception('failed to fetch flowExecutionKey');
+      return Future.error('failed to fetch flowExecutionKey');
     }
 
     final res = await _client.get(
@@ -40,7 +40,7 @@ class GradeDataSource {
       square: true,
     );
     if (res.statusCode != 200) {
-      throw Exception('status code != 200');
+      return Future.error('status code != 200');
     }
 
     return parseGradeFromBody(res.body);

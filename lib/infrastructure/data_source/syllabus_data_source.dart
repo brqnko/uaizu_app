@@ -22,7 +22,7 @@ class SyllabusDataSource {
       parse(flowExecutionKeyRes.body),
     );
     if (flowExecutionKey == null) {
-      throw Exception('Failed to parse execution key');
+      return Future.error('Failed to parse execution key');
     }
 
     final res = await _client.get(
@@ -46,7 +46,7 @@ class SyllabusDataSource {
     );
 
     if (res.statusCode != 200) {
-      throw Exception('fetch registration: status code != 200');
+      return Future.error('fetch registration: status code != 200');
     }
 
     return parseRegistrationFromBody(res.body);
