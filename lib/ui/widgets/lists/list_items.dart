@@ -119,7 +119,7 @@ class BookListItem extends StatelessWidget {
         width: 40,
         height: 56,
         decoration: BoxDecoration(
-          color: colorScheme.surfaceVariant,
+          color: colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(4),
         ),
         child: Icon(
@@ -185,7 +185,7 @@ class NotificationListItem extends StatelessWidget {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: isRead ? colorScheme.surfaceVariant : colorScheme.primary,
+          color: isRead ? colorScheme.surfaceContainerHighest : colorScheme.primary,
           shape: BoxShape.circle,
         ),
         child: Icon(

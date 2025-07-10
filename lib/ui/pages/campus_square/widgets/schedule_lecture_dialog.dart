@@ -90,7 +90,7 @@ class ScheduleLectureBottomSheet extends ConsumerWidget {
                             note.startTime.subtract(const Duration(minutes: 5)),
                       );
                     },
-                    child: Text(l10n.reminder))
+                    child: Text(l10n.reminder),),
               ],
             ),
           ),

@@ -106,7 +106,7 @@ class RegistrationPage extends HookConsumerWidget {
             );
           },
         );
-      }, l10n),
+      }, l10n,),
     );
   }
 }
