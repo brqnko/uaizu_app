@@ -20,7 +20,7 @@ class LmsDetail extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     final taskFuture = useMemoized(
       () {
         return ref.watch(getLmsTaskDayUseCaseProvider).call(
