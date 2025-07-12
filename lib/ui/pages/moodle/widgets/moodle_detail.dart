@@ -63,10 +63,9 @@ class LmsDetail extends HookConsumerWidget {
                       ),
                     ],
                   ),
-                  onTap: () => showDialog<void>(
+                  onTap: () => showModalBottomSheet<void>(
                     context: context,
-                    builder: (BuildContext context) =>
-                        MoodleTaskDialog(note: note),
+                    builder: (context) => MoodleTaskBottomSheet(note: note),
                   ),
                 );
               }).toList(),

@@ -284,4 +284,135 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noDataAvailable => 'No data available';
+
+  @override
+  String get addNotification => 'Add Notification';
+
+  @override
+  String get notificationTitle => 'Notification Title';
+
+  @override
+  String get notificationBody => 'Notification Body';
+
+  @override
+  String get notificationTime => 'Notification Time';
+
+  @override
+  String get upcoming => 'Upcoming';
+
+  @override
+  String get confirmed => 'Confirmed';
+
+  @override
+  String get notificationDetails => 'Notification Details';
+
+  @override
+  String get deleteNotification => 'Delete Notification';
+
+  @override
+  String get selectTime => 'Select Time';
+
+  @override
+  String get selectDate => 'Select Date';
+
+  @override
+  String get confirmDelete => 'Confirm Delete';
+
+  @override
+  String get deleteNotificationMessage =>
+      'Do you want to delete this notification?';
+
+  @override
+  String get emptyNotifications => 'No notifications';
+
+  @override
+  String get titleRequired => 'Title is required';
+
+  @override
+  String get bodyRequired => 'Body is required';
+
+  @override
+  String get addNotificationToSchedule => 'Add Notification';
+
+  @override
+  String get notificationAdded => 'Notification added';
+
+  @override
+  String errorOccurredWithDetails(String error) {
+    return 'An error occurred: $error';
+  }
+
+  @override
+  String classWillStart(String timeSlot, String location) {
+    return 'Class will start ($timeSlot - $location)';
+  }
+
+  @override
+  String taskDeadlineApproaching(String deadline) {
+    return 'Task deadline is approaching (Due: $deadline)';
+  }
+
+  @override
+  String taskDeadline(String deadline) {
+    return 'Task Deadline: $deadline';
+  }
+
+  @override
+  String get activityLink => 'Activity Link';
+
+  @override
+  String get taskLink => 'Task Link';
+
+  @override
+  String get addNotificationTitle => 'Add Notification';
+
+  @override
+  String get title => 'Title';
+
+  @override
+  String get content => 'Content';
+
+  @override
+  String get titlePlaceholder => 'Enter notification title';
+
+  @override
+  String get contentPlaceholder => 'Enter notification content';
+
+  @override
+  String get scheduleNotificationTime => 'Scheduled Time';
+
+  @override
+  String get titleLabel => 'Title';
+
+  @override
+  String get contentLabel => 'Content';
+
+  @override
+  String get notificationTimeLabel => 'Notification Time';
+
+  @override
+  String get scheduled => 'Scheduled';
+
+  @override
+  String get confirmedNotifications => 'Confirmed';
+
+  @override
+  String get noScheduledNotifications => 'No scheduled notifications';
+
+  @override
+  String get noConfirmedNotifications => 'No confirmed notifications';
+
+  @override
+  String get viewDetails => 'View Details';
+
+  @override
+  String get markAsConfirmed => 'Mark as Confirmed';
+
+  @override
+  String get markAsUnconfirmed => 'Mark as Unconfirmed';
+
+  @override
+  String errorOccurred2(String error) {
+    return 'An error occurred: $error';
+  }
 }

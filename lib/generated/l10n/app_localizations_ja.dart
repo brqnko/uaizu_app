@@ -284,4 +284,134 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get noDataAvailable => 'データがありません';
+
+  @override
+  String get addNotification => '通知を追加';
+
+  @override
+  String get notificationTitle => '通知タイトル';
+
+  @override
+  String get notificationBody => '通知内容';
+
+  @override
+  String get notificationTime => '通知時間';
+
+  @override
+  String get upcoming => '予定';
+
+  @override
+  String get confirmed => '確認済み';
+
+  @override
+  String get notificationDetails => '通知詳細';
+
+  @override
+  String get deleteNotification => '通知を削除';
+
+  @override
+  String get selectTime => '時間を選択';
+
+  @override
+  String get selectDate => '日付を選択';
+
+  @override
+  String get confirmDelete => '削除確認';
+
+  @override
+  String get deleteNotificationMessage => 'この通知を削除しますか？';
+
+  @override
+  String get emptyNotifications => '通知はありません';
+
+  @override
+  String get titleRequired => 'タイトルは必須です';
+
+  @override
+  String get bodyRequired => '内容は必須です';
+
+  @override
+  String get addNotificationToSchedule => '通知を追加';
+
+  @override
+  String get notificationAdded => '通知が追加されました';
+
+  @override
+  String errorOccurredWithDetails(String error) {
+    return 'エラーが発生しました: $error';
+  }
+
+  @override
+  String classWillStart(String timeSlot, String location) {
+    return '授業が始まります ($timeSlot - $location)';
+  }
+
+  @override
+  String taskDeadlineApproaching(String deadline) {
+    return 'タスクの期限が近づいています (期限: $deadline)';
+  }
+
+  @override
+  String taskDeadline(String deadline) {
+    return 'タスク期限: $deadline';
+  }
+
+  @override
+  String get activityLink => 'アクティビティリンク';
+
+  @override
+  String get taskLink => 'タスクリンク';
+
+  @override
+  String get addNotificationTitle => '通知を追加';
+
+  @override
+  String get title => 'タイトル';
+
+  @override
+  String get content => '内容';
+
+  @override
+  String get titlePlaceholder => '通知のタイトルを入力';
+
+  @override
+  String get contentPlaceholder => '通知の内容を入力';
+
+  @override
+  String get scheduleNotificationTime => '通知時間';
+
+  @override
+  String get titleLabel => 'タイトル';
+
+  @override
+  String get contentLabel => '内容';
+
+  @override
+  String get notificationTimeLabel => '通知時間';
+
+  @override
+  String get scheduled => '予定';
+
+  @override
+  String get confirmedNotifications => '確認済み';
+
+  @override
+  String get noScheduledNotifications => '予定の通知はありません';
+
+  @override
+  String get noConfirmedNotifications => '確認済みの通知はありません';
+
+  @override
+  String get viewDetails => '詳細を見る';
+
+  @override
+  String get markAsConfirmed => '確認済みにする';
+
+  @override
+  String get markAsUnconfirmed => '未確認に戻す';
+
+  @override
+  String errorOccurred2(String error) {
+    return 'エラーが発生しました: $error';
+  }
 }

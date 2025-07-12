@@ -28,7 +28,9 @@ class NotificationManagerNotifier extends Notifier<NotificationManager> {
     );
   }
 
-  void remove(Notification notification) {
+  Future<void> remove(Notification notification) async {
+    await ref.read(notificationSenderProvider).cancelNotification(notification);
+
     state = state.copyWith(
       upcomingNotifications: {...state.upcomingNotifications}
         ..remove(notification),

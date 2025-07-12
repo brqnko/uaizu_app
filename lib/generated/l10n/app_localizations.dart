@@ -649,6 +649,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No data available'**
   String get noDataAvailable;
+
+  /// Add notification button label
+  ///
+  /// In en, this message translates to:
+  /// **'Add Notification'**
+  String get addNotification;
+
+  /// Notification title field label
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Title'**
+  String get notificationTitle;
+
+  /// Notification body field label
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Body'**
+  String get notificationBody;
+
+  /// Notification time field label
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Time'**
+  String get notificationTime;
+
+  /// Upcoming notifications section
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get upcoming;
+
+  /// Confirmed notifications section
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get confirmed;
+
+  /// Notification details page title
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Details'**
+  String get notificationDetails;
+
+  /// Delete notification button label
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Notification'**
+  String get deleteNotification;
+
+  /// Select time button label
+  ///
+  /// In en, this message translates to:
+  /// **'Select Time'**
+  String get selectTime;
+
+  /// Select date button label
+  ///
+  /// In en, this message translates to:
+  /// **'Select Date'**
+  String get selectDate;
+
+  /// Confirm delete dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Delete'**
+  String get confirmDelete;
+
+  /// Delete notification confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to delete this notification?'**
+  String get deleteNotificationMessage;
+
+  /// Message when no notifications exist
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications'**
+  String get emptyNotifications;
+
+  /// Title required validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Title is required'**
+  String get titleRequired;
+
+  /// Body required validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Body is required'**
+  String get bodyRequired;
+
+  /// Add notification button for schedule
+  ///
+  /// In en, this message translates to:
+  /// **'Add Notification'**
+  String get addNotificationToSchedule;
+
+  /// Success message when notification is added
+  ///
+  /// In en, this message translates to:
+  /// **'Notification added'**
+  String get notificationAdded;
+
+  /// Error message with details
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred: {error}'**
+  String errorOccurredWithDetails(String error);
+
+  /// Notification body for class reminder
+  ///
+  /// In en, this message translates to:
+  /// **'Class will start ({timeSlot} - {location})'**
+  String classWillStart(String timeSlot, String location);
+
+  /// Notification body for task deadline reminder
+  ///
+  /// In en, this message translates to:
+  /// **'Task deadline is approaching (Due: {deadline})'**
+  String taskDeadlineApproaching(String deadline);
+
+  /// Task deadline display
+  ///
+  /// In en, this message translates to:
+  /// **'Task Deadline: {deadline}'**
+  String taskDeadline(String deadline);
+
+  /// Activity link label
+  ///
+  /// In en, this message translates to:
+  /// **'Activity Link'**
+  String get activityLink;
+
+  /// Task link label
+  ///
+  /// In en, this message translates to:
+  /// **'Task Link'**
+  String get taskLink;
+
+  /// Title for add notification page
+  ///
+  /// In en, this message translates to:
+  /// **'Add Notification'**
+  String get addNotificationTitle;
+
+  /// Title field label
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get title;
+
+  /// Content field label
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get content;
+
+  /// Placeholder for title input field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter notification title'**
+  String get titlePlaceholder;
+
+  /// Placeholder for content input field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter notification content'**
+  String get contentPlaceholder;
+
+  /// Label for scheduled notification time
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled Time'**
+  String get scheduleNotificationTime;
+
+  /// Title section label
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get titleLabel;
+
+  /// Content section label
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get contentLabel;
+
+  /// Notification time section label
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Time'**
+  String get notificationTimeLabel;
+
+  /// Scheduled notifications tab
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled'**
+  String get scheduled;
+
+  /// Confirmed notifications tab
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get confirmedNotifications;
+
+  /// Empty message for scheduled notifications
+  ///
+  /// In en, this message translates to:
+  /// **'No scheduled notifications'**
+  String get noScheduledNotifications;
+
+  /// Empty message for confirmed notifications
+  ///
+  /// In en, this message translates to:
+  /// **'No confirmed notifications'**
+  String get noConfirmedNotifications;
+
+  /// View details menu option
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get viewDetails;
+
+  /// Mark as confirmed menu option
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as Confirmed'**
+  String get markAsConfirmed;
+
+  /// Mark as unconfirmed menu option
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as Unconfirmed'**
+  String get markAsUnconfirmed;
+
+  /// Error message with error details
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred: {error}'**
+  String errorOccurred2(String error);
 }
 
 class _AppLocalizationsDelegate

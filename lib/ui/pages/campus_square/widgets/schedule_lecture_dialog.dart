@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:uaizu_app/domain/entity/campus_square_calendar.dart';
+import 'package:uaizu_app/domain/entity/notification.dart' as app_notification;
 import 'package:uaizu_app/generated/l10n/app_localizations.dart';
+import 'package:uaizu_app/state/notifications.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
 
@@ -77,25 +79,66 @@ class ScheduleLectureBottomSheet extends ConsumerWidget {
             ),
           ),
           Container(
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                    onPressed: () async {
-                      await showBoardDateTimePicker(
-                        context: context,
-                        pickerType: DateTimePickerType.time,
-                        maximumDate: note.startTime,
-                        initialDate:
-                            note.startTime.subtract(const Duration(minutes: 5)),
-                      );
-                    },
-                    child: Text(l10n.reminder),),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: () => _addNotificationForLecture(context, ref),
+                    icon: const Icon(Icons.notification_add),
+                    label: Text(l10n.addNotificationToSchedule),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: colorScheme.primary,
+                      foregroundColor: colorScheme.onPrimary,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _addNotificationForLecture(
+      BuildContext context, WidgetRef ref,) async {
+    final l10n = AppLocalizations.of(context)!;
+    final reminderTime = await showBoardDateTimePicker(
+      context: context,
+      pickerType: DateTimePickerType.datetime,
+      initialDate: note.startTime.subtract(const Duration(minutes: 15)),
+      maximumDate: note.startTime,
+      minimumDate: DateTime.now(),
+    );
+
+    if (reminderTime != null && context.mounted) {
+      final notification = app_notification.Notification(
+        title: 'Campus Square: ${note.courseName}',
+        body: l10n.classWillStart(note.timeSlot, note.location),
+        payload: 'campus_square_lecture',
+        scheduledDate: reminderTime,
+        sourceHash: note.hashCode,
+      );
+
+      try {
+        await ref.read(notificationManagerProvider.notifier).add(notification);
+        if (context.mounted) {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(l10n.notificationAdded)),
+          );
+        }
+      } on Exception catch (e) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(l10n.errorOccurredWithDetails(e.toString())),),
+          );
+        }
+      }
+    }
   }
 }

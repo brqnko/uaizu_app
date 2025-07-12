@@ -18,8 +18,6 @@ import 'package:uaizu_app/use_case/usecase.dart';
 
 part 'campus_square_usecase.freezed.dart';
 
-// TODOcache
-// if (param.useCache && _repository.hasCache(time)) return ~~;
 final getCampusSquareCalenderDayUseCacseProvider = Provider((ref) {
   return GetCampusSquareCalenderDayUseCase(
     ref.watch(calendarRepositoryProvider),
