@@ -65,7 +65,7 @@ class AppearancePage extends ConsumerWidget {
           title: Text(l10n.theme),
           subtitle: Text(
             _getThemeDisplayName(
-                ref.watch(settingsProvider.select((s) => s.appTheme)), l10n),
+                ref.watch(settingsProvider.select((s) => s.appTheme)), l10n,),
           ),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () {

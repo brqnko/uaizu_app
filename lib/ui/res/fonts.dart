@@ -16,6 +16,11 @@ class Fonts {
     fontWeight: FontWeight.w600,
   );
 
+  static const bodyL = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
+
   static const bodyM = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w400,
@@ -29,5 +34,15 @@ class Fonts {
   static const bodyT = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
+  );
+
+  static const labelM = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const labelS = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
   );
 }

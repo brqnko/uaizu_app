@@ -20,7 +20,7 @@ class LmsDetail extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     final taskFuture = useMemoized(
       () {
         return ref.watch(getLmsTaskDayUseCaseProvider).call(
@@ -63,10 +63,9 @@ class LmsDetail extends HookConsumerWidget {
                       ),
                     ],
                   ),
-                  onTap: () => showDialog<void>(
+                  onTap: () => showModalBottomSheet<void>(
                     context: context,
-                    builder: (BuildContext context) =>
-                        MoodleTaskDialog(note: note),
+                    builder: (context) => MoodleTaskBottomSheet(note: note),
                   ),
                 );
               }).toList(),

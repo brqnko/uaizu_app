@@ -253,7 +253,7 @@ class SyllabusPage extends HookConsumerWidget {
             );
           },
         );
-      }, l10n),
+      }, l10n,),
     );
   }
 }

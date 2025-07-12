@@ -63,7 +63,7 @@ class GradeAndExamPage extends HookConsumerWidget {
   }
 
   Widget _buildToeicScore(
-      Grade grade, ColorScheme colorScheme, AppLocalizations l10n) {
+      Grade grade, ColorScheme colorScheme, AppLocalizations l10n,) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -138,7 +138,7 @@ class GradeAndExamPage extends HookConsumerWidget {
               l10n.quarter1,
               l10n.quarter2,
               l10n.quarter3,
-              l10n.quarter4
+              l10n.quarter4,
             ],
           ),
         ),

@@ -11,13 +11,13 @@ Widget futureBody<T>(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CircularProgressIndicator(
+          const CircularProgressIndicator(
             color: Colors.blue,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             l10n.loading,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       ),
@@ -31,20 +31,20 @@ Widget futureBody<T>(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
+            const Icon(
               Icons.error_outline,
               size: 48,
               color: Colors.red,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               l10n.somethingWentWrong,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               '${snapshot.error}',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
           ],
@@ -61,15 +61,15 @@ Widget futureBody<T>(
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(
+        const Icon(
           Icons.inbox,
           size: 48,
           color: Colors.grey,
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
           l10n.noDataAvailable,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
       ],
     ),

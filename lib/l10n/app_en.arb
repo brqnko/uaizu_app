@@ -371,5 +371,193 @@
   "noDataAvailable": "No data available",
   "@noDataAvailable": {
     "description": "Message when no data is found"
+  },
+  "addNotification": "Add Notification",
+  "@addNotification": {
+    "description": "Add notification button label"
+  },
+  "notificationTitle": "Notification Title",
+  "@notificationTitle": {
+    "description": "Notification title field label"
+  },
+  "notificationBody": "Notification Body",
+  "@notificationBody": {
+    "description": "Notification body field label"
+  },
+  "notificationTime": "Notification Time",
+  "@notificationTime": {
+    "description": "Notification time field label"
+  },
+  "upcoming": "Upcoming",
+  "@upcoming": {
+    "description": "Upcoming notifications section"
+  },
+  "confirmed": "Confirmed",
+  "@confirmed": {
+    "description": "Confirmed notifications section"
+  },
+  "notificationDetails": "Notification Details",
+  "@notificationDetails": {
+    "description": "Notification details page title"
+  },
+  "deleteNotification": "Delete Notification",
+  "@deleteNotification": {
+    "description": "Delete notification button label"
+  },
+  "selectTime": "Select Time",
+  "@selectTime": {
+    "description": "Select time button label"
+  },
+  "selectDate": "Select Date",
+  "@selectDate": {
+    "description": "Select date button label"
+  },
+  "confirmDelete": "Confirm Delete",
+  "@confirmDelete": {
+    "description": "Confirm delete dialog title"
+  },
+  "deleteNotificationMessage": "Do you want to delete this notification?",
+  "@deleteNotificationMessage": {
+    "description": "Delete notification confirmation message"
+  },
+  "emptyNotifications": "No notifications",
+  "@emptyNotifications": {
+    "description": "Message when no notifications exist"
+  },
+  "titleRequired": "Title is required",
+  "@titleRequired": {
+    "description": "Title required validation message"
+  },
+  "bodyRequired": "Body is required",
+  "@bodyRequired": {
+    "description": "Body required validation message"
+  },
+  "addNotificationToSchedule": "Add Notification",
+  "@addNotificationToSchedule": {
+    "description": "Add notification button for schedule"
+  },
+  "notificationAdded": "Notification added",
+  "@notificationAdded": {
+    "description": "Success message when notification is added"
+  },
+  "errorOccurredWithDetails": "An error occurred: {error}",
+  "@errorOccurredWithDetails": {
+    "description": "Error message with details",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "classWillStart": "Class will start ({timeSlot} - {location})",
+  "@classWillStart": {
+    "description": "Notification body for class reminder",
+    "placeholders": {
+      "timeSlot": {
+        "type": "String"
+      },
+      "location": {
+        "type": "String"
+      }
+    }
+  },
+  "taskDeadlineApproaching": "Task deadline is approaching (Due: {deadline})",
+  "@taskDeadlineApproaching": {
+    "description": "Notification body for task deadline reminder",
+    "placeholders": {
+      "deadline": {
+        "type": "String"
+      }
+    }
+  },
+  "taskDeadline": "Task Deadline: {deadline}",
+  "@taskDeadline": {
+    "description": "Task deadline display",
+    "placeholders": {
+      "deadline": {
+        "type": "String"
+      }
+    }
+  },
+  "activityLink": "Activity Link",
+  "@activityLink": {
+    "description": "Activity link label"
+  },
+  "taskLink": "Task Link",
+  "@taskLink": {
+    "description": "Task link label"
+  },
+  "addNotificationTitle": "Add Notification",
+  "@addNotificationTitle": {
+    "description": "Title for add notification page"
+  },
+  "title": "Title",
+  "@title": {
+    "description": "Title field label"
+  },
+  "content": "Content",
+  "@content": {
+    "description": "Content field label"
+  },
+  "titlePlaceholder": "Enter notification title",
+  "@titlePlaceholder": {
+    "description": "Placeholder for title input field"
+  },
+  "contentPlaceholder": "Enter notification content",
+  "@contentPlaceholder": {
+    "description": "Placeholder for content input field"
+  },
+  "scheduleNotificationTime": "Scheduled Time",
+  "@scheduleNotificationTime": {
+    "description": "Label for scheduled notification time"
+  },
+  "titleLabel": "Title",
+  "@titleLabel": {
+    "description": "Title section label"
+  },
+  "contentLabel": "Content",
+  "@contentLabel": {
+    "description": "Content section label"
+  },
+  "notificationTimeLabel": "Notification Time",
+  "@notificationTimeLabel": {
+    "description": "Notification time section label"
+  },
+  "scheduled": "Scheduled",
+  "@scheduled": {
+    "description": "Scheduled notifications tab"
+  },
+  "confirmedNotifications": "Confirmed",
+  "@confirmedNotifications": {
+    "description": "Confirmed notifications tab"
+  },
+  "noScheduledNotifications": "No scheduled notifications",
+  "@noScheduledNotifications": {
+    "description": "Empty message for scheduled notifications"
+  },
+  "noConfirmedNotifications": "No confirmed notifications",
+  "@noConfirmedNotifications": {
+    "description": "Empty message for confirmed notifications"
+  },
+  "viewDetails": "View Details",
+  "@viewDetails": {
+    "description": "View details menu option"
+  },
+  "markAsConfirmed": "Mark as Confirmed",
+  "@markAsConfirmed": {
+    "description": "Mark as confirmed menu option"
+  },
+  "markAsUnconfirmed": "Mark as Unconfirmed",
+  "@markAsUnconfirmed": {
+    "description": "Mark as unconfirmed menu option"
+  },
+  "errorOccurred2": "An error occurred: {error}",
+  "@errorOccurred2": {
+    "description": "Error message with error details",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   }
 }

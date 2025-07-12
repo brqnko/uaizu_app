@@ -10,8 +10,9 @@ class NotificationSender {
   final Map<Notification, int> _notificationIdMap;
 
   Future<void> send(Notification notification) async {
+    final notificationId = _calculateNotificationId(notification);
     await _plugin.zonedSchedule(
-      _calculateNotificationId(notification),
+      notificationId,
       notification.title,
       notification.body,
       TZDateTime.from(notification.scheduledDate, local),
@@ -24,6 +25,7 @@ class NotificationSender {
         iOS: DarwinNotificationDetails(),
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      payload: notification.payload,
     );
   }
 
