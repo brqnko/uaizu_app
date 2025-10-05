@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,17 +16,7 @@ Future<void> main() async {
   initializeTimeZones();
 
   final plugin = FlutterLocalNotificationsPlugin();
-  await plugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.requestNotificationsPermission();
-  await plugin.initialize(
-    const InitializationSettings(
-      android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-      iOS: DarwinInitializationSettings(),
-    ),
-    onDidReceiveNotificationResponse: _onDidReceiveNotificationResponse,
-  );
+  await _initializeNotifications(plugin);
 
   final appSettings =
       await SettingsDatabase(const FlutterSecureStorage()).loadSettings();
@@ -38,6 +29,61 @@ Future<void> main() async {
       child: const App(),
     ),
   );
+}
+
+Future<void> _initializeNotifications(
+  FlutterLocalNotificationsPlugin plugin,
+) async {
+  if (kIsWeb) {
+    return;
+  }
+
+  const initializationSettings = InitializationSettings(
+    android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+    iOS: DarwinInitializationSettings(),
+    macOS: DarwinInitializationSettings(),
+    linux: LinuxInitializationSettings(
+      defaultActionName: 'Open notification',
+    ),
+  );
+
+  await plugin.initialize(
+    initializationSettings,
+    onDidReceiveNotificationResponse: _onDidReceiveNotificationResponse,
+  );
+
+  switch (defaultTargetPlatform) {
+    case TargetPlatform.android:
+      await plugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.requestNotificationsPermission();
+      break;
+    case TargetPlatform.iOS:
+      await plugin
+          .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
+      break;
+    case TargetPlatform.macOS:
+      await plugin
+          .resolvePlatformSpecificImplementation<
+              MacOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
+      break;
+    case TargetPlatform.linux:
+    case TargetPlatform.windows:
+    case TargetPlatform.fuchsia:
+      break;
+  }
 }
 
 void _onDidReceiveNotificationResponse(NotificationResponse details) {
@@ -66,7 +112,10 @@ void _onDidReceiveNotificationResponse(NotificationResponse details) {
           }
           break;
       }
-    } on Exception {
+    } on Exception catch (error, stackTrace) {
+      debugPrint(
+        'Failed to handle notification payload: $error\n$stackTrace',
+      );
     }
   }
 }
