@@ -1,13 +1,15 @@
 # uaizu_app
 
-## Desktop support
+会津大学の学生を対象とした、Flutter製アプリです。
 
-This project now ships with Flutter desktop scaffolding for Linux, macOS, and Windows.
+CampusSquare, Moodle, 図書館にアクセスできます。
 
-To run the app on desktop, ensure the desired platform is enabled in your Flutter installation and then run, for example:
+## Images
 
-```bash
-flutter run -d linux
-```
+### Desktop
 
-Replace `linux` with `windows` or `macos` depending on your environment.
+![Desktop](images/desktop.png)
+
+### Mobile
+
+![Mobile](images/mobile.png)
