@@ -18,6 +18,7 @@ class SettingsNotifier extends Notifier<AppSettings> {
     bool? hideStudentId,
     AppTheme? appTheme,
     AppLocale? appLocale,
+    String? geminiApiKey,
   }) {
     state = AppSettings(
       accountInfo: AccountInfo(
@@ -27,6 +28,7 @@ class SettingsNotifier extends Notifier<AppSettings> {
       hideStudentId: hideStudentId ?? state.hideStudentId,
       appTheme: appTheme ?? state.appTheme,
       appLocale: appLocale ?? state.appLocale,
+      geminiApiKey: geminiApiKey ?? state.geminiApiKey,
     );
 
     ref.watch(settingsRepositoryProvider).saveSettings(state);

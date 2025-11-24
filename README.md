@@ -8,8 +8,14 @@ CampusSquare, Moodle, 図書館にアクセスできます。
 
 ### Desktop
 
-![Desktop](images/desktop.png)
+<img src="images/desktop.png" alt="Desktop" width="600">
 
 ### Mobile
 
-![Mobile](images/mobile.png)
+<img src="images/mobile.png" alt="Mobile" width="300">
+
+## Features
+
+### Notifications
+
+### Podcasts

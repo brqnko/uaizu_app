@@ -7,10 +7,15 @@ AppBar brandAppBar(
   Widget? child,
   double? height,
   Color? color,
+  List<Widget>? actions,
 }) {
   final colorScheme = Theme.of(context).colorScheme;
 
   return AppBar(
+    actions: [
+      ...?actions,
+      const SizedBox(width: 16),
+    ],
     toolbarHeight: height ?? 75,
     backgroundColor: color ?? colorScheme.primary,
     iconTheme: IconThemeData(color: colorScheme.onPrimary),

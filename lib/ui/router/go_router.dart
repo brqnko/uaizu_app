@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uaizu_app/ui/pages/campus_square/campus_square.dart';
 import 'package:uaizu_app/ui/pages/campus_square/grade_and_exam.dart';
+import 'package:uaizu_app/ui/pages/campus_square/podcast.dart';
 import 'package:uaizu_app/ui/pages/campus_square/registration.dart';
 import 'package:uaizu_app/ui/pages/campus_square/schedule.dart';
 import 'package:uaizu_app/ui/pages/campus_square/syllabus.dart';
@@ -36,6 +37,8 @@ final squareRegistrationNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'squareRegistration');
 final squareSyllabusNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'squareSyllabus');
+final squarePodcastNavigatorKey =
+  GlobalKey<NavigatorState>(debugLabel: 'squarePodcast');
 
 final goRouterProvider = Provider((ref) {
   final appRouter = GoRouter(
@@ -110,6 +113,20 @@ final goRouterProvider = Provider((ref) {
                           return NoTransitionPage(
                             key: state.pageKey,
                             child: const SyllabusPage(),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  StatefulShellBranch(
+                    navigatorKey: squarePodcastNavigatorKey,
+                    routes: [
+                      GoRoute(
+                        path: '/square/podcast',
+                        pageBuilder: (context, state) {
+                          return NoTransitionPage(
+                            key: state.pageKey,
+                            child: const PodcastPage(),
                           );
                         },
                       ),

@@ -53,6 +53,10 @@ class CampusSquareDrawer extends ConsumerWidget {
             title: l10n.syllabus,
             onTap: () => _navigateToIndex(context, 3),
           ),
+          _DrawerNavItem(
+            title: l10n.syllabus,
+            onTap: () => _navigateToIndex(context, 4),
+          ),
         ],
       ),
     );

@@ -51,6 +51,7 @@ dependencies:
   flutter_datetime_picker_plus: ^2.2.0
   shared_preferences: ^2.3.3
   board_datetime_picker: ^2.7.0
+  audioplayers: ^6.5.1
 
 
 dev_dependencies:

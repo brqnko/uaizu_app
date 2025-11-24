@@ -12,6 +12,7 @@ class SettingsDatabase {
     final hideStudentId = await _storage.read(key: 'hideStudentId');
     final appTheme = await _storage.read(key: 'appTheme');
     final appLocale = await _storage.read(key: 'appLocale');
+    final geminiApiKey = await _storage.read(key: 'geminiApiKey');
 
     return AppSettings(
       accountInfo: AccountInfo(
@@ -27,6 +28,7 @@ class SettingsDatabase {
         (e) => e.toString() == appLocale,
         orElse: () => AppLocale.en,
       ),
+      geminiApiKey: geminiApiKey,
     );
   }
 
@@ -45,5 +47,8 @@ class SettingsDatabase {
       key: 'appLocale',
       value: settings.appLocale.toString(),
     );
+    if (settings.geminiApiKey != null) {
+      await _storage.write(key: 'geminiApiKey', value: settings.geminiApiKey);
+    }
   }
 }

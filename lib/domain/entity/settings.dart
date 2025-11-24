@@ -35,5 +35,6 @@ class AppSettings with _$AppSettings {
     required bool hideStudentId,
     required AppTheme appTheme,
     required AppLocale appLocale,
+    String? geminiApiKey,
   }) = _AppSettings;
 }
