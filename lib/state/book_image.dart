@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
-import 'package:uaizu_app/use_case/library_usecase.dart';
+import 'package:uaizu_app/domain/provider/book_repository_provider.dart';
 
 final bookImageProvider =
     AsyncNotifierProvider<BookImageNotifier, Map<Book, String?>>(() {
@@ -21,11 +21,8 @@ class BookImageNotifier extends AsyncNotifier<Map<Book, String?>> {
     }
 
     await update((prev) async {
-      final imageUrl = await ref.watch(getBookImageUseCaseProvider).call(
-            GetBookImageUseCaseParam(
-              book: book,
-            ),
-          );
+      final imageUrl =
+          await ref.watch(bookRepositoryProvider).fetchBookImageUrl(book);
 
       state.requireValue[book] = imageUrl;
       return state.requireValue;

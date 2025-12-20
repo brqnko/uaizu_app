@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/registration.dart';
+import 'package:uaizu_app/domain/provider/registration_repository_provider.dart';
 import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/dialogs/select_year_dialog.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
@@ -9,7 +10,6 @@ import 'package:uaizu_app/ui/widgets/app_bar.dart';
 import 'package:uaizu_app/ui/widgets/future_body.dart';
 import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
 import 'package:uaizu_app/ui/widgets/search_button.dart';
-import 'package:uaizu_app/use_case/campus_square_usecase.dart';
 
 class RegistrationPage extends HookConsumerWidget {
   const RegistrationPage({super.key});
@@ -25,13 +25,10 @@ class RegistrationPage extends HookConsumerWidget {
 
     final registrationsFuture = useMemoized(
       () {
-        return ref.read(getRegistrationUseCaseProvider).call(
-              GetRegistrationUseCaseParam(
-                query: SearchRegistrationQuery(
-                  year: year.value,
-                  semester: semester.value,
-                ),
-                useCache: false,
+        return ref.read(registrationRepositoryProvider).fetchRegistration(
+              SearchRegistrationQuery(
+                year: year.value,
+                semester: semester.value,
               ),
             );
       },

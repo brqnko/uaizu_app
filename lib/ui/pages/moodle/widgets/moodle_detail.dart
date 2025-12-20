@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:uaizu_app/domain/provider/calendar_repository_provider.dart';
 import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/pages/moodle/widgets/moodle_task_dialog.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/future_body.dart';
 import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
 import 'package:uaizu_app/ui/widgets/tagged_widget.dart';
-import 'package:uaizu_app/use_case/lms_usecase.dart';
 
 final _dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
@@ -23,10 +23,8 @@ class LmsDetail extends HookConsumerWidget {
 
     final taskFuture = useMemoized(
       () {
-        return ref.watch(getLmsTaskDayUseCaseProvider).call(
-              LmsTaskDayUseCaseParam(
-                date: focusedDay.value,
-              ),
+        return ref.watch(calendarRepositoryProvider).fetchLmsTaskDay(
+              focusedDay.value,
             );
       },
       [focusedDay.value],

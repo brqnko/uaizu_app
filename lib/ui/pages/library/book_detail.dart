@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
+import 'package:uaizu_app/domain/provider/book_repository_provider.dart';
 import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/state/book_image.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
-import 'package:uaizu_app/use_case/library_usecase.dart';
 
 Widget _buildBookImage(Book book, WidgetRef ref) {
   ref.read(bookImageProvider.notifier).updateRequest(book);
@@ -172,9 +172,7 @@ class BookDetailPage extends HookConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
 
     final bookDetailFuture = useMemoized(() {
-      return ref.watch(getBookDetailUseCaseProvider).call(
-            GetBookDetailUseCaseParam(bookPath: path),
-          );
+      return ref.watch(bookRepositoryProvider).fetchBookDetail(path);
     });
     final bookDetail = useFuture(bookDetailFuture);
 

@@ -3,11 +3,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:uaizu_app/domain/entity/library_calendar.dart';
+import 'package:uaizu_app/domain/provider/calendar_repository_provider.dart';
 import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/future_body.dart';
 import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
-import 'package:uaizu_app/use_case/library_usecase.dart';
 
 DateTime _flatToMonth(DateTime date) {
   return DateTime.utc(date.year, date.month);
@@ -80,15 +80,17 @@ class LibraryCalendar extends HookConsumerWidget {
     final isFourYear = useState(true);
 
     final calendarFuture = useMemoized(
-      () {
-        return ref.watch(getLibraryCalendarUseCaseProvider).call(
-              GetLibraryCalenderUseCaseParam(
-                query: LibraryCalenderQuery(
-                  time: month.value,
-                  isFourYear: isFourYear.value,
-                ),
-              ),
-            );
+      () async {
+        final query = LibraryCalenderQuery(
+          time: month.value,
+          isFourYear: isFourYear.value,
+        );
+        final calender = await ref
+            .watch(calendarRepositoryProvider)
+            .fetchLibraryCalendarMonth(query);
+        return LibraryCalendarEntire(
+          calender: {calender.month: calender},
+        );
       },
       [month.value, isFourYear.value],
     );

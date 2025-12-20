@@ -3,13 +3,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:uaizu_app/domain/entity/campus_square_calendar.dart';
+import 'package:uaizu_app/domain/provider/calendar_repository_provider.dart';
 import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/pages/campus_square/widgets/schedule_lecture_dialog.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
 import 'package:uaizu_app/ui/widgets/future_body.dart';
 import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
 import 'package:uaizu_app/ui/widgets/tagged_widget.dart';
-import 'package:uaizu_app/use_case/campus_square_usecase.dart';
 
 extension on CampusSquareCalendarLectureType {
   Color color(ColorScheme colorScheme) {
@@ -38,11 +38,8 @@ class CampusSquareDetail extends HookConsumerWidget {
 
     final scheduleFuture = useMemoized(
       () {
-        return ref.watch(getCampusSquareCalenderDayUseCacseProvider).call(
-              GetCampusSquareCalenderDayUseCaseParam(
-                date: focusedDay.value,
-                useCache: true,
-              ),
+        return ref.watch(calendarRepositoryProvider).fetchCampusSquareCalendarDay(
+              focusedDay.value,
             );
       },
       [focusedDay.value],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/grade.dart';
+import 'package:uaizu_app/domain/provider/grade_repository_provider.dart';
 import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/state/settings.dart';
 import 'package:uaizu_app/ui/dialogs/select_year_dialog.dart';
@@ -15,7 +16,6 @@ import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
 import 'package:uaizu_app/ui/widgets/key_value_container.dart';
 import 'package:uaizu_app/ui/widgets/search_button.dart';
 import 'package:uaizu_app/ui/widgets/tagged_widget.dart';
-import 'package:uaizu_app/use_case/campus_square_usecase.dart';
 
 class GradeAndExamPage extends HookConsumerWidget {
   const GradeAndExamPage({super.key});
@@ -101,14 +101,11 @@ class GradeAndExamPage extends HookConsumerWidget {
 
     final gradeFuture = useMemoized(
       () {
-        return ref.read(getGradeUseCaseProvider).call(
-              GetGradeUseCaseParam(
-                query: GradeQuery(
-                  showAll: showAll.value,
-                  year: year.value,
-                  quarter: quarter.value + 1,
-                ),
-                useCache: false,
+        return ref.read(gradeRepositoryProvider).fetchGrade(
+              GradeQuery(
+                showAll: showAll.value,
+                year: year.value,
+                quarter: quarter.value + 1,
               ),
             );
       },

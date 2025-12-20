@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
-import 'package:uaizu_app/use_case/library_usecase.dart';
+import 'package:uaizu_app/domain/provider/book_repository_provider.dart';
 
 const _maxCountPerSearch = 20;
 
@@ -59,15 +60,14 @@ class BookSearchResultNotifier extends AsyncNotifier<BookSearchResult> {
   ) async {
     _isLoading = true;
 
-    final result = await ref.watch(getBookSearchResultUseCaseProvider).call(
-          GetBookSearchResultUseCaseParam(
-            query: BookSearchQuery(
-              query: query,
-              mode: BookSearchMode.normal,
-              order: order,
-              start: _currentPage,
-              count: _maxCountPerSearch,
-            ),
+    debugPrint('getting book search result, start: $_currentPage');
+    final result = await ref.watch(bookRepositoryProvider).fetchBookSearchResult(
+          BookSearchQuery(
+            query: query,
+            mode: BookSearchMode.normal,
+            order: order,
+            start: _currentPage,
+            count: _maxCountPerSearch,
           ),
         );
 

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/syllabus.dart';
+import 'package:uaizu_app/domain/provider/syllabus_repository_provider.dart';
 import 'package:uaizu_app/generated/l10n/app_localizations.dart';
 import 'package:uaizu_app/ui/dialogs/select_year_dialog.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
@@ -10,7 +11,6 @@ import 'package:uaizu_app/ui/widgets/app_bar.dart';
 import 'package:uaizu_app/ui/widgets/future_body.dart';
 import 'package:uaizu_app/ui/widgets/horizontal_expanded_container.dart';
 import 'package:uaizu_app/ui/widgets/search_button.dart';
-import 'package:uaizu_app/use_case/campus_square_usecase.dart';
 
 class SyllabusPage extends HookConsumerWidget {
   const SyllabusPage({super.key});
@@ -27,14 +27,11 @@ class SyllabusPage extends HookConsumerWidget {
 
     final syllabusFuture = useMemoized(
       () {
-        return ref.watch(getSyllabusUseCaseProvider).call(
-              GetSyllabusUseCaseParam(
-                query: SyllabusLectureSearchQuery(
-                  year: year.value,
-                  displayCount: displayCount.value,
-                  freeWord: freeWord.value,
-                ),
-                useCache: false,
+        return ref.watch(syllabusRepositoryProvider).fetchLectures(
+              SyllabusLectureSearchQuery(
+                year: year.value,
+                displayCount: displayCount.value,
+                freeWord: freeWord.value,
               ),
             );
       },

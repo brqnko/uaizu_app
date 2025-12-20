@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uaizu_app/domain/entity/book.dart';
+import 'package:uaizu_app/domain/provider/book_repository_provider.dart';
 import 'package:uaizu_app/ui/res/fonts.dart';
-import 'package:uaizu_app/use_case/library_usecase.dart';
 
 class NewBooksReel extends HookConsumerWidget {
   const NewBooksReel({super.key});
@@ -75,7 +75,7 @@ class NewBooksReel extends HookConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final booksFuture = useMemoized(() {
-      return ref.watch(getNewBooksUseCaseProvider).call(());
+      return ref.watch(bookRepositoryProvider).fetchNewBooks();
     });
 
     final books = useFuture(booksFuture);
